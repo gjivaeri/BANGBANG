@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+  <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css">
+  {% block css %}
+  {% endblock css %}
+  <title>base</title>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav-bar">
+      <div class="nav-title">
+        <strong>방탈출 예약 시스템</strong>
+      </div>
+      <div class="nav-menu">
+        <a class="nav-search" href="{% url 'home' %}">검색</a>
+        <a class="nav-recommand" href="{% url 'home' %}">추천</a>
+        <a class="nav-review" href="{% url 'new_themeRev' %}">리뷰</a>
+        <a class="nav-mypage" href="{% url 'join' %}">마이페이지</a>
+      </div>
+    </div>
+    {% block content %}
+    {% endblock content %}
+  </div>
+</body>
+</html>

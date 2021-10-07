@@ -1,0 +1,77 @@
+{% extends '../base.html' %}
+
+{% block css %}{% load static %}
+<link href="{% static 'css/login.css' %}" rel="stylesheet" type="text/css">
+<title>login</title>
+{% endblock css %}
+
+{% block content %}
+<form method='POST'> 
+{% csrf_token %}
+    <div class="form">
+        <div class="login">
+            <div class="login-title">
+            로그인
+            </div>
+            <!-- <div class="login-form">
+            <input type="text" name="userID" placeholder="아이디를 입력해주세요">
+            <input type="password" name="userPW" placeholder="비밀번호를 입력해주세요">
+            </div> -->
+            {% for form in forms %}
+            <div class="login-form">
+              <!-- <label for = "{{ form.id_for_label }}">{{form.label }}</label> -->
+              {{form}}
+            </div>
+            {% endfor %}
+            <div class="login-button">
+            <button class="submit-button" type="submit">로그인</button>
+            </div>
+            <div class="cacao-login">
+            <img src="{%static 'images/image-removebg-preview.png' %}">
+            <a class="cacao-go" href="">카카오 로그인</a>
+            </div>
+            <div class="under-menu">
+            <div class="signup">
+                <a class="signup-go" href="{% url 'join' %}">회원가입</a>
+            </div>
+            <div class="find-id">
+                아이디 찾기
+            </div>
+            <div class="find-password">
+                비밀번호 찾기
+            </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock content %}
+
+
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    login
+    <form method='POST' action=''>
+      {% csrf_token %}
+      {% for form in forms %}
+      <div>
+        <label for = "{{ form.id_for_label }}">{{form.label }}</label>
+        {{form}}
+      </div>
+      {% endfor %}
+
+      {% if error %}
+      {{error}}
+      {% endif %}
+      <button type="submit" value='login'>제출</button>
+    </form>
+</body>
+</html> {% endcomment %}

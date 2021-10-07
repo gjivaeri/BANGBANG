@@ -1,0 +1,63 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href={% static 'css/list_review.css' %} rel="stylesheet" type="text/css">
+{% endblock css %}
+
+  {% block content %}
+  <div class="content">
+
+    <div class="content-top">
+      <div class="write"><a href="/new/shopRev">리뷰 작성하기</a></div> 
+
+      <div class="filter">
+        <span>인기순</span><img src={% static 'images/black-arrow.png' %} width=20%; alt="arrow"/>
+      </div>
+    </div>   
+    <div class="posts">
+      <ul class = "row">
+        {% for review in reviews %}
+        <li class="cell">
+          <div class="post">
+            <div class="writers">
+              <img class="profileImg" src="{% get_static_prefix %}{{review.themeRevImage}}"/>
+              <div>
+                <div>{{review.themeRev_WriterID}}</div>
+                <div>{{review.themeRevWriteDate}}</div>
+              </div>
+            </div>
+            {% for theme in themes%}
+            {% if review.theme_ID_id == theme.themeID %}
+            {% for shop in shops %}
+            {% if shop.shopID == theme.ShopID_id %}
+            <div class="info">
+              <img src="{% get_static_prefix %}{{review.themeRevImage}}"/>
+              <div>
+                <div>{{shop.shopName}}</div>
+                <div>{{shop.Location}}</div>
+                <div>{{shop.Rating}}</div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            <div class="summary">
+              <div class="summary-cont">
+                <a href="{% url 'detail_themeRev' review.pk %}">
+                {{review.themeRevContent}}
+                </a>
+              </div>
+              <div class="summary-bottom">
+                <div class="like-count">{{review.themeRevRecom}}+</div>
+                <div class="like">추천</div>
+                <div class="dislike">비추천</div>
+              </div>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+        </ul>
+    </div>
+  <div>
+  {% endblock content %}

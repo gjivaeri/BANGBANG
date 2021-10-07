@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Join
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>
+            <label for='themeRevTitle'>Title</label>
+            <input type='text' id="themeRevTitle" name="themeRevTitle">
+        </div>
+        <div>
+            <label for='themeRevRating'>Rating</label>
+            <input type='number' min='1' max='5' step='1' id="themeRevRating" name="themeRevRating">
+        </div>
+        <div>
+            <label for='themeRevDifficulty'>Difficulty</label>
+            <input type='number' min='1' max='5' step='1' id="themeRevDifficulty" name="themeRevDifficulty">
+        </div>
+        <div>
+            <label for='themeRevHorror'>Horror</label>
+            <input type='number' min='1' max='5' step='1' id="themeRevHorror" name="themeRevHorror">
+        </div>
+        <div>
+            <label for='themeRevActivity'>Activity</label>
+            <input type='number' min='1' max='5' step='1' id="themeRevActivity" name="themeRevActivity">
+        </div>
+
+        <div>
+            <label for='themeRevContent'>Content</label>
+            <input type='text' id="themeRevContent" name="themeRevContent">
+        </div>  
+        <div>
+            <label for='themeRevImage'>Image</label>
+            <input type='text' id='themeRevImage' name='themeRevImage'>
+        </div>
+        <div>
+            <label for='themeRevResult'>result</label>
+            실패 <input type='radio' id='themeRevResult' name='themeRevResult' value=False>
+            성공 <input type='radio' id='themeRevResult' name='themeRevResult' value=True>
+        </div>
+        <div>
+            <label for='themeRevOccurredTime'>OccurredTime</label>
+            <input type='time' id='themeRevOccurredTime' name='themeRevOccurredTime'>
+        </div>
+        <div>
+            <label for='themeRevDate'>Date</label>
+            <input type='date' id='themeRevDate' name='themeRevDate' value='1'>
+        </div>
+        <button type="submit">수정하기</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    업체 리뷰
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>
+            <label for='shopRevTitle'>Title</label>
+            <input type='text' id="shopRevTitle" name="shopRevTitle">
+        </div>
+        <div>
+            <label for='shopRevRating'>Rating</label>
+            <input type='number' min='1' max='5' step='1' id="shopRevRating" name="shopRevRating">
+        </div>
+
+        <div>
+            <label for='shopRevContent'>Content</label>
+            <input type='text' id="shopRevContent" name="shopRevContent">
+        </div>  
+        <div>
+            <label for='shopRevImage'>Image</label>
+            <input type='text' id='shopRevImage' name='shopRevImage'>
+        </div>
+
+        <div>
+            <label for='shopRevDate'>Visit Date</label>
+            <input type='date' id='shopRevDate' name='shopRevDate' value='1'>
+        </div>
+
+        <div>
+            <label for='shopRevWriteDate'>Review Date</label>
+            <input type='date' id='shopRevWriteDate' name='shopRevWriteDate' value='1'>
+        </div>
+
+        <button type="submit">수정하기</button>
+    </form>
+</body>
+</html>
