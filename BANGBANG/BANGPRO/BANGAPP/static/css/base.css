@@ -20,6 +20,7 @@ body{
 
 .nav-bar, .nav-menu{
   display: flex;
+  z-index: 1;
 }
 
 
