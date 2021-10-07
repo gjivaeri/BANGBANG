@@ -79,8 +79,8 @@ class Theme(models.Model):
 
 
 class Like(models.Model):
-    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="like_record", default='test')
-    article = models.ForeignKey('Themerev', on_delete=models.CASCADE, related_name="like_record")
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="like_record")
+    article = models.ForeignKey('ThemeRev', on_delete=models.CASCADE, related_name="like_record")
     
     class Meta:
         unique_together = ('user','article')
