@@ -1,0 +1,69 @@
+.board_wrap{
+  display: flex;
+  flex-direction: column;
+  width: 740px;
+  height: auto;
+  padding: 25px;
+  background-color: #e7e5e5;
+}
+
+.board_title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;;
+}
+
+.board_title_btn {
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    border: 1px solid #F55C03;
+    background-color: #ffff;
+    border-radius: 25px; 
+}
+
+.board_title_btn a{
+    color:#F55C03;
+    font-size: 10px;
+}
+.star_review{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.star_review, .visited, .booked, .text-review {
+    padding: 15px;
+    width: 700px;
+    background-color: #ffff;
+    border: 1px solid #b3aba7;
+    border-radius: 15px;
+}
+
+.star_review:hover, .visited:hover, .booked:hover, .text-review:hover {
+    border: 1px solid #F55C03;
+    border-radius: 15px;
+}
+
+.star {
+    font-size: 36px;
+    color:#ffe400;
+}
+
+.star input {
+    display: none;
+}
+
+.star input:checked + label ~ label {
+    color: #838383;
+}
+.star label:active {
+    transform: scale(0.8);
+    transition: 0.3s ease;
+}
+
+
+.text-review textarea {
+    border: #ffff;
+}
