@@ -15,6 +15,7 @@ class User(models.Model):
     def __str__(self):
         return self.userID
 
+
 class Shoprev(models.Model):
     shoprevID = models.AutoField(primary_key=True, unique=True)
     shoprevTitle = models.CharField(max_length=200)

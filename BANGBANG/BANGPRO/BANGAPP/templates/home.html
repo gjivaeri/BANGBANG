@@ -10,8 +10,13 @@
     <h3><a href="/registration/login">로그인</a></h3>
     <h3><a href="/logout">로그아웃</a></h3>    
 margin
+    {% comment %} {% if user.is_authenticated %} {% endcomment %}
+    <h3><a href="/logout">로그아웃</a></h3>
+    {% comment %} {% else %} {% endcomment %}
     <h3><a href="/registration/join">회원가입</a></h3>
     <h3><a href="/registration/login">로그인</a></h3>
-    <h3><a href="/logout">로그아웃</a></h3>
-    
+    {% comment %} {% endif %}     {% endcomment %}
+    <h3>{{ username }}님 반갑습니다</h3>
+    <h3>{{ user }}</h3>
+
 {% endblock content %} 

@@ -8,13 +8,15 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 #for loginview
 from .forms import LoginForm
+from django.views import generic
 from argon2 import PasswordHasher, exceptions
 #for likeview
 from django.utils.decorators import method_decorator
-from django.urls import reverse
+from .decorator import login_required
+from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView #Generic View 개발 속도를 빠르게 만들어줌
 
 
 
@@ -47,31 +49,68 @@ def join(request):
             user.save()
         return redirect('home')
 
-def login(request):
-    loginform = LoginForm()
-    context = { 'forms' : loginform }
-    if request.method == 'GET':
-        return render(request, 'registration/login.html', context=context)
+class LoginView(generic.View): 
+  template_name = 'registration/login.html'
+  form_class = LoginForm
+  success_url = reverse_lazy("home") 
+  #Class-level 속성을 가지는 객체들은 import 될 때 배치되는데 URL-seolving 규칙은 import 시간에 세팅되어있지 않아 class 내에서 reverse()를 사용하면 URLconf의 규칙을 인식하지 못한다.
 
-    elif request.method == 'POST':
-        loginform = LoginForm(request.POST)
+  loginform = LoginForm()
+  context = { 'forms' : loginform }
+
+  def post(self, request):
+      loginform = LoginForm(request.POST)
+      context = { 'forms' : loginform }
+      if loginform.is_valid():
+          self.request.session['user'] = loginform.cleaned_data['userID']
+          username = self.request.session['user']
+          # return super().form_valid(form)
+          return render(request, './home.html', {'username' : username})
+
+      else:
+          context['forms'] = loginform
+          if loginform.errors:
+            for value in loginform.errors.values():
+                context['error'] = value
+      return render(request, 'registration/login.html', context)
+
+  def get(self,request):
+      return render(request, 'registration/login.html', context=self.context)
+
+
+# def login(request):
+#     loginform = LoginForm()
+#     context = { 'forms' : loginform }
+#     print(type(LoginForm()))
+#     # userID = request.POST.get('userID')
+#     # banguser = User.objects.get(userID = userID)
+#     if request.method == 'GET':
+#         return render(request, 'registration/login.html', context=context)
+
+#     elif request.method == 'POST':
+#         loginform = LoginForm(request.POST)
         
-        if loginform.is_valid():
-            return redirect('home')
+#         if loginform.is_valid():
+#             # request.session['user'] = banguser.userID
+#             return redirect('home')
 
-        else:
-           context['forms'] = loginform
-           if loginform.errors:
-              for value in loginform.errors.values():
-                  context['error'] = value
-        return render(request, 'registration/login.html', context)
+#         else:
+#            context['forms'] = loginform
+#            if loginform.errors:
+#               for value in loginform.errors.values():
+#                   context['error'] = value
+#         return render(request, 'registration/login.html', context)
 
 def logout(request):
-    auth.logout(request)
+    if 'user' in request.session:
+        del(request.session['user'])
     return redirect('home')
 
 def home(request):
-    return render(request, 'home.html')
+    username = request.session.get('user')
+    user = User.objects.filter(userID = username)
+    content = {'user' : user}
+    return render(request, 'home.html', content)
 
 
 def shop(request, shop_pk):
@@ -94,7 +133,7 @@ def detail_shopRev(request, shopRev_pk):
     return render(request, 'detail_shopRev.html', {'shopRev': shopRev})
 
 #theme Review
-@login_required(login_url="/registration/login")
+# @login_required(login_url="/registration/login")
 def new_themeRev(request):
     if request.method == "POST":
         new_themeRev = ThemeRev.objects.create(
@@ -143,7 +182,7 @@ def detail_themeRev(request, themeRev_pk):
     return render(request, 'detail_themeRev.html', {'themeRev': themeRev})
 
 #SHOP Review
-@login_required(login_url="/registration/login")
+# @login_required(login_url="/registration/login")
 def new_shopRev(request):
     if request.method == "POST":
         new_shopRev = Shoprev.objects.create(
@@ -208,7 +247,12 @@ class LikeArticleView(RedirectView):
         #args와 kwargs를 동시에 전달할 수 없음
 
     def get(self, *args, **kwargs):
-        user = self.request.user
+        # user = self.request.user //login이 안되어 있어 안먹힘
+
+        # username = self.request.session.get('user')
+        # user = User.objects.filter(userID = username) //slicing?
+        
+        user = self.request.session.get('user')
         article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
         #pk가 존재하는 themeRev 있으면 가져오고 아님 404에러발생
 

@@ -44,7 +44,7 @@
         {{themeRev.themeRev_WriterID}}
     </div>
     <div>
-        <a href="{% url 'article_like' themeRev.pk %}">
+        <a href="{% url 'article_like' pk=themeRev.pk %}">
         좋아요
         </a>
         {{themeRev.themeRevRecom}}

@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from BANGAPP import views
+from BANGAPP.views import LoginView,LikeArticleView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('registration/join/', views.join, name="join"),
-    path('registration/login/', views.login, name="login"),
-    path('', views.home, name='home'),
+    # path('registration/login/', views.login, name="login"),
+    path('home/', views.home, name='home'),
     path('logout/', views.logout, name="logout"),
     path('shop/<int:shop_pk>', views.shop, name="shop"),
     path('theme/<int:theme_pk>', views.theme, name='theme'),
@@ -35,5 +36,9 @@ urlpatterns = [
     path('detail/shopRev/<int:shopRev_pk>', views.detail_shopRev, name="detail_shopRev"),
     path('list_shopRev/', views.list_shopRev, name="list_shopRev"),
     path('list_themeRev/', views.list_themeRev, name="list_themeRev"),
-    path('liketest/<int:themeRev_pk>', views.LikeArticleView, name="article_like"),
+    # path('liketest/<int:themeRev_pk>', LikeArticleView.as_view(), name="article_like"),
+    path('registration/login/', LoginView.as_view(), name="login"),
+    path('liketest/<int:pk>', LikeArticleView.as_view(), name="article_like"),
+    # path('registration/login/', views.LoginView, name="login")
+
 ]
