@@ -108,7 +108,7 @@ def logout(request):
 
 def home(request):
     username = request.session.get('user')
-    user = User.objects.filter(userID = username)
+    user = User.objects.filter(userID = username).values('userID')
     content = {'user' : user}
     return render(request, 'home.html', content)
 
@@ -242,22 +242,19 @@ def list_shopRev(request):
 class LikeArticleView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
       #args는 튜플, kwargs는 사전형을 인자로 받음. 리디렉션할 대상 url를 구성
-        return reverse('detail_themeRev', kwargs={'pk':kwargs['pk']})
+        return reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']})
         #reverse(): view 함수를 사용하여 URL을 역으로 계산=url이 변경되어도 pattern name만 알면 됨
         #args와 kwargs를 동시에 전달할 수 없음
 
     def get(self, *args, **kwargs):
-        # user = self.request.user //login이 안되어 있어 안먹힘
-        # user = self.request.session.get('user') //user가 User 모델 instance여야함
         username = self.request.session.get('user')
-        user = User.objects.filter(userID = username) 
-        
+        user = get_object_or_404(User, userID = username)
         article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
         #pk가 존재하는 themeRev 있으면 가져오고 아님 404에러발생
 
         if Like.objects.filter(user=user, article=article).exists():
-          messages.add_message(self.request, messages.ERROR, '좋아요는 한번만 가능합니다.')
-          return HttpResponseRedirect(reverse('detail_themeRev', kwargs={'pk':kwargs['pk']}))
+          # messages.add_message(self.request, messages.ERROR, '좋아요는 한번만 가능합니다.') 차후구현
+          return HttpResponseRedirect(reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']}))
         else:
           Like(user=user, article=article).save()
           #like 모델이 존재하면 (좋아요를 이미 눌렀으면 error 발생), 아니면 Like모델에 저장
@@ -265,7 +262,7 @@ class LikeArticleView(RedirectView):
         article.themeRevRecom += 1
         article.save()
 
-        messages.add_message(self.request, messages.SUCCESS, '좋아요가 반영되었습니다.')
+        # messages.add_message(self.request, messages.SUCCESS, '좋아요가 반영되었습니다.') 차후구현
 
         return super(LikeArticleView, self).get(self.request, *args, **kwargs)
         #super()메서드가 자체적으로 response생성, 페이징 처리해주기 때문에 사용
