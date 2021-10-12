@@ -36,9 +36,6 @@ urlpatterns = [
     path('detail/shopRev/<int:shopRev_pk>', views.detail_shopRev, name="detail_shopRev"),
     path('list_shopRev/', views.list_shopRev, name="list_shopRev"),
     path('list_themeRev/', views.list_themeRev, name="list_themeRev"),
-    # path('liketest/<int:themeRev_pk>', LikeArticleView.as_view(), name="article_like"),
     path('registration/login/', LoginView.as_view(), name="login"),
     path('liketest/<int:pk>', LikeArticleView.as_view(), name="article_like"),
-    # path('registration/login/', views.LoginView, name="login")
-
 ]
