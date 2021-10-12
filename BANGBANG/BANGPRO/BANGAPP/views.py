@@ -248,11 +248,10 @@ class LikeArticleView(RedirectView):
 
     def get(self, *args, **kwargs):
         # user = self.request.user //login이 안되어 있어 안먹힘
-
-        # username = self.request.session.get('user')
-        # user = User.objects.filter(userID = username) //slicing?
+        # user = self.request.session.get('user') //user가 User 모델 instance여야함
+        username = self.request.session.get('user')
+        user = User.objects.filter(userID = username) 
         
-        user = self.request.session.get('user')
         article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
         #pk가 존재하는 themeRev 있으면 가져오고 아님 404에러발생
 
