@@ -1,0 +1,19 @@
+{% extends '../base.html' %}
+
+{% block css %}{% load static %}
+<link href="{% static 'css/join.css' %}" rel="stylesheet" type="text/css">
+<title>join</title>
+{% endblock css %}
+
+{% block content %}
+<div class="form">
+    <div class="signup">
+        <div>
+            <p>로그인 된 유저입니다</p>
+        </div>
+        <a href="/logout">로그아웃</a>
+    </div> 
+</div>
+{% endblock content %}
+
+

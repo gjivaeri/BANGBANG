@@ -2,6 +2,7 @@ from django import forms
 from .models import User
 from argon2 import PasswordHasher, exceptions
 
+
 class LoginForm(forms.Form):
   userID = forms.CharField(
     max_length=32,

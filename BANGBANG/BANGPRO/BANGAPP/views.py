@@ -47,7 +47,7 @@ def join(request):
               userGender = userGender
           )
             user.save()
-        return redirect('home')
+        return render(request, 'registration/complete.html')
 
 
 class LoginView(generic.View): 
@@ -262,7 +262,6 @@ class LikeArticleView(RedirectView):
 def mypage(request):
     username = request.session.get('user')
     if User.objects.filter(userID = username).exists():
-        return render(request, 'registration/complete.html')
-    else:
-        return render(request, 'registration/join.html')
+        return render(request, 'registration/mypage.html')
+    return render(request, 'registration/join.html')
 
