@@ -263,5 +263,4 @@ def mypage(request):
     username = request.session.get('user')
     if User.objects.filter(userID = username).exists():
         return render(request, 'registration/mypage.html')
-    return render(request, 'registration/join.html')
-
+    return redirect('login')
