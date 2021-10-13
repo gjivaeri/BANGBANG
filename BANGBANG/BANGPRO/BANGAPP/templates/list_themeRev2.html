@@ -11,22 +11,17 @@
       <div class="write"><a href="/new/shopRev">리뷰 작성하기</a></div> 
 
       {% comment %} 정렬 {% endcomment %}
-      {% comment %} <form method="GET" action="{% url 'list_themeRev' %}">
+      <form method="GET" action="{% url 'home' %}">
       <div class="filter">
         <select name="sort" id="sort">
-          <option value="likes" id="likes">
+          <option value="recently" id="recently">
                   <span>인기순</span><img src={% static 'images/black-arrow.png' %} width=20%; alt="arrow"/>
           </option>
-          <option value="rating" id="rating">
-                  <span>별점순</span><img src={% static 'images/black-arrow.png' %} width=20%; alt="arrow"/>
-          </option>
-          <option value="recent" id="recent">
-                  <span>최신순</span><img src={% static 'images/black-arrow.png' %} width=20%; alt="arrow"/>
-          </option>
+          <option value="likes" id="likes">좋아요순</option>
+          <option value="comments" id="comments">댓글순</option>
         </select>
         <button class="btn btn-primary" type="submit" value="">정렬</button>
       </div>
-      </form> {% endcomment %}
 
       <div class="filter">
         <span>인기순</span><img src={% static 'images/black-arrow.png' %} width=20%; alt="arrow"/>

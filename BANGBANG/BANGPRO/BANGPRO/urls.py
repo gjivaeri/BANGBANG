@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from BANGAPP import views
-from BANGAPP.views import LoginView,LikeArticleView
+from BANGAPP.views import LoginView,LikeArticleView,LikeListView,HateListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,9 +34,12 @@ urlpatterns = [
     path('edit/shopRev/<int:shopRev_pk>', views.edit_shopRev, name="edit_shopRev"),
     path('delete/shopRev/<int:shopRev_pk>', views.delete_shopRev, name="delete_shopRev"),
     path('detail/shopRev/<int:shopRev_pk>', views.detail_shopRev, name="detail_shopRev"),
-    path('list_shopRev/', views.list_shopRev, name="list_shopRev"),
+    # path('list_shopRev/', views.list_shopRev, name="list_shopRev"),
     path('list_themeRev/', views.list_themeRev, name="list_themeRev"),
+    # path('list_themeRev/', ListThemeRev.as_view(), name="list_themeRev"),
     path('registration/login/', LoginView.as_view(), name="login"),
     path('liketest/<int:pk>', LikeArticleView.as_view(), name="article_like"),
-    path('mypage/', views.mypage, name="mypage")
+    path('likeinlist/<int:pk>', LikeListView.as_view(), name="list_like"),
+    path('hateinlist/<int:pk>', HateListView.as_view(), name="list_hate"),
+    path('mypage/', views.mypage, name="mypage"),
 ]

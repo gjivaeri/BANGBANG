@@ -85,4 +85,12 @@ class Like(models.Model):
     
     class Meta:
         unique_together = ('user','article')
-  
+
+
+class Hate(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="hate_record")
+    article = models.ForeignKey('ThemeRev', on_delete=models.CASCADE, related_name="hate_record")
+    
+    class Meta:
+        unique_together = ('user','article')
+

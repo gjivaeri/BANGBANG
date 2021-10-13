@@ -2,7 +2,7 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
-from .models import User, Shop, Shoprev, Theme, ThemeRev, Like
+from .models import User, Shop, Shoprev, Theme, ThemeRev, Like, Hate
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -16,8 +16,9 @@ from .decorator import login_required
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import RedirectView #Generic View 개발 속도를 빠르게 만들어줌
-
+from django.views.generic import View, RedirectView #Generic View 개발 속도를 빠르게 만들어줌
+#for sort 
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -216,6 +217,40 @@ def delete_themeRev(request, themeRev_pk):
     return redirect('theme')
 
 
+# class ListThemeRev(View):
+#   def sort(request):
+#     ordering_priority = []
+
+#     # 이곳에서 오름차순인지 내림차순인지 알아낸 뒤에 명령어를 변수에 입력해둔다.
+#     order = '' if request.GET.get('order') == 'asc' else '-'
+
+#     # 종합해서 ordering query를 생성한다.
+#     if request.GET.get('sort') and request.GET.get('sort') != 'timestamp':
+#         # 정렬 기준이 시간이 아닐 때만 해당 값을 ordering_priority에 추가한다.
+#         # 시나리오대로라면 이곳에 like_count라는 값이 들어갔을 것이다.
+#         # 다른 기준으로 정렬하면 무조건 시간의 내림차순으로 정렬하기 때문에 이런식으로 구성이 된다.
+#         sort = request.GET.get('sort')
+#         ordering_priority.append(order + sort)
+#         ordering_priority.append('-timestamp')
+#     else:
+#         sort = 'timestamp'
+#         ordering_priority.append(order + sort)
+                
+#     sorted = ThemeRev.objects.all().order_by(*ordering_priority)
+
+#     paginator = Paginator(sorted,9)
+#     #분할될 객체 / 한페이지에 담길 객체 수
+#     page = request.GET.get('page','')
+#     #url에서 page=? 에 들어가는 값. 몇페이지의 정보를 보내는지 알아냄. 공백이어도 허용
+#     posts = paginator.get_page(page)
+#     #페이지 번호를 받아 해당 페이지를 리턴
+#     themes = Theme.objects.all()
+#     reviews = ThemeRev.objects.all()
+#     shops = Shop.objects.all()
+    
+#     return render(request,'home.html',{'posts':posts, 'themes':themes, 'sort':sort, 'reviews':reviews, 'shops':shops})
+
+
 def list_themeRev(request):
     reviews = ThemeRev.objects.all()
     themes = Theme.objects.all()
@@ -227,6 +262,7 @@ def list_shopRev(request):
     reviews = Shoprev.objects.all()
     shops = Shop.objects.all()
     return render(request, 'list_shopRev.html', {'shops':shops, 'reviews':reviews})
+
 
 @method_decorator(login_required, 'get')
 class LikeArticleView(RedirectView):
@@ -243,6 +279,9 @@ class LikeArticleView(RedirectView):
         #pk가 존재하는 themeRev 있으면 가져오고 아님 404에러발생
 
         if Like.objects.filter(user=user, article=article).exists():
+          Like.objects.filter(user=user, article=article).delete()
+          article.themeRevRecom -= 1
+          article.save()
           # messages.add_message(self.request, messages.ERROR, '좋아요는 한번만 가능합니다.') 차후구현
           return HttpResponseRedirect(reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']}))
         else:
@@ -257,6 +296,77 @@ class LikeArticleView(RedirectView):
         return super(LikeArticleView, self).get(self.request, *args, **kwargs)
         #super()메서드가 자체적으로 response생성, 페이징 처리해주기 때문에 사용
         #super()로 부모클래스의 메서드를 쓸 수 있음. redirectview를 상속받아 사용
+
+
+@method_decorator(login_required, 'get')
+class LikeListView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('list_themeRev')
+
+    def get(self, *args, **kwargs):
+        username = self.request.session.get('user')
+        user = get_object_or_404(User, userID = username)
+        article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
+
+        if Like.objects.filter(user=user, article=article).exists():
+          Like.objects.filter(user=user, article=article).delete()
+          article.themeRevRecom -= 1
+          article.save()
+          return HttpResponseRedirect(reverse('list_themeRev'))
+        else:
+          Like(user=user, article=article).save()
+
+        article.themeRevRecom += 1
+        article.save()
+
+        return super(LikeListView, self).get(self.request, *args, **kwargs)
+
+
+@method_decorator(login_required, 'get')
+class HateArticleView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']})
+
+
+    def get(self, *args, **kwargs):
+        username = self.request.session.get('user')
+        user = get_object_or_404(User, userID = username)
+        article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
+
+        if Hate.objects.filter(user=user, article=article).exists():
+          Hate.objects.filter(user=user, article=article).delete()
+          article.themeRevRecom -= 1
+          article.save()
+          return HttpResponseRedirect(reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']}))
+        else:
+          Hate(user=user, article=article).save()
+
+        article.themeRevRecom += 1
+        article.save()
+        return super(HateArticleView, self).get(self.request, *args, **kwargs)
+
+
+@method_decorator(login_required, 'get')
+class HateListView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('list_themeRev')
+
+    def get(self, *args, **kwargs):
+        username = self.request.session.get('user')
+        user = get_object_or_404(User, userID = username)
+        article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
+
+        if Hate.objects.filter(user=user, article=article).exists():
+          Hate.objects.filter(user=user, article=article).delete()
+          article.themeRevRecom += 1
+          article.save()
+          return HttpResponseRedirect(reverse('list_themeRev'))
+        else:
+          Hate(user=user, article=article).save()
+
+        article.themeRevRecom -= 1
+        article.save()
+        return super(HateListView, self).get(self.request, *args, **kwargs)
 
 
 def mypage(request):
