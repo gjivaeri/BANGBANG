@@ -38,4 +38,5 @@ urlpatterns = [
     path('list_themeRev/', views.list_themeRev, name="list_themeRev"),
     path('registration/login/', LoginView.as_view(), name="login"),
     path('liketest/<int:pk>', LikeArticleView.as_view(), name="article_like"),
+    path('mypage/', views.mypage, name="mypage")
 ]

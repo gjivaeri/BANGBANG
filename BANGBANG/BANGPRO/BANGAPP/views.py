@@ -49,6 +49,7 @@ def join(request):
             user.save()
         return redirect('home')
 
+
 class LoginView(generic.View): 
   template_name = 'registration/login.html'
   form_class = LoginForm
@@ -78,33 +79,11 @@ class LoginView(generic.View):
       return render(request, 'registration/login.html', context=self.context)
 
 
-# def login(request):
-#     loginform = LoginForm()
-#     context = { 'forms' : loginform }
-#     print(type(LoginForm()))
-#     # userID = request.POST.get('userID')
-#     # banguser = User.objects.get(userID = userID)
-#     if request.method == 'GET':
-#         return render(request, 'registration/login.html', context=context)
-
-#     elif request.method == 'POST':
-#         loginform = LoginForm(request.POST)
-        
-#         if loginform.is_valid():
-#             # request.session['user'] = banguser.userID
-#             return redirect('home')
-
-#         else:
-#            context['forms'] = loginform
-#            if loginform.errors:
-#               for value in loginform.errors.values():
-#                   context['error'] = value
-#         return render(request, 'registration/login.html', context)
-
 def logout(request):
     if 'user' in request.session:
         del(request.session['user'])
     return redirect('home')
+
 
 def home(request):
     username = request.session.get('user')
@@ -135,21 +114,27 @@ def detail_shopRev(request, shopRev_pk):
 #theme Review
 # @login_required(login_url="/registration/login")
 def new_themeRev(request):
-    if request.method == "POST":
-        new_themeRev = ThemeRev.objects.create(
-           themeRevTitle=request.POST["themeRevTitle"],
-           themeRevRating=request.POST["themeRevRating"],
-           themeRevDifficulty=request.POST["themeRevDifficulty"],
-           themeRevHorror=request.POST["themeRevHorror"],
-           themeRevActivity=request.POST["themeRevActivity"],
-           themeRevContent=request.POST["themeRevContent"],
-           themeRevImage=request.POST["themeRevImage"],
-           themeRevResult=request.POST["themeRevResult"],
-           themeRevOccurredTime=request.POST["themeRevOccurredTime"],
-           themeRevDate=request.POST["themeRevDate"],
-           #themeRev_WriterID=request.user,
-        )
-    return render(request, "new_themeRev.html")
+    username = request.session.get('user')
+    if User.objects.filter(userID = username).exists():
+      if request.method == "POST":
+          new_themeRev = ThemeRev.objects.create(
+            themeRevTitle=request.POST["themeRevTitle"],
+            themeRevRating=request.POST["themeRevRating"],
+            themeRevDifficulty=request.POST["themeRevDifficulty"],
+            themeRevHorror=request.POST["themeRevHorror"],
+            themeRevActivity=request.POST["themeRevActivity"],
+            themeRevContent=request.POST["themeRevContent"],
+            themeRevImage=request.POST["themeRevImage"],
+            themeRevResult=request.POST["themeRevResult"],
+            themeRevOccurredTime=request.POST["themeRevOccurredTime"],
+            themeRevDate=request.POST["themeRevDate"],
+            #themeRev_WriterID=request.user,
+          )
+          return redirect("detail_themeRev", new_themeRev.pk)
+      return render(request, "new_themeRev.html")
+    else:
+      return render(request, 'registration/join.html')
+
 
 def edit_themeRev(request, themeRev_pk):
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
@@ -184,18 +169,23 @@ def detail_themeRev(request, themeRev_pk):
 #SHOP Review
 # @login_required(login_url="/registration/login")
 def new_shopRev(request):
-    if request.method == "POST":
-        new_shopRev = Shoprev.objects.create(
-           shopRevTitle=request.POST["shopRevTitle"],
-           shopRevRating=request.POST["shopRevRating"],
-           shopRevContent=request.POST["shopRevContent"],
-           shopRevImage=request.POST["shopRevImage"],
-           shopRevDate=request.POST["shopRevDate"],
-           shopRevWriteDate=request.POST["shopRevWriteDate"],
-           shopRev_WriterID=request.user,
-        )
-        return redirect("detail_shopRev", new_shopRev.pk)
-    return render(request, "new_shopRev.html")
+    username = request.session.get('user')
+    if User.objects.filter(userID = username).exists():
+      if request.method == "POST":
+          new_shopRev = Shoprev.objects.create(
+            shopRevTitle=request.POST["shoprevTitle"],
+            shopRevRating=request.POST["shopRating"],
+            shopRevContent=request.POST["shoprevCont"],
+            shopRevImage=request.POST["shoprevImage"],
+            shopRevDate=request.POST["shoprevDate"],
+            shopRevWriteDate=request.POST["shoprevWDate"],
+            shopRev_WriterID=request.user,
+          )
+          return redirect("detail_shopRev", new_shopRev.pk)
+      return render(request, "new_shopRev.html")
+    else:
+      return render(request, 'registration/join.html')
+    
 
 def edit_shopRev(request, shopRev_pk):
     shopRev = Shoprev.objects.get(pk=shopRev_pk)
@@ -267,3 +257,12 @@ class LikeArticleView(RedirectView):
         return super(LikeArticleView, self).get(self.request, *args, **kwargs)
         #super()메서드가 자체적으로 response생성, 페이징 처리해주기 때문에 사용
         #super()로 부모클래스의 메서드를 쓸 수 있음. redirectview를 상속받아 사용
+
+
+def mypage(request):
+    username = request.session.get('user')
+    if User.objects.filter(userID = username).exists():
+        return render(request, 'registration/complete.html')
+    else:
+        return render(request, 'registration/join.html')
+

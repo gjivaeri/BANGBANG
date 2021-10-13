@@ -11,6 +11,9 @@
         <div class="signup-title">
         회원가입
         </div>
+            {% if user.is_authenticated %}
+            <p>로그인 된 유저입니다</p>
+            {% else %}
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="signup-form">
@@ -36,6 +39,7 @@
                     </div>
                 </div>
             </form>
+            {% endif %}
         </div>
     </div> 
 </div>
