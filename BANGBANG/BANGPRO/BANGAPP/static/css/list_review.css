@@ -21,7 +21,7 @@ body{position: relative;width: 100%;height: 100%;}
 }
 
 .content-top > .write{
-  flex-basis: 87%;
+  flex-basis: 90%;
 }
 
 .content-top > .filter{
@@ -29,20 +29,28 @@ body{position: relative;width: 100%;height: 100%;}
   border: 1px solid black;
   border-radius: 50px;
   padding: 4px 3px 10px 10px;
-  width:8%;
+  width:60px;
   height:10px;
   font-size:14px;
 }
 
-.content-top > .filter > span{
-  padding:10px 9px 0 0 ;
-}
+.content-top > .filter > select {
+  width: 60px;
+  padding: 0 .5em;
+  border: none;
+  background: url('images/black-arrow.png');
+  /* background: url('/images/black-arrow.png') no-repeat 95% 50%; */
+  background-size: 20px;
+  border-radius: 0px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  }
 
-.content-top > .filter > img{
-  height:6px;
-  width:11px;
-}
-
+.content-top > .filterselect::-ms-expand {
+  display: none;
+  }
+  
 /* each review */
 .cell {
   float:left;
@@ -84,11 +92,6 @@ body{position: relative;width: 100%;height: 100%;}
     font-size:14px;
   }
 
-  .content-top > .filter > span{
-    padding:8px 6px 0 0 ;
-    font-size:13px;
-}
-  
   .posts > ul > li{
     width:50%;
   }
@@ -117,11 +120,6 @@ body{position: relative;width: 100%;height: 100%;}
     font-size:14px;
 
   }
-
-  .content-top > .filter > span{
-    padding:10px 6px 0 0 ;
-    font-size:13px;
-}
 
   .posts > ul > li{
     width:80%;

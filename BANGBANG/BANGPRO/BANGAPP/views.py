@@ -217,51 +217,46 @@ def delete_themeRev(request, themeRev_pk):
     return redirect('theme')
 
 
-# class ListThemeRev(View):
-#   def sort(request):
-#     ordering_priority = []
-
-#     # 이곳에서 오름차순인지 내림차순인지 알아낸 뒤에 명령어를 변수에 입력해둔다.
-#     order = '' if request.GET.get('order') == 'asc' else '-'
-
-#     # 종합해서 ordering query를 생성한다.
-#     if request.GET.get('sort') and request.GET.get('sort') != 'timestamp':
-#         # 정렬 기준이 시간이 아닐 때만 해당 값을 ordering_priority에 추가한다.
-#         # 시나리오대로라면 이곳에 like_count라는 값이 들어갔을 것이다.
-#         # 다른 기준으로 정렬하면 무조건 시간의 내림차순으로 정렬하기 때문에 이런식으로 구성이 된다.
-#         sort = request.GET.get('sort')
-#         ordering_priority.append(order + sort)
-#         ordering_priority.append('-timestamp')
-#     else:
-#         sort = 'timestamp'
-#         ordering_priority.append(order + sort)
-                
-#     sorted = ThemeRev.objects.all().order_by(*ordering_priority)
-
-#     paginator = Paginator(sorted,9)
-#     #분할될 객체 / 한페이지에 담길 객체 수
-#     page = request.GET.get('page','')
-#     #url에서 page=? 에 들어가는 값. 몇페이지의 정보를 보내는지 알아냄. 공백이어도 허용
-#     posts = paginator.get_page(page)
-#     #페이지 번호를 받아 해당 페이지를 리턴
-#     themes = Theme.objects.all()
-#     reviews = ThemeRev.objects.all()
-#     shops = Shop.objects.all()
-    
-#     return render(request,'home.html',{'posts':posts, 'themes':themes, 'sort':sort, 'reviews':reviews, 'shops':shops})
-
-
-def list_themeRev(request):
-    reviews = ThemeRev.objects.all()
-    themes = Theme.objects.all()
-    shops = Shop.objects.all()
-    return render(request, 'list_themeRev.html', {'shops':shops, 'themes':themes, 'reviews':reviews})
-
-
 def list_shopRev(request):
     reviews = Shoprev.objects.all()
     shops = Shop.objects.all()
     return render(request, 'list_shopRev.html', {'shops':shops, 'reviews':reviews})
+
+
+def list_themeRev(request):
+    ordering_priority = []
+    order = '' if request.GET.get('order') == 'asc' else '-'
+    # 이곳에서 오름차순인지 내림차순인지 알아낸 뒤에 명령어를 변수에 입력해둔다.
+
+    # 종합해서 ordering query를 생성한다.
+    if request.GET.get('sort') and request.GET.get('sort') != 'themeRevWriteDate':
+        # 정렬 기준이 시간이 아닐 때만 해당 값을 ordering_priority에 추가한다.
+        # 시나리오대로라면 이곳에 like_count라는 값이 들어갔을 것이다.
+        # 다른 기준으로 정렬하면 무조건 시간의 내림차순으로 정렬하기 때문에 이런식으로 구성이 된다.
+        sort = request.GET.get('sort')
+        ordering_priority.append(order + sort)
+        ordering_priority.append('-themeRevWriteDate')
+    else:
+        sort = 'themeRevWriteDate'
+        ordering_priority.append(order + sort)
+
+    sorted = ThemeRev.objects.all().order_by(*ordering_priority)
+    themes = Theme.objects.all()
+    reviews = sorted
+    shops = Shop.objects.all()
+
+    #차후 구현할 페이지 파트
+    paginator = Paginator(sorted,9)
+    page = request.GET.get('page','')
+    posts = paginator.get_page(page)
+    #url에서 page=? 에 들어가는 값. 몇페이지의 정보를 보내는지 알아냄. 공백이어도 허용
+    #분할될 객체 / 한페이지에 담길 객체 수
+    #페이지 번호를 받아 해당 페이지를 리턴
+    
+    content = {
+      'posts':posts, 'themes':themes, 'sort':sorted, 'reviews':reviews, 'shops':shops,
+    }
+    return render(request,'list_themeRev.html', content)
 
 
 @method_decorator(login_required, 'get')

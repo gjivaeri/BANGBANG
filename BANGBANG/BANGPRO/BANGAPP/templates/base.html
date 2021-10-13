@@ -9,6 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
   <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   {% block css %}
   {% endblock css %}
   <title>base</title>
@@ -29,5 +31,7 @@
     {% block content %}
     {% endblock content %}
   </div>
+  {% block js %}
+  {% endblock js%}
 </body>
 </html>

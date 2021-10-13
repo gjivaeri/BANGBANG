@@ -2,6 +2,7 @@
 {% load static %}
 {% block css %}
 <link href={% static 'css/list_review.css' %} rel="stylesheet" type="text/css">
+{% comment %} <link rel="black-arrow" type="image/png" href="http://127.0.0.1/static/images/black-arrow.png">  {% endcomment %}
 {% endblock css %}
 
   {% block content %}
@@ -10,26 +11,12 @@
     <div class="content-top">
       <div class="write"><a href="/new/shopRev">리뷰 작성하기</a></div> 
 
-      {% comment %} 정렬 {% endcomment %}
-      {% comment %} <form method="GET" action="{% url 'list_themeRev' %}">
       <div class="filter">
-        <select name="sort" id="sort">
-          <option value="likes" id="likes">
-                  <span>인기순</span><img src={% static 'images/black-arrow.png' %} width=20%; alt="arrow"/>
-          </option>
-          <option value="rating" id="rating">
-                  <span>별점순</span><img src={% static 'images/black-arrow.png' %} width=20%; alt="arrow"/>
-          </option>
-          <option value="recent" id="recent">
-                  <span>최신순</span><img src={% static 'images/black-arrow.png' %} width=20%; alt="arrow"/>
-          </option>
+        <select name="sort-select" id="sort-select" onchange="location = this.value;">
+          <option class="sort-date" value="/list_themeRev">최신순</option>
+          <option class="sort-likes" value="?sort=themeRevRecom">인기순</option>
+          <option class="sort-rating" value="?sort=themeRevRating">별점순</option>
         </select>
-        <button class="btn btn-primary" type="submit" value="">정렬</button>
-      </div>
-      </form> {% endcomment %}
-
-      <div class="filter">
-        <span>인기순</span><img src={% static 'images/black-arrow.png' %} width=20%; alt="arrow"/>
       </div>
     </div>   
     <div class="posts">
@@ -53,7 +40,7 @@
               <div>
                 <div>{{shop.shopName}}</div>
                 <div>{{shop.Location}}</div>
-                <div>{{shop.Rating}}</div>
+                <div>{{review.themeRevRating}}</div>
               </div>
             </div>
             {% endif %}
@@ -87,3 +74,6 @@
     </div>
   <div>
   {% endblock content %}
+  {% block js %}
+    <script type="text/javascript" src="/static/js/sorted.js"></script>
+  {% endblock js %}
