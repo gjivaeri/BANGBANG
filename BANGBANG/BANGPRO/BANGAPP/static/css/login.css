@@ -97,20 +97,20 @@ a:link, a:visited {
 
 .cacao-login{
  width: 24vw;
- height: 2vw;
+ height: 2.2vw;
  border-radius: 35px;
 }
 
 input{
   width: 23vw;
-  height: 1.9vw;
+  height: 2.1vw;
   border-radius: 35px;
   border-color: #5c4f59;
 }
 
 .submit-button{
   width: 24vw;
-  height: 2.2vw;
+  height: 2.4vw;
   border-radius: 35px;
 }
 

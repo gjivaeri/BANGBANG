@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -62,7 +63,7 @@ class ThemeRev(models.Model):
     themeRevRecom = models.IntegerField(default=0)
     themeRevNRecom = models.IntegerField(default=0)
     themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
-
+    
     def __str__(self):
         return self.themeRevTitle
 

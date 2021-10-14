@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href={% static 'css/list_review.css' %} rel="stylesheet" type="text/css">
+{% comment %} <link rel="black-arrow" type="image/png" href="http://127.0.0.1/static/images/black-arrow.png">  {% endcomment %}
+{% endblock css %}
+
+{% block content %}
 <body>
+    <span style="">place for margin
+    </span>
     <div>
         {{themeRev.themeRevTitle}}
     </div>
@@ -44,10 +46,18 @@
         {{themeRev.themeRev_WriterID}}
     </div>
     <div>
-        <a href="{% url 'article_like' pk=themeRev.pk %}">
-        좋아요
-        </a>
-        {{themeRev.themeRevRecom}}
+        {{themeRev.pk}}
+    </div>
+    <div>                
+      <input type="button" class="like" name="{{ themeRev.pk }}" value="추천">
+      <p id="count-{{ themeRev.pk }}">
+        {{ themeRev.themeRevRecom }}+</p>
+      </p>
     </div>
 </body>
-</html>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="/static/js/like.js"></script>
+<script type="text/javascript" src="/static/js/sorted.js"></script>
+
+{% endblock js %}

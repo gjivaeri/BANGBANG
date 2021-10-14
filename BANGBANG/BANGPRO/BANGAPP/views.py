@@ -17,6 +17,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import View, RedirectView #Generic View 개발 속도를 빠르게 만들어줌
+from django.views.decorators.csrf import csrf_exempt
 #for sort 
 from django.core.paginator import Paginator
 
@@ -64,6 +65,7 @@ class LoginView(generic.View):
       loginform = LoginForm(request.POST)
       context = { 'forms' : loginform }
       if loginform.is_valid():
+          print(request.user)
           self.request.session['user'] = loginform.cleaned_data['userID']
           username = self.request.session['user']
           # return super().form_valid(form)
@@ -132,7 +134,7 @@ def new_themeRev(request):
             #themeRev_WriterID=request.user,
           )
           return redirect("detail_themeRev", new_themeRev.pk)
-      return render(request, "new_themeRev.html")
+      return render(request, "write.html")
     else:
       return render(request, 'registration/join.html')
 
@@ -227,11 +229,11 @@ def list_themeRev(request):
     ordering_priority = []
     order = '' if request.GET.get('order') == 'asc' else '-'
     # 이곳에서 오름차순인지 내림차순인지 알아낸 뒤에 명령어를 변수에 입력해둔다.
+    # ?order=asc 라는 string이 있으면 order가 ''가 되어버려서 내림차순으로 정렬되어버림
 
     # 종합해서 ordering query를 생성한다.
     if request.GET.get('sort') and request.GET.get('sort') != 'themeRevWriteDate':
         # 정렬 기준이 시간이 아닐 때만 해당 값을 ordering_priority에 추가한다.
-        # 시나리오대로라면 이곳에 like_count라는 값이 들어갔을 것이다.
         # 다른 기준으로 정렬하면 무조건 시간의 내림차순으로 정렬하기 때문에 이런식으로 구성이 된다.
         sort = request.GET.get('sort')
         ordering_priority.append(order + sort)
@@ -293,28 +295,26 @@ class LikeArticleView(RedirectView):
         #super()로 부모클래스의 메서드를 쓸 수 있음. redirectview를 상속받아 사용
 
 
-@method_decorator(login_required, 'get')
-class LikeListView(RedirectView):
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('list_themeRev')
+@csrf_exempt
+def like(request):
+    pk = request.POST.get('pk', None)
+    username = request.session.get('user')
+    user = get_object_or_404(User, userID = username)
+    article = get_object_or_404(ThemeRev, pk=pk)
 
-    def get(self, *args, **kwargs):
-        username = self.request.session.get('user')
-        user = get_object_or_404(User, userID = username)
-        article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
-
-        if Like.objects.filter(user=user, article=article).exists():
-          Like.objects.filter(user=user, article=article).delete()
-          article.themeRevRecom -= 1
-          article.save()
-          return HttpResponseRedirect(reverse('list_themeRev'))
-        else:
-          Like(user=user, article=article).save()
-
-        article.themeRevRecom += 1
-        article.save()
-
-        return super(LikeListView, self).get(self.request, *args, **kwargs)
+    if Like.objects.filter(user=user, article=article).exists():
+      Like.objects.filter(user=user, article=article).delete()
+      article.themeRevRecom -= 1
+      article.save()
+      message = '추천 취소'
+    else:
+      Like(user=user, article=article).save()
+      article.themeRevRecom += 1
+      article.save()
+      message = '추천'
+    
+    context = {'like_count':article.themeRevRecom, 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 
 @method_decorator(login_required, 'get')
@@ -330,13 +330,13 @@ class HateArticleView(RedirectView):
 
         if Hate.objects.filter(user=user, article=article).exists():
           Hate.objects.filter(user=user, article=article).delete()
-          article.themeRevRecom -= 1
+          article.themeRevRecom += 1
           article.save()
           return HttpResponseRedirect(reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']}))
         else:
           Hate(user=user, article=article).save()
 
-        article.themeRevRecom += 1
+        article.themeRevRecom -= 1
         article.save()
         return super(HateArticleView, self).get(self.request, *args, **kwargs)
 

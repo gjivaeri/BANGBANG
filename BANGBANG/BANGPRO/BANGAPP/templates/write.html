@@ -1,14 +1,13 @@
 {% extends './base.html' %}
+{% load static %}
 
-{% block css %}{% load static %}
+{% block css %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href={% static 'css/write.css' %} rel="stylesheet" type="text/css">
   <title>write</title>
   {% endblock css %}
 
   {% block content %}
-</head>
-<body>
     <div class="board_wrap">
         <div class="board_title">
             <div class="board_title_txt">
@@ -55,6 +54,7 @@
           </div>
         </div>
     </div>
-    <script src=write.js></script>
-</body>
-</html>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="/static/js/write.js"></script>
+{% endblock js %}

@@ -4,13 +4,14 @@
 <link href={% static 'css/list_review.css' %} rel="stylesheet" type="text/css">
 {% comment %} <link rel="black-arrow" type="image/png" href="http://127.0.0.1/static/images/black-arrow.png">  {% endcomment %}
 {% endblock css %}
-
-  {% block content %}
+{% block header %}
+{% endblock header %}
+{% block content %}
   <div class="content">
 
+{% comment %} 1.필터 해당 부분  {% endcomment %}
     <div class="content-top">
-      <div class="write"><a href="/new/shopRev">리뷰 작성하기</a></div> 
-
+      <div class="write"><a href="/new/themeRev">리뷰 작성하기</a></div> 
       <div class="filter">
         <select name="sort-select" id="sort-select" onchange="location = this.value;">
           <option class="sort-date" value="/list_themeRev">최신순</option>
@@ -19,11 +20,13 @@
         </select>
       </div>
     </div>   
+
     <div class="posts">
       <ul class = "row">
         {% for review in reviews %}
         <li class="cell">
           <div class="post">
+{% comment %} 2.작성자 정보 해당 부분 {% endcomment %}
             <div class="writers">
               <img class="profileImg" src="{% get_static_prefix %}{{review.themeRevImage}}"/>
               <div>
@@ -31,6 +34,7 @@
                 <div>{{review.themeRevWriteDate}}</div>
               </div>
             </div>
+{% comment %} 3.가게 정보 해당 부분 {% endcomment %}
             {% for theme in themes%}
             {% if review.theme_ID_id == theme.themeID %}
             {% for shop in shops %}
@@ -47,18 +51,20 @@
             {% endfor %}
             {% endif %}
             {% endfor %}
+{% comment %} 4.리뷰 내용 해당 부분 {% endcomment %}
             <div class="summary">
               <div class="summary-cont">
                 <a href="{% url 'detail_themeRev' review.pk %}">
                 {{review.themeRevContent}}
                 </a>
               </div>
+{% comment %} 5.좋아요 해당 부분 {% endcomment %}
               <div class="summary-bottom">
-                <div class="like-count">{{review.themeRevRecom}}+</div>
-                <div class="like">
-                <a href="{% url 'list_like' pk=review.pk %}">
-                추천
-                </a>
+                <div class="like-count" id="count-{{ review.pk }}">
+                  {{ review.themeRevRecom }}+</p>
+                </div>
+                <div>
+                <input type="button" class="like" name="{{ review.pk }}" value="추천">
                 </div>
                 <div class="dislike">
                 <a href="{% url 'list_hate' pk=review.pk %}">
@@ -66,6 +72,7 @@
                 </a>
                 </div>
               </div>
+
             </div>
           </div>
         </li>
@@ -73,7 +80,10 @@
         </ul>
     </div>
   <div>
-  {% endblock content %}
-  {% block js %}
-    <script type="text/javascript" src="/static/js/sorted.js"></script>
-  {% endblock js %}
+  
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="/static/js/like.js"></script>
+<script type="text/javascript" src="/static/js/sorted.js"></script>
+
+{% endblock js %}
