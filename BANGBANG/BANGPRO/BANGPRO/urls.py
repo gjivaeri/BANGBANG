@@ -16,31 +16,25 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from BANGAPP import views
-from BANGAPP.views import LoginView,LikeArticleView,HateListView
+from BANGAPP.views import LoginView
 # LikeListView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('registration/join/', views.join, name="join"),
-    # path('registration/login/', views.login, name="login"),
+    path('registration/login/', LoginView.as_view(), name="login"),
     path('home/', views.home, name='home'),
     path('logout/', views.logout, name="logout"),
     path('shop/<int:shop_pk>', views.shop, name="shop"),
-    path('theme/<int:theme_pk>', views.theme, name='theme'),
     path('new/themeRev', views.new_themeRev, name="new_themeRev"),
     path('edit/themeRev/<int:themeRev_pk>', views.edit_themeRev, name="edit_themeRev"),
     path('delete/themeRev/<int:themeRev_pk>', views.delete_themeRev, name="delete_themeRev"),
     path('detail/themeRev/<int:themeRev_pk>', views.detail_themeRev, name="detail_themeRev"),
-    path('new/shopRev', views.new_shopRev, name="new_shopRev"),
-    path('edit/shopRev/<int:shopRev_pk>', views.edit_shopRev, name="edit_shopRev"),
-    path('delete/shopRev/<int:shopRev_pk>', views.delete_shopRev, name="delete_shopRev"),
-    path('detail/shopRev/<int:shopRev_pk>', views.detail_shopRev, name="detail_shopRev"),
-    # path('list_shopRev/', views.list_shopRev, name="list_shopRev"),
+    # path('new/shopRev', views.new_shopRev, name="new_shopRev"),
+    # path('edit/shopRev/<int:shopRev_pk>', views.edit_shopRev, name="edit_shopRev"),
+    # path('delete/shopRev/<int:shopRev_pk>', views.delete_shopRev, name="delete_shopRev"),
+    # path('detail/shopRev/<int:shopRev_pk>', views.detail_shopRev, name="detail_shopRev"),
     path('list_themeRev/', views.list_themeRev, name="list_themeRev"),
-    # path('list_themeRev/', ListThemeRev.as_view(), name="list_themeRev"),
-    path('registration/login/', LoginView.as_view(), name="login"),
-    path('liketest/<int:pk>', LikeArticleView.as_view(), name="article_like"),
-    # path('likeinlist/<int:pk>', LikeListView.as_view(), name="list_like"),
     path('like/', views.like, name="like"),
-    path('hateinlist/<int:pk>', HateListView.as_view(), name="list_hate"),
+    path('hate/', views.hate, name="hate"),
     path('mypage/', views.mypage, name="mypage"),
 ]

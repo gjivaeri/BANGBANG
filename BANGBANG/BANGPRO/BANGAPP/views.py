@@ -101,11 +101,6 @@ def shop(request, shop_pk):
 
     return render(request,'shop.html',{'shop':shop, 'reviews':reviews})
 
-def theme(request, theme_pk):
-    theme = Theme.objects.get(pk=theme_pk)
-    reviews = ThemeRev.objects.filter(theme_ID=theme_pk)
-
-    return render(request, 'theme.html', {'theme': theme, 'reviews' : reviews})
 
 def detail_shopRev(request, shopRev_pk):
     shopRev = Shoprev.objects.get(pk=shopRev_pk)
@@ -219,12 +214,6 @@ def delete_themeRev(request, themeRev_pk):
     return redirect('theme')
 
 
-def list_shopRev(request):
-    reviews = Shoprev.objects.all()
-    shops = Shop.objects.all()
-    return render(request, 'list_shopRev.html', {'shops':shops, 'reviews':reviews})
-
-
 def list_themeRev(request):
     ordering_priority = []
     order = '' if request.GET.get('order') == 'asc' else '-'
@@ -261,40 +250,6 @@ def list_themeRev(request):
     return render(request,'list_themeRev.html', content)
 
 
-@method_decorator(login_required, 'get')
-class LikeArticleView(RedirectView):
-    def get_redirect_url(self, *args, **kwargs):
-      #args는 튜플, kwargs는 사전형을 인자로 받음. 리디렉션할 대상 url를 구성
-        return reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']})
-        #reverse(): view 함수를 사용하여 URL을 역으로 계산=url이 변경되어도 pattern name만 알면 됨
-        #args와 kwargs를 동시에 전달할 수 없음
-
-    def get(self, *args, **kwargs):
-        username = self.request.session.get('user')
-        user = get_object_or_404(User, userID = username)
-        article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
-        #pk가 존재하는 themeRev 있으면 가져오고 아님 404에러발생
-
-        if Like.objects.filter(user=user, article=article).exists():
-          Like.objects.filter(user=user, article=article).delete()
-          article.themeRevRecom -= 1
-          article.save()
-          # messages.add_message(self.request, messages.ERROR, '좋아요는 한번만 가능합니다.') 차후구현
-          return HttpResponseRedirect(reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']}))
-        else:
-          Like(user=user, article=article).save()
-          #like 모델이 존재하면 (좋아요를 이미 눌렀으면 error 발생), 아니면 Like모델에 저장
-
-        article.themeRevRecom += 1
-        article.save()
-
-        # messages.add_message(self.request, messages.SUCCESS, '좋아요가 반영되었습니다.') 차후구현
-
-        return super(LikeArticleView, self).get(self.request, *args, **kwargs)
-        #super()메서드가 자체적으로 response생성, 페이징 처리해주기 때문에 사용
-        #super()로 부모클래스의 메서드를 쓸 수 있음. redirectview를 상속받아 사용
-
-
 @csrf_exempt
 def like(request):
     pk = request.POST.get('pk', None)
@@ -317,55 +272,31 @@ def like(request):
     return HttpResponse(json.dumps(context), content_type="application/json")
 
 
-@method_decorator(login_required, 'get')
-class HateArticleView(RedirectView):
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']})
+@csrf_exempt
+def hate(request):
+    pk = request.POST.get('pk', None)
+    username = request.session.get('user')
+    user = get_object_or_404(User, userID = username)
+    article = get_object_or_404(ThemeRev, pk=pk)
 
-
-    def get(self, *args, **kwargs):
-        username = self.request.session.get('user')
-        user = get_object_or_404(User, userID = username)
-        article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
-
-        if Hate.objects.filter(user=user, article=article).exists():
-          Hate.objects.filter(user=user, article=article).delete()
-          article.themeRevRecom += 1
-          article.save()
-          return HttpResponseRedirect(reverse('detail_themeRev', kwargs={'themeRev_pk':kwargs['pk']}))
-        else:
-          Hate(user=user, article=article).save()
-
-        article.themeRevRecom -= 1
-        article.save()
-        return super(HateArticleView, self).get(self.request, *args, **kwargs)
-
-
-@method_decorator(login_required, 'get')
-class HateListView(RedirectView):
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('list_themeRev')
-
-    def get(self, *args, **kwargs):
-        username = self.request.session.get('user')
-        user = get_object_or_404(User, userID = username)
-        article = get_object_or_404(ThemeRev, pk=kwargs['pk'])
-
-        if Hate.objects.filter(user=user, article=article).exists():
-          Hate.objects.filter(user=user, article=article).delete()
-          article.themeRevRecom += 1
-          article.save()
-          return HttpResponseRedirect(reverse('list_themeRev'))
-        else:
-          Hate(user=user, article=article).save()
-
-        article.themeRevRecom -= 1
-        article.save()
-        return super(HateListView, self).get(self.request, *args, **kwargs)
+    if Hate.objects.filter(user=user, article=article).exists():
+      Hate.objects.filter(user=user, article=article).delete()
+      article.themeRevRecom += 1
+      article.save()
+      message = '비추천 취소'
+    else:
+      Hate(user=user, article=article).save()
+      article.themeRevRecom -= 1
+      article.save()
+      message = '비추천'
+    
+    context = {'like_count':article.themeRevRecom, 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 
 def mypage(request):
     username = request.session.get('user')
     if User.objects.filter(userID = username).exists():
-        return render(request, 'registration/mypage.html')
+        content = {'username' : username}
+        return render(request, 'registration/mypage.html', content)
     return redirect('login')

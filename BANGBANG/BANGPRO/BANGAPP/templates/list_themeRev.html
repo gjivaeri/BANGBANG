@@ -66,10 +66,8 @@
                 <div>
                 <input type="button" class="like" name="{{ review.pk }}" value="추천">
                 </div>
-                <div class="dislike">
-                <a href="{% url 'list_hate' pk=review.pk %}">
-                비추천
-                </a>
+                <div>
+                <input type="button" class="hate" name="{{ review.pk }}" value="비추천">
                 </div>
               </div>
 
@@ -84,6 +82,6 @@
 {% endblock content %}
 {% block js %}
 <script type="text/javascript" src="/static/js/like.js"></script>
+<script type="text/javascript" src="/static/js/hate.js"></script>
 <script type="text/javascript" src="/static/js/sorted.js"></script>
-
 {% endblock js %}
