@@ -1,7 +1,7 @@
 {% extends './base.html' %}
 {% load static %}
 {% block css %}
-<link href={% static 'css/list_review.css' %} rel="stylesheet" type="text/css">
+<link href={% static 'css/list_themeRev.css' %} rel="stylesheet" type="text/css">
 {% comment %} <link rel="black-arrow" type="image/png" href="http://127.0.0.1/static/images/black-arrow.png">  {% endcomment %}
 {% endblock css %}
 {% block header %}
@@ -31,7 +31,7 @@
               <img class="profileImg" src="{% get_static_prefix %}{{review.themeRevImage}}"/>
               <div>
                 <div>{{review.themeRev_WriterID}}</div>
-                <div>{{review.themeRevWriteDate}}</div>
+                <div>{{review.themeRevWriteDte}}</div>
               </div>
             </div>
 {% comment %} 3.가게 정보 해당 부분 {% endcomment %}
@@ -40,7 +40,13 @@
             {% for shop in shops %}
             {% if shop.shopID == theme.ShopID_id %}
             <div class="info">
-              <img src="{% get_static_prefix %}{{review.themeRevImage}}"/>
+              <a href="{% url 'detail_theme' theme.pk %}">
+                <img src="{% get_static_prefix %}{{review.themeRevImage}}"/>
+              </a>
+              {% comment %} <img src="{% get_static_prefix %}{{theme.themeImage}}"/> 
+              테마 이미지 필드 만들어지면 이렇게 연결
+              {% endcomment %}
+              {% comment %} <a href="{% url 'detail_theme' theme.pk %}"> {% endcomment %}
               <div>
                 <div>{{shop.shopName}}</div>
                 <div>{{shop.Location}}</div>

@@ -21,7 +21,6 @@ from django.views.decorators.csrf import csrf_exempt
 #for sort 
 from django.core.paginator import Paginator
 
-
 # Create your views here.
 
 def join(request):
@@ -88,6 +87,14 @@ def logout(request):
     return redirect('home')
 
 
+def mypage(request):
+    username = request.session.get('user')
+    if User.objects.filter(userID = username).exists():
+        content = {'username' : username}
+        return render(request, 'registration/mypage.html', content)
+    return redirect('login')
+
+
 def home(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
@@ -102,12 +109,17 @@ def shop(request, shop_pk):
     return render(request,'shop.html',{'shop':shop, 'reviews':reviews})
 
 
-def detail_shopRev(request, shopRev_pk):
-    shopRev = Shoprev.objects.get(pk=shopRev_pk)
+def detail_theme(request, theme_pk):
+  #이 페이지에서 새로 뭘 작성할게 아니면 아래 두줄은 삭제
     if request.method == "POST":
-        return redirect('detail_shopRev', shopRev_pk)
+      return redirect('detail_theme', theme_pk)
 
-    return render(request, 'detail_shopRev.html', {'shopRev': shopRev})
+    theme = Theme.objects.get(pk=theme_pk)
+    review = ThemeRev.objects.filter(theme_ID=theme_pk)
+    topreview = review.order_by('-themeRevRecom').first()
+    # like = Like.objects.filter(article__in=review)
+    return render(request, 'detail_theme.html', {'theme':theme, 'review':review, 'topreview':topreview})
+    
 
 #theme Review
 # @login_required(login_url="/registration/login")
@@ -129,7 +141,7 @@ def new_themeRev(request):
             #themeRev_WriterID=request.user,
           )
           return redirect("detail_themeRev", new_themeRev.pk)
-      return render(request, "write.html")
+      return render(request, "new_themeRev.html")
     else:
       return render(request, 'registration/join.html')
 
@@ -158,60 +170,18 @@ def edit_themeRev(request, themeRev_pk):
 
 
 def detail_themeRev(request, themeRev_pk):
+    reviews = ThemeRev.objects.all()
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
     if request.method == "POST":
         return redirect('detail_themeRev', themeRev_pk)
 
-    return render(request, 'detail_themeRev.html', {'themeRev': themeRev})
-
-#SHOP Review
-# @login_required(login_url="/registration/login")
-def new_shopRev(request):
-    username = request.session.get('user')
-    if User.objects.filter(userID = username).exists():
-      if request.method == "POST":
-          new_shopRev = Shoprev.objects.create(
-            shopRevTitle=request.POST["shoprevTitle"],
-            shopRevRating=request.POST["shopRating"],
-            shopRevContent=request.POST["shoprevCont"],
-            shopRevImage=request.POST["shoprevImage"],
-            shopRevDate=request.POST["shoprevDate"],
-            shopRevWriteDate=request.POST["shoprevWDate"],
-            shopRev_WriterID=request.user,
-          )
-          return redirect("detail_shopRev", new_shopRev.pk)
-      return render(request, "new_shopRev.html")
-    else:
-      return render(request, 'registration/join.html')
-    
-
-def edit_shopRev(request, shopRev_pk):
-    shopRev = Shoprev.objects.get(pk=shopRev_pk)
-
-    if request.method == "POST":
-        shopRev.objects.filter(pk=shopRev_pk).update(
-           shopRevTitle=request.POST["shopRevTitle"],
-           shopRevRating=request.POST["shopRevRating"],
-           shopRevContent=request.POST["shopRevContent"],
-           shopRevImage=request.POST["shopRevImage"],
-           shopRevDate=request.POST["shopRevDate"],
-           shopRevWriteDate=request.POST["shopRevWriteDate"],
-           shopRev_WriterID=request.user,
-        )
-        return redirect('detail_shopRev', shopRev_pk)
-
-    return render(request, 'edit_shopRev.html', {'shopRev': shopRev})
-
-def delete_shopRev(request, shopRev_pk):
-    shopRev = Shoprev.objects.get(pk=shopRev_pk)
-    shopRev.delete()
-    return redirect('/shop/<int:shopRev_pk>')
+    return render(request, 'detail_themeRev.html', {'reviews':reviews, 'themeRev': themeRev})
 
 
 def delete_themeRev(request, themeRev_pk):
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
     themeRev.delete()
-    return redirect('theme')
+    return redirect('detail_themeRev')
 
 
 def list_themeRev(request):
@@ -294,9 +264,46 @@ def hate(request):
     return HttpResponse(json.dumps(context), content_type="application/json")
 
 
-def mypage(request):
-    username = request.session.get('user')
-    if User.objects.filter(userID = username).exists():
-        content = {'username' : username}
-        return render(request, 'registration/mypage.html', content)
-    return redirect('login')
+#SHOP Review 검토 후 삭제
+# # @login_required(login_url="/registration/login")
+# def new_shopRev(request):
+#     username = request.session.get('user')
+#     if User.objects.filter(userID = username).exists():
+#       if request.method == "POST":
+#           new_shopRev = Shoprev.objects.create(
+#             shopRevTitle=request.POST["shoprevTitle"],
+#             shopRevRating=request.POST["shopRating"],
+#             shopRevContent=request.POST["shoprevCont"],
+#             shopRevImage=request.POST["shoprevImage"],
+#             shopRevDate=request.POST["shoprevDate"],
+#             shopRevWriteDate=request.POST["shoprevWDate"],
+#             shopRev_WriterID=request.user,
+#           )
+#           return redirect("detail_shopRev", new_shopRev.pk)
+#       return render(request, "new_shopRev.html")
+#     else:
+#       return render(request, 'registration/join.html')
+    
+
+# def edit_shopRev(request, shopRev_pk):
+#     shopRev = Shoprev.objects.get(pk=shopRev_pk)
+
+#     if request.method == "POST":
+#         shopRev.objects.filter(pk=shopRev_pk).update(
+#            shopRevTitle=request.POST["shopRevTitle"],
+#            shopRevRating=request.POST["shopRevRating"],
+#            shopRevContent=request.POST["shopRevContent"],
+#            shopRevImage=request.POST["shopRevImage"],
+#            shopRevDate=request.POST["shopRevDate"],
+#            shopRevWriteDate=request.POST["shopRevWriteDate"],
+#            shopRev_WriterID=request.user,
+#         )
+#         return redirect('detail_shopRev', shopRev_pk)
+
+#     return render(request, 'edit_shopRev.html', {'shopRev': shopRev})
+
+# def delete_shopRev(request, shopRev_pk):
+#     shopRev = Shoprev.objects.get(pk=shopRev_pk)
+#     shopRev.delete()
+#     return redirect('/shop/<int:shopRev_pk>')
+

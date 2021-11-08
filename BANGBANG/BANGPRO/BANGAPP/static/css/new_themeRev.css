@@ -15,8 +15,8 @@
 }
 
 .board_title_btn {
-    width: 200px;
-    height: 50px;
+    width: 100px;
+    height: 26px;
     text-align: center;
     border: 1px solid #F55C03;
     background-color: #ffff;
@@ -27,7 +27,7 @@
     color:#F55C03;
     font-size: 10px;
 }
-.star_review{
+.star_review {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -46,24 +46,40 @@
     border-radius: 15px;
 }
 
-.star {
+.star, .starDifficulty{
     font-size: 36px;
     color:#ffe400;
 }
 
-.star input {
+.star input, .starDifficulty input, .starHorror input, .starActivity input {
     display: none;
 }
 
-.star input:checked + label ~ label {
+
+.star input:checked + label ~ label, .starDifficulty input:checked + label ~ label {
     color: #838383;
 }
-.star label:active {
+.star label:active, .starDifficulty label:active {
     transform: scale(0.8);
     transition: 0.3s ease;
 }
 
+.rating {
+	cursor: pointer;
+}
+
+.rating .rating-star {
+  display: inline-block;
+  position: relative;
+  padding-right: 5px;
+  margin-left: -5px;
+  color: #e3cf7a;
+}
+.rating .selected:before {
+  content: '\f005';
+}
 
 .text-review textarea {
     border: #ffff;
 }
+

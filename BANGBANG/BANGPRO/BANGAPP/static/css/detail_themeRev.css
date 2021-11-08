@@ -1,0 +1,97 @@
+html{height: 100%;}
+body{position: relative;width: 100%;height: 100%;}
+
+.content{
+  color: #53444F;
+  font-family: 'NanumSquare';
+  display:flex;
+  position: absolute;
+  top: 8%;
+  left: 10%;
+}
+
+.themeRevList{
+  width: 35vmax;
+  height: 100vh;
+  float: left;
+}
+
+.themeRevDetail{
+  width: 43vmax;
+  height: 100vh;
+  float:right;
+  background-color: rgb(238, 238, 238);
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+}
+
+h2{
+  margin-top: 3vh;
+  margin-bottom: 2vh;
+}
+/* review summary */
+.review-box{
+  vertical-align: middle;
+  border: 1px solid black;
+  border-radius: 20px;
+  display:flex;
+  flex-direction: column;
+  padding:1% 1% 1% 1%;
+  height:25vh;
+  width: 32vmax;
+  margin-bottom: 5%;
+  background-color: white;
+}
+
+.review-box > .summary-cont{
+  padding: 3vh 2vh 0vh 3vh;
+  line-height: 1.6;
+  font-size: 1.1em;
+  height:9.2em;
+  overflow:hidden;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp : 6;
+  -webkit-box-orient: vertical;
+
+}
+
+.review-box > .summary-cont > a {
+  text-decoration: none;
+  color: #53444F;
+}
+
+
+/* like count  */
+.summary-bottom{
+  display:flex;
+  padding: 3vh 2vh 0vh 3vh;
+}
+
+.summary-bottom > .like-count{
+  flex-basis: 70vh;
+  font-size:1.2em;
+}
+
+.summary-bottom > div > .like{
+  width:5vh;
+  border: none;
+  background-color: white;
+  font-size:1.05em;
+}
+
+.summary-bottom > div > .hate{
+  width:5vh;
+  border: none;
+  background-color: white;
+  font-size:1.05em;
+
+}
+
+.summary-bottom > div > .like:hover{
+  color:#F55C03;
+}
+
+.summary-bottom > div > .hate:hover{
+  color:#F55C03;
+}

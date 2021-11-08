@@ -1,63 +1,83 @@
 {% extends './base.html' %}
 {% load static %}
 {% block css %}
-<link href={% static 'css/list_review.css' %} rel="stylesheet" type="text/css">
+<link href={% static 'css/detail_themeRev.css' %} rel="stylesheet" type="text/css">
 {% comment %} <link rel="black-arrow" type="image/png" href="http://127.0.0.1/static/images/black-arrow.png">  {% endcomment %}
 {% endblock css %}
 
 {% block content %}
-<body>
-    <span style="">place for margin
-    </span>
-    <div>
-        {{themeRev.themeRevTitle}}
-    </div>
-    <div>
-        {{themeRev.themeRevRating}}
-    </div>
-    <div>
-        {{themeRev.themeRevDifficulty}}
-    </div>
-    <div>
-        {{themeRev.themeRevHorror}}
-    </div>
-    <div>
-        {{themeRev.themeRevActivity}}
-    </div>
-    <div>
-        {{themeRev.themeRevContent}}
-    </div>
-    <div>
-        {{themeRev.themeRevImage}}
-    </div>
-    <div>
-        {{themeRev.themeRevResult}}
-    </div>
-    <div>
-        {{themeRev.themeRevOccurredTime}}
-    </div>
-    <div>
-        {{themeRev.themeRevDate}}
-    </div>
-    <div>
-        {{themeRev.themeRevWriteDate}}
-    </div>
-    <div>
-        {{themeRev.themeRev_WriterID}}
-    </div>
-    <div>
-        {{themeRev.pk}}
-    </div>
-    <div>                
-      <input type="button" class="like" name="{{ themeRev.pk }}" value="추천">
-      <p id="count-{{ themeRev.pk }}">
-        {{ themeRev.themeRevRecom }}+</p>
-      </p>
-    </div>
-</body>
+<div class="content">
+  <div class="themeRevList">
+    <h2>리뷰 목록</h2>
+    {% for review in reviews %}
+      <div class="review-box">
+        <div class="summary-cont">
+          {% comment %} <a href="{% url 'detail_themeRev' review.pk %}"> {% endcomment %}
+          {{review.themeRevContent}}
+        </div>
+        <div class="summary-bottom">
+          <div class="like-count" id="count-{{ review.pk }}">
+            ♡{{ review.themeRevRecom }}+
+            {% comment %} 이미지 삽입 오류 수정되면 하트 이미지로 대체 {% endcomment %}
+          </div>
+          <div>
+            <input type="button" class="like" name="{{ review.pk }}" value="추천">
+          </div>
+          <div>
+            <input type="button" class="hate" name="{{ review.pk }}" value="비추천">
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="themeRevDetail">
+      <span>리뷰 닫기</span><br>
+      이 파트는 new_themeRev 완성 후 가져올 것
+      {% comment %} 아래는 new_themeRev의 html 가져올 것 {% endcomment %}
+      <div>
+          {{themeRev.themeRevTitle}}
+      </div>
+      <div>
+          {{themeRev.themeRevRating}}
+      </div>
+      <div>
+          {{themeRev.themeRevDifficulty}}
+      </div>
+      <div>
+          {{themeRev.themeRevHorror}}
+      </div>
+      <div>
+          {{themeRev.themeRevActivity}}
+      </div>
+      <div>
+          {{themeRev.themeRevContent}}
+      </div>
+      <div>
+          {{themeRev.themeRevImage}}
+      </div>
+      <div>
+          {{themeRev.themeRevResult}}
+      </div>
+      <div>
+          {{themeRev.themeRevOccurredTime}}
+      </div>
+      <div>
+          {{themeRev.themeRevDate}}
+      </div>
+      <div>
+          {{themeRev.themeRevWriteDate}}
+      </div>
+      <div>
+          {{themeRev.themeRev_WriterID}}
+      </div>
+      <div>
+          {{themeRev.pk}}
+      </div>
+  </div>
+</div>
 {% endblock content %}
 {% block js %}
 <script type="text/javascript" src="/static/js/like.js"></script>
-<script type="text/javascript" src="/static/js/sorted.js"></script>
-
+<script type="text/javascript" src="/static/js/hate.js"></script>
 {% endblock js %}

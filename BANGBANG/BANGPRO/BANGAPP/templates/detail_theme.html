@@ -1,0 +1,102 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href={% static 'css/detail_theme.css' %} rel="stylesheet" type="text/css">
+{% comment %} <link rel="black-arrow" type="image/png" href="http://127.0.0.1/static/images/black-arrow.png">  {% endcomment %}
+{% endblock css %}
+
+{% block content %}
+<div class="content">
+
+    <div class="themeInfoBox">
+      <div class="themeInfo-top">
+        <div class="imageField">
+          <img src="{% get_static_prefix %}{{topreview.themeRevImage}}"/>
+          {% comment %} <img src="{% get_static_prefix %}{{theme.themeImage}}"/> 
+          테마 모델에 이미지 필드 만들어지면 이렇게 연결
+          {% endcomment %} 
+        </div>       
+        <div class="themeInfo">
+          <div><h2>{{theme.themeName}}</h2></div>
+          <div><span>난이도</span>{{theme.themeDifficulty}}</div>
+          <div><span>공포도</span>{{theme.themeHorror}}</div>
+          <div><span>인원</span>{{theme.themeRecomPeople}}</div>
+        </div>
+      </div>
+      <div class="themeDetail">
+        {% comment %} 테마 모델에 테마 설명 필드 필요함 {% endcomment %}
+        {% comment %} {{theme.}} {% endcomment %}
+        장미와 다툰 뒤, 생각할 시간을 갖기 위해 여행을 떠나는 어린왕자. 항해 도중 연료가 부족해 지구의
+        어느 사막에 불시착하게 된다. 연료를 구하기 위해 이리저리 사막을 탐험하던 중 예기치 않는 상황을 조우하게 되는데...
+      </div>
+      <div class="themeRev">
+        <span>테마별 리뷰</span> <span>더보기</span>
+        <div class="review-box">
+          <div class="summary-cont">{{topreview.themeRevContent}}</div>
+          <div class="summary-bottom">
+            <div class="like-count" id="count-{{ topreview.pk }}">
+              ♡{{ topreview.themeRevRecom }}+</p>
+              {% comment %} 이미지 삽입 오류 수정되면 하트 이미지로 대체 {% endcomment %}
+            </div>
+            <div>
+            <input type="button" class="like" name="{{ topreview.pk }}" value="추천">
+            </div>
+            <div>
+            <input type="button" class="hate" name="{{ topreview.pk }}" value="비추천">
+            </div>        
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="reservation">
+      <h3>예약 시뮬레이션</h3>
+      <div class="reservation-info">
+        <div class="headcount">인원</div>                    
+        <input class="input-box" type="text" id='headcount' placeholder="" style="color:#53444F;">
+        <label for="headcount">명</label>
+        <div class="price">가격</div>
+        <div class="per">인당</div>
+        <input class="input-box" type="text" id='price' placeholder="" style="color:#53444F;">
+        <label for="price">원</label>
+      </div>
+      <div class="res-date">
+        <div>날짜</div>
+        <input class="input-box" type="text" id='year' placeholder="" style="color:#53444F;">
+        <label for="price">년</label>
+        <input class="input-box" type="text" id='month' placeholder="" style="color:#53444F;">
+        <label for="price">월</label>
+        <input class="input-box" type="text" id='date' placeholder="" style="color:#53444F;">
+        <label for="price">일</label>
+      </div>
+      시간대
+      <div class="reservation-time">
+        <div class="reservation-top">
+          <div class="available"><p>10:20</p><p>예약 가능</p></div>
+          <div class="available"><p>11:30</p><p>예약 가능</p></div>
+          <div class="unavailable"><p>12:40</p><p>예약 불가</p></div>
+          <div class="available"><p>13:50</p><p>예약 가능</p></div>
+        </div>
+        <div class="reservation-bottom">
+          <div class="unavailable"><p>15:00</p><p>예약 불가</p></div>
+          <div class="unavailable"><p>16:10</p><p>예약 불가</p></div>
+          <div class="available"><p>17:20</p><p>예약 가능</p></div>
+          <div class="unavailable"><p>18:30</p><p>예약 불가</p></div>    
+        </div>
+      </div>
+      <div class="total-price">
+        <div>합계</div>
+        <input class="input-box" type="text" id='total-price' placeholder="" style="color:#53444F;">
+        <label for="total-price">원</label>
+      </div>
+      <div class="reservation-button">
+        홈페이지에서 예약하기
+      </div>
+    </div>
+</div>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="/static/js/like.js"></script>
+<script type="text/javascript" src="/static/js/hate.js"></script>
+{% endblock js %}
