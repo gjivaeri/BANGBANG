@@ -1,3 +1,18 @@
+/* vx, vh단위로 수정할 것 */
+html{height: 100%;}
+body{position: relative;width: 100%;height: 100%;}
+
+.content{
+  color: #53444F;
+  font-family: 'NanumSquare';
+  display:flex;
+  flex-direction: column; 
+  position: absolute;
+  width: 80vmax;
+  top: 8%;
+  left: 25vw;
+}
+
 .board_wrap{
   display: flex;
   flex-direction: column;
@@ -5,6 +20,7 @@
   height: auto;
   padding: 25px;
   background-color: #e7e5e5;
+  height: 100vh;
 }
 
 .board_title{
