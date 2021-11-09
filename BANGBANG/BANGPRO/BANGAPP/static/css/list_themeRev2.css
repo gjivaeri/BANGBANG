@@ -8,17 +8,16 @@ body{position: relative;width: 100%;height: 100%;}
   display:flex;
   flex-direction: column; 
   position: absolute;
-  width: 80vmax;
   top: 10%;
-  left: 8%;
+  left: 10%;
+  width: 80%;
 }
 
 /* write review, filter */
 .content-top{
   display: flex;
   margin-bottom: 2vh;
-  margin-left: 3vw;
-  margin-right: 0.2vw;
+  padding-left: 6%;
   align-items: center;
 }
 
@@ -26,23 +25,19 @@ body{position: relative;width: 100%;height: 100%;}
   flex-basis: 90%;
 }
 
-.content-top > .more{
-  width:4vw;
-}
-
 .content-top > .filter{
   background-color: white;
   border: 1px solid black;
-  border-radius: 30px;
-  width:6.8vw;
-  height:4.2vh;
-  line-height: 2.7;
+  border-radius: 50px;
+  padding: 4px 3px 10px 10px;
+  width:60px;
+  height:10px;
+  font-size:14px;
 }
 
 .content-top > .filter > select {
-  width: 4vw;
-  margin-left: 2vw;
-  font-size:1.1em;
+  width: 60px;
+  padding: 0 .5em;
   border: none;
   /* background: url(../images/black-arrow.png); */
   /*필터가 세개라 화살표가 세개 뜨는 오류 수정해야 함 */
@@ -74,6 +69,66 @@ body{position: relative;width: 100%;height: 100%;}
 .posts > ul > li {
   width:33%;
   padding: 0 10px 20px;
+}
+
+/* 타블릿 */
+@media(max-width:1023px) {
+  .content-top{
+    display: flex;
+    margin-bottom: 20px;
+    padding-left: 7%;
+    font-size:15px;
+  }
+
+  .content-top > .write{
+    flex-basis: 87%;
+  }
+
+  .content-top > .filter{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 4px 3px 10px 10px;
+    width:56px;
+    height:10px;
+    font-size:14px;
+  }
+
+  .posts > ul > li{
+    width:50%;
+  }
+}
+
+/* 스마트폰 */
+@media(max-width:767px){
+  .content-top{
+    display: flex;
+    margin-bottom: 20px;
+    padding-left: 10%;
+    font-size:15px;
+  }
+
+  .content-top > .write{
+    flex-basis: 62%;
+  }
+
+  .content-top > .filter{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50px;
+    padding: 4px 3px 10px 10px;
+    width:56px;
+    height:10px;
+    font-size:14px;
+
+  }
+
+  .posts > ul > li{
+    width:80%;
+    margin: 0 0 30px 0px;
+    font-size:18px;
+  }
+
 }
 
 /* writer info */

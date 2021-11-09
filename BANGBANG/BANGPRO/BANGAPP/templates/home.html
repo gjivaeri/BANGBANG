@@ -1,22 +1,22 @@
 {% extends './base.html' %}
 {% load static %}
 {% block css %}
+  <link href={% static 'css/home.css' %} rel="stylesheet" type="text/css">
 {% endblock css %}
 
 {% block content %}
-
-
-    <h3><a href="/registration/join">회원가입</a></h3>
-    <h3><a href="/registration/login">로그인</a></h3>
-    <h3><a href="/logout">로그아웃</a></h3>    
-margin
-    {% comment %} {% if user.is_authenticated %} {% endcomment %}
-    <h3><a href="/logout">로그아웃</a></h3>
-    {% comment %} {% else %} {% endcomment %}
-    <h3><a href="/registration/join">회원가입</a></h3>
-    <h3><a href="/registration/login">로그인</a></h3>
-    {% comment %} {% endif %}     {% endcomment %}
-    <h3>{{ username }}님 반갑습니다</h3>
-    <h3>{{ user }}</h3>
-
+<div class="content">
+  <div class="search-top">
+    empty
+  </div> 
+  
+  <p>{{count}}개의 검색결과</p>
+  <div class="search-bottom">
+    {% for theme in themes %}
+        <div class="themeImg">
+          <img src="{% get_static_prefix %}{{theme.themeRevImage}}"/>
+        </div>
+    {% endfor %}
+  </div> 
+</div>
 {% endblock content %} 

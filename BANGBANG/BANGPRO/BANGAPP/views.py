@@ -98,7 +98,9 @@ def mypage(request):
 def home(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
-    content = {'user' : user}
+    themes = ThemeRev.objects.all()
+    count = themes.count()
+    content = {'user' : user, 'themes' : themes, 'count' : count}
     return render(request, 'home.html', content)
 
 
