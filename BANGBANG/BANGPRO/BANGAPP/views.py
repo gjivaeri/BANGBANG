@@ -98,9 +98,11 @@ def mypage(request):
 def home(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
-    themes = ThemeRev.objects.all()
+    themeImgs = ThemeRev.objects.all()
+    # 테마 모델에 이미지가 없어 임시 연결
+    themes = Theme.objects.all()
     count = themes.count()
-    content = {'user' : user, 'themes' : themes, 'count' : count}
+    content = {'user' : user, 'themeImgs' : themeImgs, 'themes' : themes, 'count' : count}
     return render(request, 'home.html', content)
 
 
