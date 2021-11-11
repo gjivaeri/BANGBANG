@@ -20,6 +20,7 @@ from BANGAPP.views import LoginView
 # LikeListView
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
     path('registration/join/', views.join, name="join"),
     path('registration/login/', LoginView.as_view(), name="login"),
     path('home/', views.home, name='home'),
