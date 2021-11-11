@@ -52,7 +52,7 @@ class ThemeRev(models.Model):
     themeRevHorror = models.IntegerField(default=0)
     themeRevActivity = models.IntegerField(default=0)
     themeRevContent = models.TextField()
-    themeRevImage = models.ImageField(upload_to='themeImages', height_field=None, width_field=None,blank=True)    
+    themeRevImage = models.ImageField(upload_to='themeRevImages', height_field=None, width_field=None,blank=True)    
     # themeRevImage = models.ImageField(upload_to=None, height_field=None, width_field=None,blank=True)
     themeRevResult = models.BooleanField(null=True)
     themeRevOccurredTime = models.TimeField(auto_now=False, auto_now_add=False)
@@ -78,6 +78,8 @@ class Theme(models.Model):
     themeRecomPeople = models.IntegerField()
     ShopID = models.ForeignKey("Shop", related_name="ShopId", on_delete=models.CASCADE, db_column="ShopID")
     themeGenre = models.CharField(max_length=64)
+    themeImage = models.ImageField(upload_to='themeImages', height_field=None, width_field=None,blank=True)    
+    themeIntro = models.TextField(null=True)
 
 
 class Like(models.Model):

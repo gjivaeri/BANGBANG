@@ -21,7 +21,9 @@
      <div class="buttons">
         <div class="on-buttons">
             <button type="button" class="modify" onclick="location.href=''">회원정보 수정</button>
-            <button type="button" class="likes" onclick="location.href=''">좋아요</button>
+            <a href="{% url 'mylike' %}">
+              <button type="button" class="likes" onclick="location.href=''">좋아요</button>
+            </a>
         </div>
         <div class="under-buttons">
             <button type="button" class="my-review" onclick="location.href=''">리뷰 관리</button>

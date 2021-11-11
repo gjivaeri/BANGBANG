@@ -1,0 +1,226 @@
+
+.wrap{
+  height: 100%;
+}
+
+.sides{
+  display: flex;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.right-side{
+  background-color: #e7e5e5;
+  width: 42vw;
+  margin: 0;
+  padding: 25px;
+  overflow: scroll;
+  margin-right: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  height:100% 
+}
+/* 스크롤 안보이게 */
+.right-side::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.pic{
+  width: 14vw;
+  height: 14vw;
+  border-radius: 20px;
+  margin-top: 26vh;
+}
+
+.shop-name{
+  font-size: 0.8vw;
+  margin-bottom: 4px;
+  margin-top: 26vh;
+  padding-top: 6px;
+}
+
+
+.theme-info{
+  display: flex;
+}
+
+
+.theme-name{
+  font-size: 1.8vw;
+  margin-bottom: 1vw;
+}
+
+.difficulty, .horror, .number{
+  display: flex;
+  align-items: center;
+}
+
+.likes{
+  display: flex;
+  border: solid 1px;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.4vw;
+  padding-bottom: 0.4vw;
+  background-color: white;
+}
+
+.heart-number{
+  font-size: 1vw;
+}
+
+.box-under{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.heart-icon{
+  /* height: 1.4vw; */
+  margin-right: 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.difficulty-title{
+  margin-right: 10px;
+  font-size: 1.2vw;
+}
+
+.horror-title{
+  margin-right: 10px;
+  font-size: 1.2vw;
+}
+
+.number-title{
+  margin-right: 10px;
+  font-size: 1.2vw;
+}
+
+.number{
+  margin-bottom: 12px;
+  font-size: 1.2vw;
+}
+
+.info-detail{
+  margin-left: 20px;
+}
+
+/* 이미지 테두리 */
+img{
+  border: solid 1px;
+}
+
+.difficulty{
+  margin-bottom: 0.8vw;
+}
+
+.horror{
+  margin-bottom: 0.8vw;
+}
+
+.difficulty-star, .horror-star{
+  height: 17px;
+}
+
+.theme-describe{
+  font-size: 1vw;
+  margin-top: 35px;
+  width: 30vw;
+}
+
+
+.left-side{
+  margin-left: 6vw;
+}
+
+/* 여기서부터 다른 부분*/
+
+.right-side-title{
+  margin-top: 11vh;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  font-family: 'NanumSquare';
+  color: #53444F;
+  background-color: #e7e5e5;
+  font-size: 1.3vw;
+}
+
+.review-profile{
+  border: solid 1px;
+  border-radius: 10px;
+  display: flex;
+  background-color: white;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  align-items: center;
+}
+
+.profile-img{
+  width: 4vw;
+  height: 4vw;
+  border-radius: 50px;
+}
+
+.name-date{
+  margin-left: 15px;
+}
+.profile-name{
+  margin-bottom: 4px;
+}
+
+.star-review{
+  display: flex;
+  border: solid 1px;
+  border-radius: 10px;
+  border-top: none;
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  justify-content: space-between;
+}
+
+.stars{
+  margin-right: 15px;
+  display: flex;
+}
+
+.text-review{
+  border: solid 1px;
+  border-radius: 10px;
+  border-top: none;
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  min-height: 40vh;
+}
+
+.review-profile, .star-review, .text-review{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.text-review-title{
+  margin-bottom: 15px;
+}
+
+.profile-name, .star-title, .text-review-title{
+  font-size: 1.3vw;
+}
+
+.date{
+  font-size: 1.1vw;
+}
+
+.star-number{
+  font-weight: 800;
+  font-size: 1.3vw;
+  margin-right: 10px;
+}
+
+.text-detail{
+  font-size: 1.2vw;
+}

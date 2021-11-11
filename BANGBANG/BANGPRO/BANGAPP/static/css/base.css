@@ -40,7 +40,7 @@ body{
   font-size: 3.5vmin;
 }
 
-.nav-search, .nav-recommand, .nav-review, .nav-mypage{
+.nav-search, .nav-recommend, .nav-review, .nav-mypage{
   margin-right: 2vw;
   margin-left: 1.4vw;
   margin-top: 2.3vh;
@@ -49,7 +49,7 @@ body{
   font-weight: 700;
 }
 
-.nav-search:hover, .nav-recommand:hover, .nav-review:hover, .nav-mypage:hover{
+.nav-search:hover, .nav-recommend:hover, .nav-review:hover, .nav-mypage:hover{
   color:#F55C03;
   border-bottom: solid 3px #F55C03;
 }
@@ -58,7 +58,7 @@ a:link, a:visited {
   text-decoration: none;
 }
 
-a.nav-search, a.nav-recommand, a.nav-review, a.nav-mypage{
+a.nav-search, a.nav-recommend, a.nav-review, a.nav-mypage{
   color: #53444F;
 }
 
@@ -70,7 +70,7 @@ a.nav-search, a.nav-recommand, a.nav-review, a.nav-mypage{
     margin-top: 2.3vh;
   }
 
-  .nav-search, .nav-recommand, .nav-review, .nav-mypage{
+  .nav-search, .nav-recommend, .nav-review, .nav-mypage{
     margin-right: 2.2vw;
     margin-top: 2.4vh;
     margin-left: 2.2vw;

@@ -24,10 +24,11 @@
 <div class="content">  
   <p>{{count}}개의 검색결과</p>
   <div class="search-bottom">
-    {% for themeImg in themeImgs %}
+    {% for theme in themes %}
         <div class="themeImg">
-          {% comment %} <a href="{% url 'detail_theme' theme.pk %}"> {% endcomment %}
-            <img src="{% get_static_prefix %}{{themeImg.themeRevImage}}"/>
+          <a href="{% url 'detail_theme' theme.pk %}">
+            <img src="{% get_static_prefix %}{{theme.themeImage}}"/>
+          </a>
         </div>
     {% endfor %}
   </div> 

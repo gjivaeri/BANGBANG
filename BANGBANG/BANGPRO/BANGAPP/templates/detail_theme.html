@@ -11,10 +11,7 @@
     <div class="themeInfoBox">
       <div class="themeInfo-top">
         <div class="imageField">
-          <img src="{% get_static_prefix %}{{topreview.themeRevImage}}"/>
-          {% comment %} <img src="{% get_static_prefix %}{{theme.themeImage}}"/> 
-          테마 모델에 이미지 필드 만들어지면 이렇게 연결
-          {% endcomment %} 
+          <img src="{% get_static_prefix %}{{theme.themeImage}}"/> 
         </div>       
         <div class="themeInfo">
           <div><h2>{{theme.themeName}}</h2></div>
@@ -24,13 +21,13 @@
         </div>
       </div>
       <div class="themeDetail">
-        {% comment %} 테마 모델에 테마 설명 필드 필요함 {% endcomment %}
-        {% comment %} {{theme.}} {% endcomment %}
-        장미와 다툰 뒤, 생각할 시간을 갖기 위해 여행을 떠나는 어린왕자. 항해 도중 연료가 부족해 지구의
-        어느 사막에 불시착하게 된다. 연료를 구하기 위해 이리저리 사막을 탐험하던 중 예기치 않는 상황을 조우하게 되는데...
+        {{theme.themeIntro}}
       </div>
       <div class="themeRev">
-        <span>테마별 리뷰</span> <span>더보기</span>
+        <span>테마별 리뷰</span> 
+        <a href="{% url 'detail_themeRevAdd' %}">
+          <span>더보기</span>
+        </a>
         <div class="review-box">
           <div class="summary-cont">{{topreview.themeRevContent}}</div>
           <div class="summary-bottom">

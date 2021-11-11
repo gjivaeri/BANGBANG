@@ -23,6 +23,7 @@ urlpatterns = [
     path('registration/join/', views.join, name="join"),
     path('registration/login/', LoginView.as_view(), name="login"),
     path('home/', views.home, name='home'),
+    path('recommend/', views.recommend, name='recommend'),
     path('logout/', views.logout, name="logout"),
     path('shop/<int:shop_pk>', views.shop, name="shop"),
     path('detail/theme/<int:theme_pk>', views.detail_theme, name="detail_theme"),
@@ -34,6 +35,9 @@ urlpatterns = [
     path('like/', views.like, name="like"),
     path('hate/', views.hate, name="hate"),
     path('mypage/', views.mypage, name="mypage"),
+    path('detail/themeRev/themeRevAdd', views.detail_themeRevAdd, name="detail_themeRevAdd"),
+    path('detail/themeRev/themeRevAddDetail', views.detail_themeRevAddDetail, name="detail_themeRevAddDetail"),
+    path('mypage/mylike/', views.mylike, name="mylike"),
     #후에 삭제될 불필요한 코드
     # path('new/shopRev', views.new_shopRev, name="new_shopRev"),
     # path('edit/shopRev/<int:shopRev_pk>', views.edit_shopRev, name="edit_shopRev"),

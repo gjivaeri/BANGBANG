@@ -1,4 +1,4 @@
-html{height: 100%;}
+html{height: 100%; font-size:16px;}
 body{position: relative;width: 100%;height: 100%;}
 
 .content{
@@ -46,7 +46,7 @@ h2{
 .review-box > .summary-cont{
   padding: 3vh 2vh 0vh 3vh;
   line-height: 1.6;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   height:9.2em;
   overflow:hidden;
   word-wrap: break-word;
@@ -70,21 +70,21 @@ h2{
 
 .summary-bottom > .like-count{
   flex-basis: 70vh;
-  font-size:1.2em;
+  font-size:1.2rem;
 }
 
 .summary-bottom > div > .like{
   width:5vh;
   border: none;
   background-color: white;
-  font-size:1.05em;
+  font-size:1.05rem;
 }
 
 .summary-bottom > div > .hate{
   width:5vh;
   border: none;
   background-color: white;
-  font-size:1.05em;
+  font-size:1.05rem;
 
 }
 

@@ -11,6 +11,8 @@
   <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script> -->
   {% block header %}
   {% endblock header %}
   {% block css %}
@@ -25,7 +27,7 @@
       </div>
       <div class="nav-menu">
         <a class="nav-search" href="{% url 'home' %}">검색</a>
-        <a class="nav-recommand" href="{% url 'home' %}">추천</a>
+        <a class="nav-recommend" href="{% url 'recommend' %}">추천</a>
         <a class="nav-review" href="{% url 'list_themeRev' %}">리뷰</a>
         <a class="nav-mypage" href="{% url 'mypage' %}">마이페이지</a>
       </div>

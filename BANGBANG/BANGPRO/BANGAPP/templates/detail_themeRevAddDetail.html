@@ -1,0 +1,81 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/detail_themeRevAddDetail.css' %}" rel="stylesheet" type="text/css">
+<title>detail_themeRevAdd</title>
+{% endblock css %}
+
+{% block content %}
+  <div class="sides">
+    <div class="left-side">
+      <div class="theme-info">
+        <div class="info-pic">
+          <!-- 이미지 넣기 -->
+          <img class="pic" src="">
+        </div>
+        <div class="info-detail">
+          <div class="shop-name">셜록홈즈 홍대점</div>
+          <div class="theme-name"><strong>어린 왕자</strong></div>
+          <div class="difficulty">
+            <div class="difficulty-title">난이도</div>
+            <div class="difficulty-star"> 
+              <span class="material-icons-outlined" style="font-size: 1.5vw;">star</span>
+              <span class="material-icons-outlined" style="font-size: 1.5vw;">star</span>
+            </div>
+          </div>
+          <div class="horror">
+            <div class="horror-title">공포도</div>
+            <div class="horror-star"> <span class="material-icons-outlined" style="font-size: 1.5vw;">star</span> </div>
+          </div>
+          <div class="number">
+            <div class="number-title">인원수</div>
+            <div class="number-detail">2~4</div>  
+          </div>
+          <div class="likes"> <!--버튼으로 바꾸기?-->
+            <div class="heart-icon"><span class="material-icons-outlined" style="font-size: 1.4vw;">favorite_border</span></div>
+            <div class="heart-number">1,200</div>
+          </div>
+        </div>
+      </div>
+      <div class="theme-describe">
+        장미와 다툰 뒤, 생각할 시간을 갖기 위해 여행을 떠나는 어린 왕자. 항해 도중
+        연료가 부족해 지구의 어느 사막에 불시착하게 된다. 연료를 구하기 위해 이리저리 
+        사막을 탐험하던 중 예기치 않는 상황을 조우하게 되는데...
+      </div>
+    </div>
+
+
+    <div class="right-side">
+      <button class="right-side-title"><strong>리뷰 닫기</strong></button>
+      
+      <div class="detail-form">
+        <div class="review-profile">
+          <img class="profile-img" src="{% static 'images/image-removebg-preview.png' %}">
+          <div class="name-date">
+            <div class="profile-name"><strong>{{userName}}님</strong></div>
+            <div class="date">{{date}} 작성</div>
+          </div>
+        </div>
+        <div class="star-review">
+          <div class="star-title"><strong>별점 리뷰</strong></div>
+          <div class="stars">
+            <div class="star-number">5.0</div>
+            <div class="star-icon">별</div>
+          </div>
+        </div>
+        <div class="text-review">
+          <div class="text-review-title">
+            <strong>텍스트 리뷰</strong>
+          </div>
+          <div class="text-detail">
+          나는 요즘 방탈출 실력 거의 퇴화돼서 우리 거의 방린이라고 봐도 될 정도인데 우리도! 재미있게 플레이하면서 탈출 성공했다!
+          거기다ㅋㅋㅋ 탈출하고 나와서 사람들 폴라로리드 플레이 기록 보니까 최단 기록은 둘이서 노힌트로 11분 30초만에 탈출한 사람도
+          있고 20분 미만에 탈출한 사람들도 꽤 있었어서 방탈출 고수들이라면 정말 빠르게 탈출할 수 있을 것 같다.
+          </div>
+        </div>
+      
+      </div>
+
+    </div>
+  </div>
+{% endblock content %} 

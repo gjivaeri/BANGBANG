@@ -98,11 +98,9 @@ def mypage(request):
 def home(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
-    themeImgs = ThemeRev.objects.all()
-    # 테마 모델에 이미지가 없어 임시 연결
     themes = Theme.objects.all()
     count = themes.count()
-    content = {'user' : user, 'themeImgs' : themeImgs, 'themes' : themes, 'count' : count}
+    content = {'user' : user, 'themes' : themes, 'count' : count}
     return render(request, 'home.html', content)
 
 
@@ -209,7 +207,6 @@ def list_themeRev(request):
     themes = Theme.objects.all()
     reviews = sorted
     shops = Shop.objects.all()
-
     #차후 구현할 페이지 파트
     paginator = Paginator(sorted,9)
     page = request.GET.get('page','')
@@ -219,7 +216,7 @@ def list_themeRev(request):
     #페이지 번호를 받아 해당 페이지를 리턴
     
     content = {
-      'posts':posts, 'themes':themes, 'sort':sorted, 'reviews':reviews, 'shops':shops,
+      'posts':posts, 'themes':themes, 'sort':sorted, 'reviews':reviews, 'shops':shops
     }
     return render(request,'list_themeRev.html', content)
 
@@ -267,6 +264,28 @@ def hate(request):
     context = {'like_count':article.themeRevRecom, 'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")
 
+def mylike(request):
+  username = request.session.get('user')
+  user = get_object_or_404(User, userID = username)
+  mylikes = Like.objects.filter(user=user)
+  #내가 좋아요한(Like) 테마의 이미지(Theme.themeImg)
+  #테마리뷰의 like뷰 외에 테마의 like뷰를 만들어야 함
+
+  return render(request, 'mypage/mylike.html')
+
+def recommend(request):
+    username = request.session.get('user')
+    user = User.objects.filter(userID = username).values('userID')
+    themes = Theme.objects.all()
+    content = {'user' : user, 'themes' : themes}
+    return render(request, 'recommend.html', content)
+    
+#개발중 임시 view
+def detail_themeRevAdd(request):
+  return render(request, 'detail_themeRevAdd.html')
+
+def detail_themeRevAddDetail(request):
+  return render(request, 'detail_themeRevAddDetail.html')
 
 #SHOP Review 검토 후 삭제
 # # @login_required(login_url="/registration/login")

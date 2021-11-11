@@ -1,0 +1,31 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+  <link href={% static 'css/recommend.css' %} rel="stylesheet" type="text/css">
+{% endblock css %}
+{% block content %}
+<div class="content">  
+  <div class="recommend-top">
+  <p>추천 키워드</p>
+  <div class="keywords">
+    <button class="review-button" onclick="">셋이 놀기 좋은</button> 
+    <button class="review-button" onclick="">스토리가 치밀한</button> 
+    <button class="review-button" onclick="">내가 탐정이라면?</button> 
+    <button class="review-button" onclick="">연인과 함께</button> 
+    <button class="review-button" onclick="">동화속 주인공되기</button> 
+    <button class="review-button" onclick="">오싹오싹 공포체험</button> 
+    <button class="review-button" onclick="">방탈출 초보 추천</button> 
+  </div>
+  
+  </div>  
+  <div class="recommend-bottom">
+    {% for theme in themes %}
+        <div class="themeImg">
+          <a href="{% url 'detail_theme' theme.pk %}">
+            <img src="{% get_static_prefix %}{{theme.themeImage}}"/>
+          </a>
+        </div>
+    {% endfor %}
+  </div> 
+</div>
+{% endblock content %}

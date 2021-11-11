@@ -1,0 +1,189 @@
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.wrap{
+  height: 100%;
+}
+
+.sides{
+  display: flex;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.right-side{
+  background-color: #e7e5e5;
+  width: 42vw;
+  margin: 0;
+  padding: 25px;
+  overflow: scroll;
+  margin-right: 10px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  height: 100vh;
+}
+/* 스크롤 안보이게 */
+.right-side::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.pic{
+  width: 14vw;
+  height: 14vw;
+  border-radius: 20px;
+  margin-top: 26vh;
+}
+
+.shop-name{
+  font-size: 0.8vw;
+  margin-bottom: 4px;
+  margin-top: 26vh;
+  padding-top: 6px;
+}
+
+
+.theme-info{
+  display: flex;
+}
+
+
+.theme-name{
+  font-size: 1.8vw;
+  margin-bottom: 1vw;
+}
+
+.difficulty, .horror, .number{
+  display: flex;
+  align-items: center;
+}
+
+.likes{
+  display: flex;
+  border: solid 1px;
+  border-radius: 15px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.4vw;
+  padding-bottom: 0.4vw;
+  background-color: white;
+}
+
+.heart-number{
+  font-size: 1vw;
+}
+
+.box-form{
+  border: solid 1px;
+  border-radius: 10px;
+  background-color: white;
+  margin-top: 15px;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 18px;
+  padding-bottom: 12px;
+  cursor: pointer;
+}
+
+.theme-likes{
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.box-under{
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.heart-icon{
+  /* height: 1.4vw; */
+  margin-right: 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.difficulty-title{
+  margin-right: 10px;
+  font-size: 1.2vw;
+}
+
+.horror-title{
+  margin-right: 10px;
+  font-size: 1.2vw;
+}
+
+.number-title{
+  margin-right: 10px;
+  font-size: 1.2vw;
+}
+
+.number{
+  margin-bottom: 12px;
+  font-size: 1.2vw;
+}
+
+.info-detail{
+  margin-left: 20px;
+}
+
+/* 이미지 테두리 */
+img{
+  border: solid 1px;
+}
+
+.difficulty{
+  margin-bottom: 0.8vw;
+}
+
+.horror{
+  margin-bottom: 0.8vw;
+}
+
+.difficulty-star, .horror-star{
+  height: 17px;
+}
+
+.theme-describe{
+  font-size: 1vw;
+  margin-top: 35px;
+  width: 30vw;
+}
+
+.theme-heart{
+  height: 22px;
+}
+
+.right-side-title{
+  margin-top: 11vh;
+  margin-bottom: 22px;
+}
+
+.detail-ment{
+  font-size: 13px;
+}
+
+.theme-heart-number{
+  font-size: 14px;
+}
+
+.left-side{
+  margin-left: 6vw;
+}
+
+.like-button, .dislike-button{
+  background-color: white;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+}
+
+.dislike-button{
+  margin-left: 10px;
+}
+
+/* .box-form:hover{
+  border: solid 2px #F55C03;;
+} */
