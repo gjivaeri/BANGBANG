@@ -22,7 +22,7 @@
     {% for theme in themes %}
         <div class="themeImg">
           <a href="{% url 'detail_theme' theme.pk %}">
-            <img src="{% get_static_prefix %}{{theme.themeImage}}"/>
+            <img src="{{theme.themeImage.url}}">
           </a>
         </div>
     {% endfor %}

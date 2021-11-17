@@ -1,5 +1,6 @@
 from django.contrib import auth
 from django.contrib.auth import authenticate
+from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from .models import User, Shop, Shoprev, Theme, ThemeRev, Like, Hate
@@ -7,7 +8,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 #for loginview
-from .forms import LoginForm
+from .forms import LoginForm, PostSearchForm
 from django.views import generic
 from argon2 import PasswordHasher, exceptions
 #for likeview
@@ -16,7 +17,7 @@ from .decorator import login_required
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import View, RedirectView #Generic View 개발 속도를 빠르게 만들어줌
+from django.views.generic import FormView, View, RedirectView #Generic View 개발 속도를 빠르게 만들어줌
 from django.views.decorators.csrf import csrf_exempt
 #for sort 
 from django.core.paginator import Paginator
@@ -94,6 +95,22 @@ def mypage(request):
         return render(request, 'registration/mypage.html', content)
     return redirect('login')
 
+#검색기능, Q객체사용불가
+# class SearchFormView(FormView):
+#     form_class = PostSearchForm
+#     template_name = 'home.html'
+
+#     def form_valid(self, form):
+#         searchWord = form.cleaned_data['search_word']
+#         post_list = Theme.objects.filter(Q(themeName=searchWord) | Q(themeGenre=searchWord) | Q(themeIntro=searchWord)).distinct()
+
+#         context = {}
+#         context['form'] = form
+#         context['search_term'] = searchWord
+#         context['object_list'] = post_list
+
+#         return render(self.request, self.template_name, context)
+
 
 def home(request):
     username = request.session.get('user')
@@ -125,28 +142,44 @@ def detail_theme(request, theme_pk):
 
 #theme Review
 # @login_required(login_url="/registration/login")
+# def new_themeRev(request):
+#     username = request.session.get('user')
+#     if User.objects.filter(userID = username).exists():
+#       if request.method == "POST":
+#           new_themeRev = ThemeRev.objects.create(
+#             themeRevTitle=request.POST["themeRevTitle"],
+#             themeRevRating=request.POST["themeRevRating"],
+#             themeRevDifficulty=request.POST["themeRevDifficulty"],
+#             themeRevHorror=request.POST["themeRevHorror"],
+#             themeRevActivity=request.POST["themeRevActivity"],
+#             themeRevContent=request.POST["themeRevContent"],
+#             themeRevImage=request.POST["themeRevImage"],
+#             themeRevResult=request.POST["themeRevResult"],
+#             themeRevOccurredTime=request.POST["themeRevOccurredTime"],
+#             themeRevDate=request.POST["themeRevDate"],
+#             #themeRev_WriterID=request.user,
+#           )
+#           return redirect("detail_themeRev", new_themeRev.pk)
+#       return render(request, "new_themeRev.html")
+#     else:
+#       return render(request, 'registration/join.html')
 def new_themeRev(request):
-    username = request.session.get('user')
-    if User.objects.filter(userID = username).exists():
-      if request.method == "POST":
-          new_themeRev = ThemeRev.objects.create(
-            themeRevTitle=request.POST["themeRevTitle"],
-            themeRevRating=request.POST["themeRevRating"],
-            themeRevDifficulty=request.POST["themeRevDifficulty"],
-            themeRevHorror=request.POST["themeRevHorror"],
-            themeRevActivity=request.POST["themeRevActivity"],
-            themeRevContent=request.POST["themeRevContent"],
-            themeRevImage=request.POST["themeRevImage"],
-            themeRevResult=request.POST["themeRevResult"],
-            themeRevOccurredTime=request.POST["themeRevOccurredTime"],
-            themeRevDate=request.POST["themeRevDate"],
-            #themeRev_WriterID=request.user,
-          )
-          return redirect("detail_themeRev", new_themeRev.pk)
-      return render(request, "new_themeRev.html")
-    else:
-      return render(request, 'registration/join.html')
+  obj = Theme.objects.filter(themeRating=0).order_by("?").first()
+  context = {
+    'object': obj
+  }
+  
+  return render(request, "new_themeRev.html", context)
 
+def rateTheme(request):
+  if request.method == 'POST':
+    el_id = request.POST.get('el_id')
+    val = request.POST.get('val')
+    obj = Theme.objects.get(id=el_id)
+    obj.themeRating = val
+    obj.save
+    return JsonResponse({'success':'true', 'score': val}, safe=False)
+  return JsonResponse({'success':'false'})
 
 def edit_themeRev(request, themeRev_pk):
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)

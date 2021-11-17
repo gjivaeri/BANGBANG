@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 # from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
@@ -71,15 +72,23 @@ class Theme(models.Model):
     themeID = models.AutoField(primary_key=True, unique=True)
     themeName = models.CharField(max_length=128)
     themeTimeLimit = models.CharField(max_length=64)
-    themeRating = models.IntegerField(default=0)
+    themeRating = models.IntegerField(default=0,
+        validators =[
+            MaxValueValidator(5),
+            MinValueValidator(0),
+        ]
+        )
     themeDifficulty = models.IntegerField(default=0)
     themeHorror = models.IntegerField(default=0)
     themeActivity = models.IntegerField(default=0)
     themeRecomPeople = models.IntegerField()
     ShopID = models.ForeignKey("Shop", related_name="ShopId", on_delete=models.CASCADE, db_column="ShopID")
     themeGenre = models.CharField(max_length=64)
-    themeImage = models.ImageField(upload_to='themeImages', height_field=None, width_field=None,blank=True)    
+    themeImage = models.ImageField(upload_to='themeImages/', height_field=None, width_field=None,blank=True)    
     themeIntro = models.TextField(null=True)
+
+    def __str__(self):
+      return self.themeName
 
 
 class Like(models.Model):
@@ -97,3 +106,16 @@ class Hate(models.Model):
     class Meta:
         unique_together = ('user','article')
 
+
+# class Test(models.Model):
+#     TestID = models.AutoField(primary_key=True)
+#     TestTitle = models.CharField(max_length=200)
+#     TestRating = models.IntegerField(default=0)
+#     TestOccurredTime = models.TimeField(auto_now=False, auto_now_add=False)
+#     TestDate = models.DateField()
+#     TestWriteDate = models.DateTimeField(auto_now_add=True)
+#     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
+#     Test_WriterID = models.ForeignKey("User", related_name="_WriterID", on_delete=models.CASCADE, db_column="Test_WriterID")
+    
+#     def __str__(self):
+#         return self.TestTitle

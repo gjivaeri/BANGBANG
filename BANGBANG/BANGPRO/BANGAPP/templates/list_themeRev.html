@@ -28,7 +28,7 @@
           <div class="post">
 {% comment %} 2.작성자 정보 해당 부분 {% endcomment %}
             <div class="writers">
-              <img class="profileImg" src="{% get_static_prefix %}{{review.themeRevImage}}"/>
+              <img class="profileImg" src="{{review.themeRevImage.url}}">
               <div>
                 <div class="writeID">{{review.themeRev_WriterID}}</div>
                 <div class="writeDate">{{review.themeRevWriteDate|date:"Y년 m월 d일"}} 작성</div>
@@ -41,10 +41,8 @@
             {% if shop.shopID == theme.ShopID_id %}
             <div class="info">
               <a href="{% url 'detail_theme' theme.pk %}">
-                <img src="{% get_static_prefix %}{{theme.themeImage}}"/> 
-              </a>
-              {% comment %} <img src="{% get_static_prefix %}{{theme.themeImage}}"/>  {% endcomment %}
-        
+                <img src="{{theme.themeImage.url}}"> 
+              </a>        
               <div>
                 <div class="themeName">{{theme.themeName}}</div>
                 <div class="shopName">{{shop.shopName}}</div>

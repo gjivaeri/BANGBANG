@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from BANGAPP import views
 from BANGAPP.views import LoginView
+from django.conf import settings
+from django.conf.urls.static import static
+
 # LikeListView
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,9 +42,10 @@ urlpatterns = [
     path('detail/themeRev/themeRevAdd', views.detail_themeRevAdd, name="detail_themeRevAdd"),
     path('detail/themeRev/themeRevAddDetail', views.detail_themeRevAddDetail, name="detail_themeRevAddDetail"),
     path('mypage/mylike/', views.mylike, name="mylike"),
+    path('rate/', views.rateTheme, name='rate')
     #후에 삭제될 불필요한 코드
     # path('new/shopRev', views.new_shopRev, name="new_shopRev"),
     # path('edit/shopRev/<int:shopRev_pk>', views.edit_shopRev, name="edit_shopRev"),
     # path('delete/shopRev/<int:shopRev_pk>', views.delete_shopRev, name="delete_shopRev"),
     # path('detail/shopRev/<int:shopRev_pk>', views.detail_shopRev, name="detail_shopRev"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -141,19 +141,19 @@ p{
 }
 
 .search-bottom{
-  border: 1px soloid black;
   height:40vh;
   width: 80vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  float: left;
 }
 
 .search-bottom > .themeImg {
   display: flex;
   flex-direction: column;
   margin-bottom: 1vh;
+  flex-basis:20%;
+  float:left;
 }
 
 .search-bottom > .themeImg > a > img{
