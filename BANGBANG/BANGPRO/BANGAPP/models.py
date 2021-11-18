@@ -13,6 +13,7 @@ class User(models.Model):
     userGender = models.IntegerField(default=0)
     ShopRevID = models.IntegerField(default=0)
     ThRevID = models.IntegerField(default=0)
+    userImage = models.ImageField(upload_to='userImages/', height_field=None, width_field=None,blank=True)    
 
     def __str__(self):
         return self.userID
@@ -68,6 +69,17 @@ class ThemeRev(models.Model):
     def __str__(self):
         return self.themeRevTitle
 
+# class ThemeRev(models.Model):
+#     themeRevID = models.AutoField(primary_key=True)
+#     themeRevTitle = models.CharField(max_length=200)
+#     themeRevContent = models.TextField()
+#     themeRevDate = models.DateField()
+#     themeRevWriteDate = models.DateTimeField(auto_now_add=True)
+#     themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
+#     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
+#     themeRevRecom = models.IntegerField(default=0)
+#     themeRevNRecom = models.IntegerField(default=0)
+    
 class Theme(models.Model):
     themeID = models.AutoField(primary_key=True, unique=True)
     themeName = models.CharField(max_length=128)
@@ -105,17 +117,3 @@ class Hate(models.Model):
     
     class Meta:
         unique_together = ('user','article')
-
-
-# class Test(models.Model):
-#     TestID = models.AutoField(primary_key=True)
-#     TestTitle = models.CharField(max_length=200)
-#     TestRating = models.IntegerField(default=0)
-#     TestOccurredTime = models.TimeField(auto_now=False, auto_now_add=False)
-#     TestDate = models.DateField()
-#     TestWriteDate = models.DateTimeField(auto_now_add=True)
-#     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
-#     Test_WriterID = models.ForeignKey("User", related_name="_WriterID", on_delete=models.CASCADE, db_column="Test_WriterID")
-    
-#     def __str__(self):
-#         return self.TestTitle
