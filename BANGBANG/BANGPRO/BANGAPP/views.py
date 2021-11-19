@@ -111,13 +111,25 @@ def mypage(request):
 
 #         return render(self.request, self.template_name, context)
 
+# def theme_list(request):
+#   theme_list = Theme.objects.all()
+#   q = request.GET.get('q','')
+#   if q :
+#     theme_list = theme_list.filter(themeName__icontains=q)
+#   return render(request,'home.html', {'theme_list':theme_list , 'q':q})
+
+
 
 def home(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
     themes = Theme.objects.all()
     count = themes.count()
-    content = {'user' : user, 'themes' : themes, 'count' : count}
+    theme_list = Theme.objects.all()
+    q = request.GET.get('q','')
+    if q :
+      theme_list = theme_list.filter(themeName__icontains=q)
+    content = {'user' : user, 'themes' : themes, 'count' : count, 'theme_list' : theme_list , 'q' : q}
     return render(request, 'home.html', content)
 
 
