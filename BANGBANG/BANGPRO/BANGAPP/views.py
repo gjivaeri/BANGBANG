@@ -24,6 +24,16 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 
+def home2(request):
+  theme = Theme.objects.all()
+  theme1 = {'theme1': theme}
+  return render(request, 'home2.html', theme1)
+
+def home2_detail(request, theme_pk):
+  theme = Theme.objects.get(pk=theme_pk)
+  review = ThemeRev.objects.filter(theme_ID=theme_pk)
+  return render(request, 'home2_detail.html', {'theme': theme, 'review':review})
+
 def join(request):
     if request.method == 'GET':
         return render(request, 'registration/join.html')
@@ -139,7 +149,15 @@ def detail_theme(request, theme_pk):
     # like = Like.objects.filter(article__in=review)
     return render(request, 'detail_theme.html', {'theme':theme, 'review':review, 'topreview':topreview})
     
+#개발중 임시 view
+def detail_themeRevAdd(request, theme_pk):
+  info = Theme.objects.filter(theme_ID=theme_pk)
+  theme = Theme.objects.get(pk=theme_pk)
+  reviews = ThemeRev.objects.filter(theme_ID=theme_pk)
+  return render(request, 'detail_themeRevAdd.html', {'theme':theme ,'reviews': reviews, 'info': info})
 
+def detail_themeRevAddDetail(request):
+  return render(request, 'detail_themeRevAddDetail.html')
 #theme Review
 # @login_required(login_url="/registration/login")
 # def new_themeRev(request):
@@ -317,12 +335,7 @@ def recommend(request):
     content = {'user' : user, 'themes' : themes}
     return render(request, 'recommend.html', content)
     
-#개발중 임시 view
-def detail_themeRevAdd(request):
-  return render(request, 'detail_themeRevAdd.html')
 
-def detail_themeRevAddDetail(request):
-  return render(request, 'detail_themeRevAddDetail.html')
 
 
 #SHOP Review 검토 후 삭제
