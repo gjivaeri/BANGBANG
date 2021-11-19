@@ -47,6 +47,9 @@ class Shop(models.Model):
     ShopIntro = models.TextField()
     shopImage = models.ImageField(upload_to='shopImages/', height_field=None, width_field=None,blank=True)    
 
+    def __str__(self):
+      return self.shopName
+
 
 # class ThemeRev(models.Model):
 #     themeRevID = models.AutoField(primary_key=True)
@@ -79,7 +82,7 @@ class ThemeRev(models.Model):
     themeRevWriteDate = models.DateTimeField(auto_now_add=True)
     themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
-    shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id", default=1)
+    shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id", default = 1)
     themeRevRecom = models.IntegerField(default=0)
     themeRevNRecom = models.IntegerField(default=0)
 
@@ -91,12 +94,7 @@ class Theme(models.Model):
     themeID = models.AutoField(primary_key=True, unique=True)
     themeName = models.CharField(max_length=128)
     themeTimeLimit = models.CharField(max_length=64)
-    themeRating = models.IntegerField(default=0,
-        validators =[
-            MaxValueValidator(5),
-            MinValueValidator(0),
-        ]
-        )
+    themeRating = models.IntegerField(default=0)
     themeDifficulty = models.IntegerField(default=0)
     themeHorror = models.IntegerField(default=0)
     themeActivity = models.IntegerField(default=0)
