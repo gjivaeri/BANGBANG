@@ -21,17 +21,24 @@
         </div>
     </div>
 </div>
+
 <div class="content">  
-  <p>{{count}}개의 검색결과</p>
-  <div class="search-bottom">
+  <p>{{themescount}}개의 검색결과</p>
+  <p>{{shopscount}}개의 검색결과</p>
+  <div class="search-botton">
     {% for theme in themes %}
-        <div class="themeImg">
-          <a href="{% url 'detail_theme' theme.pk %}">
-            <img src="{{theme.themeImage.url}}">
-          </a>
-        </div>
+    <div class="themeImg">
+      <img src="{{theme.themeImage.url}}">
+    </div>
     {% endfor %}
-  </div> 
+    {% for shop in shops %}
+    <div class="themeImg">
+      <a href="{% url 'detail_shop' shop.pk %}">
+      <img src="{{shop.shopImage.url}}">
+      </a>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock content %} 
 {% block js %}

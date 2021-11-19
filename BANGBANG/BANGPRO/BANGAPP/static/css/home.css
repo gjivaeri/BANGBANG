@@ -161,3 +161,9 @@ p{
   width: 15vmax;
   border-radius: 20px;
 } 
+
+.search-bottom > .themeImg > img{
+  height: 24vh;
+  width: 15vmax;
+  border-radius: 20px;
+} 
