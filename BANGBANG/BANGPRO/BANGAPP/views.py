@@ -333,6 +333,7 @@ def recommend(request):
     
 
 
+
 #SHOP Review 검토 후 삭제
 # # @login_required(login_url="/registration/login")
 # def new_shopRev(request):

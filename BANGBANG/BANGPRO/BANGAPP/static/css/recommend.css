@@ -21,8 +21,12 @@ a.nav-recommend{
   height:15vh;
 }
 
+.recommend-top > p {
+  font-size: 1vw;
+}
+
 .recommend-top > .keywords{
-  margin-top: 2.5vh;
+  margin-top: 2vh;
   display: flex;
   justify-content: space-around;
 }
@@ -34,7 +38,7 @@ a.nav-recommend{
   height:5vh;
   width: 10vw;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1vw;
 }
 
 .recommend-top > .keywords > button:hover{
@@ -45,7 +49,7 @@ a.nav-recommend{
   height:5vh;
   width: 10vw;
   text-align: center;
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
 }
 
 
