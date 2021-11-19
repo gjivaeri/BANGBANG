@@ -1,0 +1,10 @@
+
+{% for theme in theme1 %}
+
+{{theme.themeName}}
+
+<a href="{% url 'home2_detail' theme.pk %}">
+    <img src="{{theme.themeImage.url}}">
+</a>
+
+{% endfor %}

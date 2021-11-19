@@ -6,19 +6,35 @@
 {% block content %}
   <div class="content">
     <form action="" method="post">
-        {% csrf_token %}
-                <label for='themeRevRating'>총점</label>
-                <form class="rate-form" action="" method="POST" id="{{theme.id}}">
-                  {% csrf_token%}           
-                    <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
-                    <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
-                    <button type="submit" class="fa fa-star fa-3x my-btn" id="third"></button>
-                    <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
-                    <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
-                </form>
-                <div id="confirm-box"></div>
+    {% csrf_token %}
+    {{form}}
+    <input type="submit">
     </form>
   </div> 
+
+
+
+
+
+    {% comment %} <form class="rate-form" action="" method="POST" id="{{theme.id}}">
+      {% csrf_token%}           
+        <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
+        <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
+        <button type="submit" class="fa fa-star fa-3x my-btn" id="third"></button>
+        <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
+        <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
+    </form> {% endcomment %}
+{% comment %} 
+    themeRevID = models.AutoField(primary_key=True)
+    themeRevTitle = models.CharField(max_length=200)
+    themeRevContent = models.TextField()
+    themeRevDate = models.DateField()
+    themeRevWriteDate = models.DateTimeField(auto_now_add=True)
+    themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
+    theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
+    shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id", default=1)
+    themeRevRecom = models.IntegerField(default=0)
+    themeRevNRecom = models.IntegerField(default=0) {% endcomment %}
 
 {% endblock content %}
 {% block js %}
