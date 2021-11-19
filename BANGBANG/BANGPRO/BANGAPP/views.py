@@ -8,7 +8,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 #for loginview
-from .forms import LoginForm, PostSearchForm
+from .forms import LoginForm, ThemeRevForm
 from django.views import generic
 from argon2 import PasswordHasher, exceptions
 #for likeview
@@ -164,11 +164,15 @@ def detail_theme(request, theme_pk):
 #     else:
 #       return render(request, 'registration/join.html')
 def new_themeRev(request):
-  obj = Theme.objects.filter(themeRating=0).order_by("?").first()
-  context = {
-    'object': obj
-  }
-  
+  form = ThemeRevForm()
+
+  if request.method == "POST":
+    print(request.POST)
+    form = ThemeRevForm(request.POST)
+    if form.is_valid():
+      form.save()
+      
+  context = {'form':form}
   return render(request, "new_themeRev.html", context)
 
 def rateTheme(request):
