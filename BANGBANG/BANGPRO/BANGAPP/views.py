@@ -134,19 +134,16 @@ def home(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
     themes = Theme.objects.all()
-<<<<<<< HEAD
     shops = Shop.objects.all()
     themescount = themes.count()
     shopscount = shops.count()
     content = {'user' : user, 'themes' : themes, 'shops' : shops, 'themescount' : themescount, 'shopscount' : shopscount}
-=======
     count = themes.count()
     theme_list = Theme.objects.all()
     q = request.GET.get('q','')
     if q :
       theme_list = theme_list.filter(themeName__icontains=q)
     content = {'user' : user, 'themes' : themes, 'count' : count, 'theme_list' : theme_list , 'q' : q}
->>>>>>> a86115ee7d503db72217471e2fc10b4534f71f4d
     return render(request, 'home.html', content)
 
 def detail_shop(request, shop_pk):

@@ -82,7 +82,7 @@ class ThemeRev(models.Model):
     themeRevWriteDate = models.DateTimeField(auto_now_add=True)
     themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
-    shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id", default = 1)
+    shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id", default=1)
     themeRevRecom = models.IntegerField(default=0)
     themeRevNRecom = models.IntegerField(default=0)
 
@@ -99,7 +99,7 @@ class Theme(models.Model):
     themeHorror = models.IntegerField(default=0)
     themeActivity = models.IntegerField(default=0)
     themeRecomPeople = models.IntegerField()
-    ShopID = models.ForeignKey("Shop", related_name="ShopId", on_delete=models.CASCADE, db_column="ShopID")
+    ShopID = models.ForeignKey("Shop", related_name="ShopId", on_delete=models.CASCADE, db_column="ShopID", default=1)
     themeGenre = models.CharField(max_length=64)
     themeImage = models.ImageField(upload_to='themeImages/', height_field=None, width_field=None,blank=True)    
     themeIntro = models.TextField(null=True)
