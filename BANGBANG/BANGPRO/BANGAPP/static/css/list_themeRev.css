@@ -19,7 +19,7 @@ a.nav-review{
 /* write review, filter */
 .content-top{
   display: flex;
-  margin-bottom: 2vh;
+  margin-bottom: 3vh;
   margin-left: 1.5vw;
   align-items: center;
   width: 73vw;
@@ -27,11 +27,12 @@ a.nav-review{
 
 .content-top > .write{
   flex-basis: 79%;
+  font-size: 1vw;
 }
 
 .content-top > .write > a{
   border: 1px solid #F55C03;
-  border-radius: 25px;
+  border-radius: 20px;
   padding: 1.2vh 1.5vw 1.2vh 1.5vw;
   background-color: white;
   text-decoration: none;
@@ -47,6 +48,7 @@ a.nav-review{
 .content-top > .more{
   width:5vw;
   text-align: center;
+  font-size: 1.2vw;
 }
 
 .content-top > .filter{
@@ -67,7 +69,7 @@ a.nav-review{
   background-color: none;
   color: #53444F;
   text-align: center;
-  font-size:1.1rem;
+  font-size: 1vw;
   border: none;
   /* background: url(../images/black-arrow.png); */
   /*필터가 세개라 화살표가 세개 뜨는 오류 수정해야 함 */
@@ -101,7 +103,7 @@ a.nav-review{
   border: 1px solid #53444F;
   background-color: white;
   display:flex;
-  border-radius: 20px;
+  border-radius: 15px;
   height: 3.5vmax;
   border-bottom: none;
   padding: 1.1vh 1vw 1vh 1vw;
@@ -111,18 +113,18 @@ a.nav-review{
 .writers > .profileImg{
   border-radius: 70%;
   overflow: hidden;
-  margin-right:1vw;
+  margin-right: 10px;
   width: 3.5vmax;
   height: 3.5vmax;
 }
 
 .writers > div > .writeID{
-  font-size: 2vw;
+  font-size: 1.8vw;
   /* width: 1vw; */
 }
 
 .writers > div > .writeDate{
-  font-size: 1vw;
+  font-size: 0.9vw;
   
 }
 
@@ -131,7 +133,7 @@ a.nav-review{
   border: 1px solid #53444F;
   background-color: white;
   border-bottom: none;
-  border-radius: 20px;
+  border-radius: 15px;
   display:flex;
   padding:1vh 1vw 1vh 1vw;
   height:20vh;
@@ -140,19 +142,19 @@ a.nav-review{
 
 .info > a > img {
   border-radius: 20px;
-  margin: 0 2vw 0 0;
+  margin: 0 0.8vw 0 0;
   height:18vh;
   width: 10vmax;
   min-width: 130px;
 }
 
 .info > div > .themeName{
-  font-size: 1.5rem;
+  font-size: 1.5vw;
   margin: 1vh 0 1vh 0;
 }
 
 .info > div > .shopName{
-  font-size: 1rem;
+  font-size: 1vw;
   margin: 1vh 0 1vh 0;
 }
 
@@ -161,23 +163,23 @@ a.nav-review{
   vertical-align: middle;
   border: 1px solid #53444F;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 15px;
   display:flex;
   flex-direction: column;
-  height: 30vh;
+  height: 32vh;
   padding: 1vh 1.6vw 0vh 1.6vw;
   justify-content: center;
 }
 
 .summary > .summary-cont{
   line-height: 1.7;
-  height: 11.5em;
+  height: 20vh;
   overflow:hidden;
   word-wrap: break-word;
   display: -webkit-box;
   -webkit-line-clamp : 7;
   -webkit-box-orient: vertical;
-
+  font-size: 1vw;
 }
 
 .summary > .summary-cont > a {
@@ -192,7 +194,7 @@ a.nav-review{
   margin-top: 3.5vh;
   /* margin-bottom: -1vh; */
   /* margin-bottom: -3vh; */
-  font-size: 1.5rem;
+  font-size: 1.5vw;
   color: #53444F;
 }
 
@@ -201,14 +203,14 @@ a.nav-review{
 }
 
 .summary-bottom > div > .like{
-  font-size: 0.8rem;
+  font-size: 1vw;
   border: none;
   color: #53444F;
   background-color: white;
 }
 
 .summary-bottom > div > .hate{
-  font-size: 0.8rem;
+  font-size: 1vw;
   border: none;
   color: #53444F;
   background-color: white;
@@ -220,6 +222,10 @@ a.nav-review{
 
 .summary-bottom > div > .hate:hover{
   color:#F55C03;
+}
+
+.themeRevRating{
+  font-size: 1.1vw;
 }
 
 
@@ -280,16 +286,16 @@ a.nav-review{
   }
   
   .content-top > .filter{
-    width: 10vw;
-    height: 4vh;
+    width: 15vw;
+    height: 3.8vh;
   }
   .content-top > .filter > select {
-    font-size:0.9rem;
+    font-size:0.9vw;
     width: 6vw;
     }
   .info > a > img {
     width: 16vmax;
-    margin: 0 4vw 0 2vw;
+    margin: 0 2vw 0 2vw;
   }
   .writers > div > .writeID{
     font-size: 4vw;

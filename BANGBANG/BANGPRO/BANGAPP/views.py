@@ -320,6 +320,7 @@ def detail_themeRevAdd(request):
 def detail_themeRevAddDetail(request):
   return render(request, 'detail_themeRevAddDetail.html')
 
+
 #SHOP Review 검토 후 삭제
 # # @login_required(login_url="/registration/login")
 # def new_shopRev(request):

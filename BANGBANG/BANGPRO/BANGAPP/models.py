@@ -45,6 +45,8 @@ class Shop(models.Model):
     Price = models.IntegerField(default=0)
     PageLink = models.TextField()
     ShopIntro = models.TextField()
+    shopImage = models.ImageField(upload_to='shopImages/', height_field=None, width_field=None,blank=True)    
+
 
 class ThemeRev(models.Model):
     themeRevID = models.AutoField(primary_key=True)
@@ -79,6 +81,8 @@ class ThemeRev(models.Model):
 #     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
 #     themeRevRecom = models.IntegerField(default=0)
 #     themeRevNRecom = models.IntegerField(default=0)
+#     userImage = models.ForeignKey("User", related_name="userImage", on_delete=models.CASCADE, db_column="userImage")    
+#     usersSubname = 
     
 class Theme(models.Model):
     themeID = models.AutoField(primary_key=True, unique=True)
