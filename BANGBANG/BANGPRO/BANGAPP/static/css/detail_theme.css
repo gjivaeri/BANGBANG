@@ -9,7 +9,7 @@ body{position: relative;width: 100%;height: 100%;}
   top: 8%;
   left: 10%;
   line-height: 1.5;
-  font-size: 1.1rem;
+  font-size: 1.2vw;
 }
 
 .themeInfoBox{
@@ -31,14 +31,15 @@ body{position: relative;width: 100%;height: 100%;}
 /* themeinfo */
 .themeInfo-top{
   width: 32vmax;
-  height: 30vh;
+  /* height: 30vh; */
   margin-bottom: 3vh;
   display: flex;
 }
 
 img{
-  width: 100%;
-  height: 100%;
+  width: 14vw;
+  height: 14vw;
+  border-radius: 15px;
 }
 
 h2{
@@ -53,12 +54,13 @@ h2{
 }
 
 .themeInfo > div{
-  font-size: 1.05rem;
+  font-size: 1vw;
   margin-top: 1vh;
 }
 
 .themeInfo > div > span{
   margin-right: 3vh;
+  margin-left: 10px;
 }
 
 .themeDetail{
@@ -80,15 +82,15 @@ h2{
   vertical-align: middle;
   border: 1px solid black;
   border-radius: 20px;
-  padding:1% 1% 1% 1%;
-  height:25vh;
+  padding: 10px 10px 20px 10px;
+  height: 23vh;
   width: 32vmax;
   margin-bottom: 5%;
 }
 
 .review-box > .summary-cont{
   padding: 3vh 2vh 0vh 3vh;
-  height:8.7em;
+  height: 15vh;
   overflow:hidden;
   word-wrap: break-word;
   display: -webkit-box;
@@ -96,11 +98,15 @@ h2{
   -webkit-box-orient: vertical;
 }
 
+.themeRev > a > span{
+  margin-left: 10px;
+}
+
 /* like count  */
 .summary-bottom{
   display:flex;
   /* padding: 3vh 2vh 2vh 3vh; */
-  padding: 2vh 0vh 2vh 3vh;
+  padding: 2vh 0vh 0vh 3vh;
   font-size:1.2rem;
 }
 
@@ -112,13 +118,13 @@ h2{
   width:5vw;
   border: none;
   background-color: white;
-  font-size:1.05rem;
+  font-size: 1.2vw;
 }
 
 .summary-bottom > div > .hate{
   width:8vw;
   border: none;
-  font-size:1.05rem;
+  font-size: 1.2vw;
   background-color: white;
 }
 
@@ -129,7 +135,6 @@ h2{
 .summary-bottom > div > .hate:hover{
   color:#F55C03;
 }
-
 /* reservation */
 h3{
   margin-top: 5vh;
@@ -217,6 +222,7 @@ input{
 .reservation-time > div > .available:hover{
   background-color:#F55C03;
   color:white;
+  cursor: pointer;
 }
 
 .reservation-time > div > .unavailable{
@@ -245,14 +251,23 @@ input{
   color:#F55C03;
   background-color: white;
   border-radius: 20px;
-  height:9vh;
+  height:8vh;
   width: 42vmax;
   text-align: center;
-  line-height:9vh;
-  font-size: 1.5rem;
+  line-height:8vh;
+  font-size: 1.5vw;
 }
 
 .reservation-button:hover{
   background-color: #F55C03;
   color: white;
+}
+
+.available, .unavailable {
+  /* padding-top: 5px; */
+  padding-bottom: 5px;
+}
+
+.available > p, .unavailable > p {
+  font-size: 1.3vw;
 }
