@@ -134,21 +134,28 @@ def home(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
     themes = Theme.objects.all()
+<<<<<<< HEAD
+    shops = Shop.objects.all()
+    themescount = themes.count()
+    shopscount = shops.count()
+    content = {'user' : user, 'themes' : themes, 'shops' : shops, 'themescount' : themescount, 'shopscount' : shopscount}
+=======
     count = themes.count()
     theme_list = Theme.objects.all()
     q = request.GET.get('q','')
     if q :
       theme_list = theme_list.filter(themeName__icontains=q)
     content = {'user' : user, 'themes' : themes, 'count' : count, 'theme_list' : theme_list , 'q' : q}
+>>>>>>> a86115ee7d503db72217471e2fc10b4534f71f4d
     return render(request, 'home.html', content)
 
+def detail_shop(request, shop_pk):
+      shop = Shop.objects.get(pk=shop_pk)
+      themes = Theme.objects.filter(ShopID=shop_pk)
+      review = ThemeRev.objects.filter(theme_ID=shop_pk)
+      topreview = review.order_by('-themeRevRecom').first()
 
-def shop(request, shop_pk):
-    shop = Shop.objects.get(pk=shop_pk)
-    reviews = Shoprev.objects.filter(shopID=shop_pk)
-
-    return render(request,'shop.html',{'shop':shop, 'reviews':reviews})
-
+      return render(request,'detail_shop.html', {'shop':shop, 'themes':themes, 'review':review, 'topreview':topreview})
 
 def detail_theme(request, theme_pk):
   #이 페이지에서 새로 뭘 작성할게 아니면 아래 두줄은 삭제
