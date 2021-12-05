@@ -39,7 +39,8 @@ urlpatterns = [
     path('hate/', views.hate, name="hate"),
     path('mypage/', views.mypage, name="mypage"),
     path('detail/themeRev/themeRevAdd/<int:theme_pk>', views.detail_themeRevAdd, name="detail_themeRevAdd"),
-    path('detail/themeRev/themeRevAddDetail', views.detail_themeRevAddDetail, name="detail_themeRevAddDetail"),
+    path('detail/themeRev/themeRevAdd/<int:theme_pk>/<int:review_pk>', views.detail_themeRevAddDetail, name="detail_themeRevAddDetail"),
+    # path('themeRevAddDetail/', views.detail_themeRevAddDetail, name="detail_themeRevAddDetail"),
     path('mypage/mylike/', views.mylike, name="mylike"),
     path('rate/', views.rateTheme, name='rate'),
     #후에 삭제될 불필요한 코드

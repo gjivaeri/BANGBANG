@@ -57,7 +57,7 @@ class LoginForm(forms.Form):
 class ThemeRevForm(ModelForm):
   class Meta:
     model = ThemeRev
-    fields = '__all__'
+    fields = ('themeRevTitle', 'themeRevContent', 'themeRevDate', 'themeRev_WriterID', 'theme_ID', 'shop_ID')
 
 #     themeRevID = models.AutoField(primary_key=True)
 #     themeRevTitle = models.CharField(max_length=200)

@@ -11,10 +11,14 @@
       <div class="theme-info">
         <div class="info-pic">
           <!-- 이미지 넣기 -->
-          <img class="pic" src="">
+          <img src="{{theme.themeImage.url}}"> 
         </div>
         <div class="info-detail">
-          <div class="shop-name">{{theme.shopID}}</div>
+        {% for shop in shops%}
+        {% if shop.shopID == theme.ShopID_id%}
+          <div class="shop-name">{{shop.shopName}}</div>
+        {% endif %}
+        {% endfor %}
           <div class="theme-name"><strong>{{theme.themeName}}</strong></div>
           <div class="difficulty">
             <div class="difficulty-title"><span>난이도</span>  {{theme.themeDifficulty}}</div>
@@ -38,16 +42,15 @@
       </div>
     </div>
 
-
     <div class="right-side">
       <div class="right-side-title"><strong>테마 리뷰</strong></div>
-
       <div class="theme-reviews">
         <!-- 리뷰 폼 -->
         {% for review in reviews %}
         <div class="box-form">
-          <a href="{% url 'detail_themeRevAddDetail' %}">
-          <div class="detail-ment"> 
+          <a href="{% url 'detail_themeRevAddDetail' theme.pk review.pk %}">
+              {% comment %} <a href=" theme.pk review.pk %}"> {% endcomment %}
+          <div class="detail-ment" id="listButton"> 
           {{review.themeRevContent}}  
           </div>
           </a>
@@ -61,8 +64,8 @@
           <button class="like-button">추천</button>
           <button class="dislike-button">비추천</button>
         </div>
-        </div>            
-        {%endfor%}
+        </div>    
+        {% endfor %}
           
           
         </div>      
@@ -72,3 +75,6 @@
     </div>
   </div>
 {% endblock content %} 
+{% comment %} {% block js %}
+<script type="text/javascript" src="/static/js/detail_trad.js"></script>
+{% endblock js %} {% endcomment %}

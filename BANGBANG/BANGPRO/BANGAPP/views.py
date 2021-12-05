@@ -23,17 +23,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 
 # Create your views here.
-
-def home2(request):
-  theme = Theme.objects.all()
-  theme1 = {'theme1': theme}
-  return render(request, 'home2.html', theme1)
-
-def home2_detail(request, theme_pk):
-  theme = Theme.objects.get(pk=theme_pk)
-  review = ThemeRev.objects.filter(theme_ID=theme_pk)
-  return render(request, 'home2_detail.html', {'theme': theme, 'review':review})
-
 def join(request):
     if request.method == 'GET':
         return render(request, 'registration/join.html')
@@ -105,30 +94,6 @@ def mypage(request):
         return render(request, 'registration/mypage.html', content)
     return redirect('login')
 
-#검색기능, Q객체사용불가
-# class SearchFormView(FormView):
-#     form_class = PostSearchForm
-#     template_name = 'home.html'
-
-#     def form_valid(self, form):
-#         searchWord = form.cleaned_data['search_word']
-#         post_list = Theme.objects.filter(Q(themeName=searchWord) | Q(themeGenre=searchWord) | Q(themeIntro=searchWord)).distinct()
-
-#         context = {}
-#         context['form'] = form
-#         context['search_term'] = searchWord
-#         context['object_list'] = post_list
-
-#         return render(self.request, self.template_name, context)
-
-# def theme_list(request):
-#   theme_list = Theme.objects.all()
-#   q = request.GET.get('q','')
-#   if q :
-#     theme_list = theme_list.filter(themeName__icontains=q)
-#   return render(request,'home.html', {'theme_list':theme_list , 'q':q})
-
-
 
 def home(request):
     username = request.session.get('user')
@@ -167,13 +132,19 @@ def detail_theme(request, theme_pk):
     
 #개발중 임시 view
 def detail_themeRevAdd(request, theme_pk):
-  info = Theme.objects.filter(theme_ID=theme_pk)
   theme = Theme.objects.get(pk=theme_pk)
   reviews = ThemeRev.objects.filter(theme_ID=theme_pk)
-  return render(request, 'detail_themeRevAdd.html', {'theme':theme ,'reviews': reviews, 'info': info})
+  shops = Shop.objects.all()
+  return render(request, 'detail_themeRevAdd.html', {'theme':theme ,'reviews': reviews, 'shops':shops})
 
-def detail_themeRevAddDetail(request):
-  return render(request, 'detail_themeRevAddDetail.html')
+def detail_themeRevAddDetail(request, theme_pk, review_pk):
+  theme = Theme.objects.get(pk=theme_pk)
+  review = ThemeRev.objects.get(pk=review_pk)
+  shops = Shop.objects.all()
+  context = {'theme':theme, 'review':review, 'shops':shops}
+  return render(request, 'detail_themeRevAddDetail.html', context)
+
+
 #theme Review
 # @login_required(login_url="/registration/login")
 # def new_themeRev(request):

@@ -108,8 +108,12 @@
 }
 
 /* 이미지 테두리 */
-img{
+.info-pic > img{
+  margin-top:26vh;
   border: solid 1px;
+  width: 14vw;
+  height: 14vw;
+  border-radius: 15px;
 }
 
 .difficulty{
