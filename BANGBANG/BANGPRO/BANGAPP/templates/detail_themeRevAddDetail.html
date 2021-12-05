@@ -11,25 +11,24 @@
       <div class="theme-info">
         <div class="info-pic">
           <!-- 이미지 넣기 -->
-          <img class="pic" src="">
+          <img src="{{theme.themeImage.url}}"> 
         </div>
         <div class="info-detail">
-          <div class="shop-name">셜록홈즈 홍대점</div>
-          <div class="theme-name"><strong>어린 왕자</strong></div>
+        {% for shop in shops%}
+        {% if shop.shopID == theme.ShopID_id%}
+          <div class="shop-name">{{shop.shopName}}</div>
+        {% endif %}
+        {% endfor %}
+          <div class="theme-name"><strong>{{theme.themeName}}</strong></div>
           <div class="difficulty">
-            <div class="difficulty-title">난이도</div>
-            <div class="difficulty-star"> 
-              <span class="material-icons-outlined" style="font-size: 1.5vw;">star</span>
-              <span class="material-icons-outlined" style="font-size: 1.5vw;">star</span>
-            </div>
+            <div class="difficulty-title"><span>난이도</span>  {{theme.themeDifficulty}}</div>
           </div>
           <div class="horror">
-            <div class="horror-title">공포도</div>
-            <div class="horror-star"> <span class="material-icons-outlined" style="font-size: 1.5vw;">star</span> </div>
+            <div class="horror-title"><span>공포도</span>  {{theme.themeHorror}}</div>
           </div>
           <div class="number">
             <div class="number-title">인원수</div>
-            <div class="number-detail">2~4</div>  
+            <div class="number-detail">{{theme.themeRecomPeople}}</div>  
           </div>
           <div class="likes"> <!--버튼으로 바꾸기?-->
             <div class="heart-icon"><span class="material-icons-outlined" style="font-size: 1.4vw;">favorite_border</span></div>
@@ -37,25 +36,23 @@
           </div>
         </div>
       </div>
+      
       <div class="theme-describe">
-        장미와 다툰 뒤, 생각할 시간을 갖기 위해 여행을 떠나는 어린 왕자. 항해 도중
-        연료가 부족해 지구의 어느 사막에 불시착하게 된다. 연료를 구하기 위해 이리저리 
-        사막을 탐험하던 중 예기치 않는 상황을 조우하게 되는데...
+        {{theme.themeIntro}}
       </div>
     </div>
 
 
     <div class="right-side">
-      <a href="{% url 'detail_themeRevAdd' %}">
+      <a href="{% url 'detail_themeRevAdd' theme.pk %}">
         <button class="right-side-title"><strong>리뷰 닫기</strong></button>
       </a>
-      
       <div class="detail-form">
         <div class="review-profile">
-          <img class="profile-img" src="{% static 'images/image-removebg-preview.png' %}">
+          <img class="profile-img" src="">
           <div class="name-date">
-            <div class="profile-name"><strong>{{userName}}님</strong></div>
-            <div class="date">{{date}} 작성</div>
+            <div class="profile-name"><strong>{{review.themeRev_WriterID}}님</strong></div>
+            <div class="date"> 작성</div>
           </div>
         </div>
         <div class="star-review">
@@ -70,9 +67,7 @@
             <strong>텍스트 리뷰</strong>
           </div>
           <div class="text-detail">
-            나는 요즘 방탈출 실력 거의 퇴화돼서 우리 거의 방린이라고 봐도 될 정도인데 우리도! 재미있게 플레이하면서 탈출 성공했다!
-          거기다ㅋㅋㅋ 탈출하고 나와서 사람들 폴라로리드 플레이 기록 보니까 최단 기록은 둘이서 노힌트로 11분 30초만에 탈출한 사람도
-          있고 20분 미만에 탈출한 사람들도 꽤 있었어서 방탈출 고수들이라면 정말 빠르게 탈출할 수 있을 것 같다.
+            {{review.themeRevContent}}
           </div>
         </div>
       
