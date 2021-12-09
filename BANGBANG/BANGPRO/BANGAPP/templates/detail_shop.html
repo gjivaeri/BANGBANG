@@ -11,46 +11,31 @@
     <div class="shopInfoBox">
       <div class="shopInfo-top">
         <div class="imageField">
-          <img src="{{shop.shopImage.url}}"> 
+          <img class="shop-pic" src="{{shop.shopImage.url}}"> 
         </div>       
         <div class="shopInfo">
-          <div><h2>{{shop.shopName}}</h2></div>
-          <div>{{shop.Location}}</div>
-        </div>
-          <div>{{shop.rating}}</div>
-        
-      </div>
-      <div class="themeRev">
-        <span>지점 테마 리뷰</span> 
-        <a href="{% url 'detail_themeRevAdd' %}">
-          <span>더보기</span>
-        </a>
-        <div class="review-box">
-          <div class="summary-cont">{{topreview.themeRevContent}}</div>
-          <div class="summary-bottom">
-            <div class="like-count" id="count-{{ topreview.pk }}">
-              ♡{{ topreview.themeRevRecom }}+</p>
-              {% comment %} 이미지 삽입 오류 수정되면 하트 이미지로 대체 {% endcomment %}
-            </div>
-            <div>
-            <input type="button" class="like" name="{{ topreview.pk }}" value="추천">
-            </div>
-            <div>
-            <input type="button" class="hate" name="{{ topreview.pk }}" value="비추천">
-            </div>        
+          <h2>{{shop.shopName}}</h2>
+          <div class="location">
+            <span class="material-icons">location_on</span>
+            <div class="shop-location">{{shop.Location}}</div>
           </div>
+          <div class="shop-rating">{{shop.rating}}</div>
+        </div>
+        <div class="go-homepage">
+          <button class="go-button">홈페이지 가기</button>
         </div>
       </div>
     </div>
 
-    <div class="theme">
-      <h3>테마</h3>
+    <div class="themes">
+      <h3><strong>테마</strong></h3>
       <div class="theme-box">
         {% for theme in themes %}
-        <img class="theme-list" src="{{theme.themeImage.url}}">
+        <img class="theme-pic" src="{{theme.themeImage.url}}">
         {% endfor %}
       </div>
     </div>
+</div>
 {% endblock content %}
 {% block js %}
 <script type="text/javascript" src="/static/js/like.js"></script>

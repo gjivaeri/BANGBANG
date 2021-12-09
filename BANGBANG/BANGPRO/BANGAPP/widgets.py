@@ -11,7 +11,7 @@ class starWidget(forms.TextInput):
             ],
         }
         js = [
-            # "//code.jquery.com/jquery-3.4.1.min.js",
+            "//code.jquery.com/jquery-3.4.1.min.js",
             'widgets/rateit/jquery.rateit.min.js',
         ]
 

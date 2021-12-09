@@ -21,6 +21,7 @@ from django.views.generic import FormView, View, RedirectView #Generic View 개�
 from django.views.decorators.csrf import csrf_exempt
 #for sort 
 from django.core.paginator import Paginator
+from datetime import datetime
 
 # Create your views here.
 def join(request):
@@ -94,7 +95,7 @@ def mypage(request):
         return render(request, 'registration/mypage.html', content)
     return redirect('login')
 
-
+    
 def home(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
@@ -108,7 +109,8 @@ def home(request):
     q = request.GET.get('q','')
     if q :
       theme_list = theme_list.filter(themeName__icontains=q)
-    content = {'user' : user, 'themes' : themes, 'count' : count, 'theme_list' : theme_list , 'q' : q}
+      shops = shops.filter(themeName__icontains=q)
+    content = {'user' : user, 'shops' : shops, 'themes' : themes, 'count' : count, 'theme_list' : theme_list , 'q' : q}
     return render(request, 'home.html', content)
 
 def detail_shop(request, shop_pk):
@@ -170,19 +172,19 @@ def detail_themeRevAddDetail(request, theme_pk, review_pk):
 #       return render(request, 'registration/join.html')
 
 def new_themeRevTest(request):
-  form = TestForm()
-  context = {'form':form}
-
   if request.method == "POST":
-    form = TestForm(request.POST, request.FILES)
+    form = TestForm(request.POST)
     if form.is_valid():
       print('esy')
-      post = form.save#DB save를 지연시켜 중복 save 방지
+      post = form.save()#DB save를 지연시켜 중복 save 방지
       # post.ip = request.META['REMOTE_ADDR']
       post.save()
       return redirect("new_themeRevTest")
     else:
       print('no')
+  else:
+      form = TestForm()
+  context = {'form':form}
   return render(request, "new_themeRevTest.html", context)
 
 @csrf_exempt
@@ -291,11 +293,17 @@ def list_themeRev(request):
     #분할될 객체 / 한페이지에 담길 객체 수
     #페이지 번호를 받아 해당 페이지를 리턴
     
-    content = {
+    context = {
       'posts':posts, 'themes':themes, 'sort':sorted, 'reviews':reviews, 'shops':shops
     }
-    return render(request,'list_themeRev.html', content)
+    return render(request,'list_themeRev.html', context)
 
+def list_themeRevAll(request):
+  reviews = ThemeRev.objects.all()
+  context = {
+    'reviews':reviews,
+  }
+  return render(request, 'list_themeRevAll.html', context)
 
 @csrf_exempt
 def like(request):
@@ -353,6 +361,53 @@ def recommend(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
     themes = Theme.objects.all()
-    content = {'user' : user, 'themes' : themes}
+    shops = Shop.objects.all()
+    content = {'user' : user, 'themes' : themes, 'shops' : shops}
     return render(request, 'recommend.html', content)
     
+def edit_profile(request):
+    username = request.session.get('user') # 로그인 해야
+    if User.objects.filter(userID = username).exists():
+        user = User.objects.get(userID = username)
+        content = {
+            'username' : username,
+            'user' : user
+        }
+        if request.method == "POST":
+            verify = False # 현재 비밀번호가 올바른지 확인
+            try:
+                PasswordHasher().verify(user.userPW, request.POST.get('userPW', ''))
+            except exceptions.VerifyMismatchError:
+                verify = False
+            else:
+                verify = True
+
+            if request.POST.get('userName', '') is '': #이름이 없는 경우
+                content['error'] = '이름을 입력해주세요.'
+            elif request.POST.get('usersSubname', '') is '': #닉네임이 없는 경우
+                content['error'] = '닉네임을 입력해주세요.'  
+            elif request.POST.get('userPW', '') is '': # 현재 비밀번호 칸이 비었을 때
+                content['error'] = '현재 비밀번호를 입력해주세요.' 
+            elif not verify: # 현재 비밀번호가 올바른지
+                content['error'] = '현재 비밀번호가 올바르지 않습니다.' 
+            elif request.POST.get('userPW1', '') != request.POST.get('userPW2', ''): # 새 비밀번호 확인이 맞는지
+                content['error'] = '새 비밀번호 확인이 올바르지 않습니다.' 
+            elif request.POST.get('userPW', '') == request.POST.get('userPW1', ''): # 새 비밀번호가 이전 비밀 번호와 같은지
+                content['error'] = '이전 비밀번호와 동일 합니다.' 
+            else:
+                loginform = LoginForm(request.POST)
+                if loginform.is_valid():
+                    user.userName = request.POST.get('userName', '')
+                    if request.POST.get('userPW1', '') is not '':
+                        user.userPW = PasswordHasher().hash(request.POST.get('userPW1', ''))
+                    user.usersSubname = request.POST.get('usersSubname', '')
+                    user.userBirthday = request.POST.get('userBirthday', '')
+                    user.userGender = int(request.POST.get('userGender', ''))
+                    user.save()
+                    user.userBirthday = datetime.strptime(user.userBirthday, "%Y-%m-%d")
+                    content['user'] = user # 수정된 정보로 업데이트
+                    content['message'] = '회원정보가 수정되었습니다.'
+                else:
+                    content['error'] = '새 비밀번호를 확인해 주세요.' # 새비번 확인이 안 맞았을 때
+        return render(request, 'registration/edit_profile.html', content)
+    return redirect('login')

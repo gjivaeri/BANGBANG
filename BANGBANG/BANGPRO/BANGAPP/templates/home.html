@@ -36,6 +36,13 @@
           </a>
         </div>
     {% endfor %}
+    {% for shop in shops %}
+    <div class="themeImg">
+      <a href="{% url 'detail_shop' shop.pk %}">
+        <img src="{{shop.shopImage.url}}">
+      </a>
+    </div>
+  {% endfor %}
   </div> 
 </div>
 {% endblock content %} 
