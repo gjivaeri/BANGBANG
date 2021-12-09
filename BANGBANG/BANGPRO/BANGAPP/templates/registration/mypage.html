@@ -20,7 +20,9 @@
      </div>
      <div class="buttons">
         <div class="on-buttons">
-            <button type="button" class="modify" onclick="location.href=''">회원정보 수정</button>
+            <a href="{% url 'edit_profile' %}">
+              <button type="button" class="modify">회원정보 수정</button>
+            </a>
             <a href="{% url 'mylike' %}">
               <button type="button" class="likes" onclick="location.href=''">좋아요</button>
             </a>

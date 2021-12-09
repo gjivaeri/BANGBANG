@@ -109,7 +109,7 @@ def home(request):
     q = request.GET.get('q','')
     if q :
       theme_list = theme_list.filter(themeName__icontains=q)
-      shops = shops.filter(themeName__icontains=q)
+      shops = shops.filter(shopName__icontains=q)
     content = {'user' : user, 'shops' : shops, 'themes' : themes, 'count' : count, 'theme_list' : theme_list , 'q' : q}
     return render(request, 'home.html', content)
 
