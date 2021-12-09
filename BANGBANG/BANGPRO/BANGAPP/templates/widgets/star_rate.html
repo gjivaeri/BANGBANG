@@ -17,13 +17,13 @@
 
 
 {% comment %} include만으로 동작하는 코드 {% endcomment %}
-<form action="" method="post">
+{% comment %} <form action="" method="post">
   {% csrf_token %}
       <input type="rating" name="grade" value="0" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
       <div class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px"></div>
       <input type="submit"/>
-</form>
+</form> {% endcomment %}
 
 
-{% comment %} <input type="rating" name="grade" value="0" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
-<div class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px"></div> {% endcomment %}
+<input type="rating" name="grade" value="0" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
+<div class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px"></div> 

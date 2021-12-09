@@ -1,0 +1,99 @@
+/* vx, vh단위로 수정할 것 */
+html{height: 100%; }
+body{position: relative;width: 100%;height: 100%;}
+
+a.nav-review{
+  color:#F55C03;
+  border-bottom: solid 3px #F55C03;
+}
+
+.content{
+  font-family: 'NanumSquare';
+  position: absolute;
+  top: 6.5%;
+  left: 4.5%;
+  border-color: #53444F;
+  background-color: #e7e5e5;
+  width: 90vw;
+  height: 100vmax;
+}
+
+.title{
+  margin-top: 8vh;
+  margin-bottom: 4vh;
+  margin-left: 3vw;
+  width: 100vmax;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+/* review box */
+.themeRev{
+  margin-left: 2vw;
+  display: flex;
+  width: 85vw;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* width: 80vw;
+  height: 100vmax; */
+}
+
+.review-box{
+  background-color: white;
+  vertical-align: middle;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px 10px 20px 10px;
+  height: 23vh;
+  width: 38vmax;
+  margin-bottom: 3vh;
+}
+
+.review-box > .summary-cont{
+  padding: 2vh 2vh 1vh 3vh;
+  height: 14.5vh;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  overflow:hidden;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp : 5;
+  -webkit-box-orient: vertical;
+}
+
+.themeRev > a > span{
+  margin-left: 10px;
+}
+
+/* like count  */
+.summary-bottom{
+  display:flex;
+  /* padding: 3vh 2vh 2vh 3vh; */
+  padding: 2vh 0vh 0vh 3vh;
+  font-size:1.2rem;
+}
+
+.summary-bottom > .like-count{
+  flex-basis: 70%;
+}
+
+.summary-bottom > div > .like{
+  width:5vw;
+  border: none;
+  background-color: white;
+  font-size: 1.1vw;
+}
+
+.summary-bottom > div > .hate{
+  width:8vw;
+  border: none;
+  font-size: 1.1vw;
+  background-color: white;
+}
+
+.summary-bottom > div > .like:hover{
+  color:#F55C03;
+}
+
+.summary-bottom > div > .hate:hover{
+  color:#F55C03;
+}
