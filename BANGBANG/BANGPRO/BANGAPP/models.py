@@ -1,7 +1,5 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
-# from django.contrib.auth.models import AbstractUser
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
 class User(models.Model):
@@ -76,7 +74,6 @@ class Shop(models.Model):
 
 class ThemeRev(models.Model):
     themeRevID = models.AutoField(primary_key=True)
-    themeRevTitle = models.CharField(max_length=200)
     themeRevContent = models.TextField()
     themeRevDate = models.DateField()
     themeRevWriteDate = models.DateTimeField(auto_now_add=True)
@@ -85,9 +82,7 @@ class ThemeRev(models.Model):
     shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id", default=1)
     themeRevRecom = models.IntegerField(default=0)
     themeRevNRecom = models.IntegerField(default=0)
-
-    def __str__(self):
-      return self.themeRevTitle
+    themeRevRating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
 
 
 class Theme(models.Model):
@@ -122,3 +117,7 @@ class Hate(models.Model):
     
     class Meta:
         unique_together = ('user','article')
+
+class Test(models.Model):
+    grade = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    con = models.TextField(null=True)

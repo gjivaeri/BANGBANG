@@ -1,9 +1,9 @@
 from enum import auto
 from django import forms
 from django.forms import ModelForm
-from .models import User, Theme, ThemeRev, Shop
+from .models import User, Theme, ThemeRev, Test
 from argon2 import PasswordHasher, exceptions
-
+from .widgets import starWidget
 
 class LoginForm(forms.Form):
   userID = forms.CharField(
@@ -57,7 +57,31 @@ class LoginForm(forms.Form):
 class ThemeRevForm(ModelForm):
   class Meta:
     model = ThemeRev
-    fields = ('themeRevTitle', 'themeRevContent', 'themeRevDate', 'themeRev_WriterID', 'theme_ID', 'shop_ID')
+    fields = '__all__'
+    js = ('js/new_themeRev.js',)
+    # fields = ('themeRevTitle', 'themeRevContent', 'themeRevDate', 'themeRev_WriterID', 'theme_ID', 'shop_ID', 'themeRevRating')
+    widgets = {
+      'themeRevDate': forms.DateInput(attrs={'class':'datepicker'}),
+      'theme_ID': forms.NullBooleanSelect(attrs={'name':'theme', 'onchange':'changeTheme()', 'class':'visitedTheme', 'default':'1'}),
+      'themeRevRating': starWidget,
+    }
+
+    
+class TestForm(forms.ModelForm):
+    class Meta:
+        model = Test
+        fields = '__all__'
+        js = ('js/new_themeRev.js',)
+        widgets = {
+            # 'grade': starWidget(attrs={'id':'star_id_grade','class':'rateit rateit-bg','data-rateit-backingfld':'#id_grade'}),
+            'grade': starWidget(attrs={'name':'grade'}),
+        }
+        
+    # <input type="rating" name="grade" value="4" required="" id="id_grade" min="0" max="5" step="1" style="display: none;">
+    # <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade">
+
+
+
 
 #     themeRevID = models.AutoField(primary_key=True)
 #     themeRevTitle = models.CharField(max_length=200)

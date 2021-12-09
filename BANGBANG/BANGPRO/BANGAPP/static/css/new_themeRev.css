@@ -2,6 +2,30 @@
 html{height: 100%;}
 body{position: relative;width: 100%;height: 100%;}
 
+.content{
+  margin: 10vh auto;
+  text-align:center;
+  width: 60vw;
+  height: 100vmax;
+  background-color: #e7e5e5;
+}
+
+.box{
+  border: 1px solid #53444F;
+  background-color: white;
+  border-radius: 15px;
+  display:flex;
+  flex-direction: column;
+  vertical-align: middle;
+  padding: 1vh 1.6vw 0vh 1.6vw;
+  justify-content: center;
+}
+
+img{
+  width: 30vw;
+  height: 30vh;
+}
+/* 이전 css
 .checked {
   color: orange;
 }
@@ -107,4 +131,4 @@ body{position: relative;width: 100%;height: 100%;}
 .text-review textarea {
     border: #ffff;
 }
-
+ */

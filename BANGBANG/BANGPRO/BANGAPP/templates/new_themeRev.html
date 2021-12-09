@@ -6,35 +6,33 @@
 {% block content %}
   <div class="content">
     <form action="" method="post">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit">
-    </form>
+      {% csrf_token %}
+        <div class="submit">
+          <h2>리뷰작성</h2>
+          <input type="submit">
+        </div>
+    
+    {% comment %} 별점 선택하면 숫자로 환산해서 themeRevRating에 반영 {% endcomment %}
+    <div class="star-review box">
+      <h3>별점 리뷰</h3>
+      {% include "widgets/star_rate.html" %}
+    </div>
+
+    {% comment %} 테마 선택해서 이미지 불러오기 {% endcomment %}
+    <div class="visited-theme box">
+      <h3>방문한 방탈출 테마</h3>
+      <div class="themeImg"></div>
+      {{form.theme_ID}}
+      {{form.shop_ID}}
+      {{form.themeRevDate}}
+    </div>
+
+    <div class="text-review box">
+      <h3>텍스트 리뷰</h3>
+      {{form.themeRevContent}}
+    </div>
+  </form>
   </div> 
-
-
-
-
-
-    {% comment %} <form class="rate-form" action="" method="POST" id="{{theme.id}}">
-      {% csrf_token%}           
-        <button type="submit" class="fa fa-star fa-3x my-btn" id="first"></button>
-        <button type="submit" class="fa fa-star fa-3x my-btn" id="second"></button>
-        <button type="submit" class="fa fa-star fa-3x my-btn" id="third"></button>
-        <button type="submit" class="fa fa-star fa-3x my-btn" id="fourth"></button>
-        <button type="submit" class="fa fa-star fa-3x my-btn" id="fifth"></button>
-    </form> {% endcomment %}
-{% comment %} 
-    themeRevID = models.AutoField(primary_key=True)
-    themeRevTitle = models.CharField(max_length=200)
-    themeRevContent = models.TextField()
-    themeRevDate = models.DateField()
-    themeRevWriteDate = models.DateTimeField(auto_now_add=True)
-    themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
-    theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
-    shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id", default=1)
-    themeRevRecom = models.IntegerField(default=0)
-    themeRevNRecom = models.IntegerField(default=0) {% endcomment %}
 
 {% endblock content %}
 {% block js %}
