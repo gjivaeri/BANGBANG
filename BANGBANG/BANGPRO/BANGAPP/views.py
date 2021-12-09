@@ -8,7 +8,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 #for loginview
-from .forms import LoginForm, ThemeRevForm
+from .forms import LoginForm, ThemeRevForm, TestForm
 from django.views import generic
 from argon2 import PasswordHasher, exceptions
 #for likeview
@@ -168,27 +168,61 @@ def detail_themeRevAddDetail(request, theme_pk, review_pk):
 #       return render(request, "new_themeRev.html")
 #     else:
 #       return render(request, 'registration/join.html')
-def new_themeRev(request):
-  form = ThemeRevForm()
+
+def new_themeRevTest(request):
+  form = TestForm()
+  context = {'form':form}
 
   if request.method == "POST":
-    print(request.POST)
-    form = ThemeRevForm(request.POST)
+    form = TestForm(request.POST, request.FILES)
     if form.is_valid():
-      form.save()
+      print('esy')
+      post = form.save#DB save를 지연시켜 중복 save 방지
+      # post.ip = request.META['REMOTE_ADDR']
+      post.save()
+      return redirect("new_themeRevTest")
+    else:
+      print('no')
+  return render(request, "new_themeRevTest.html", context)
+
+@csrf_exempt
+def selectImg(request):
+    pk = request.POST.get('pk', None)
+    # username = request.session.get('user')
+    # user = get_object_or_404(User, userID = username)
+    selectTheme = get_object_or_404(Theme, pk=pk)
+    themeImg = selectTheme.themeImage
+    return HttpResponse(json.dumps(str(themeImg)), content_type="application/json")
+
+
+def new_themeRev(request):
+  if request.method == "GET":
+    form = ThemeRevForm()
+
+  elif request.method == "POST":
+    form = ThemeRevForm(request.POST, request.FILES)
+    if form.is_valid():
+      print(form.cleaned_data)
+      username = request.session.get('user')
+      user = get_object_or_404(User, userID = username)
+      # post = ThemeRev(
+        # themeRevContent = form.clean['themeRevContent'],
+        # themeRevDate = form.clean['themeRevDate'],
+        # themeRevRating = form.clean['themeRevRating'],
+        # theme_ID = form.clean['theme_ID'],
+        # shop_ID = form.clean['shop_ID'],
+      #   themeRev_WriterID = user,
+      # )
+      post = form.save(commit=False) #DB save를 지연시켜 중복 save 방지
+      post.save()
+    else:
+      print('no')
+      # post.ip = request.META['REMOTE_ADDR']
+      return redirect("new_themeRev")
       
-  context = {'form':form}
+  context = {'form':form,}
   return render(request, "new_themeRev.html", context)
 
-def rateTheme(request):
-  if request.method == 'POST':
-    el_id = request.POST.get('el_id')
-    val = request.POST.get('val')
-    obj = Theme.objects.get(id=el_id)
-    obj.themeRating = val
-    obj.save
-    return JsonResponse({'success':'true', 'score': val}, safe=False)
-  return JsonResponse({'success':'false'})
 
 def edit_themeRev(request, themeRev_pk):
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
@@ -322,49 +356,3 @@ def recommend(request):
     content = {'user' : user, 'themes' : themes}
     return render(request, 'recommend.html', content)
     
-
-
-
-#SHOP Review 검토 후 삭제
-# # @login_required(login_url="/registration/login")
-# def new_shopRev(request):
-#     username = request.session.get('user')
-#     if User.objects.filter(userID = username).exists():
-#       if request.method == "POST":
-#           new_shopRev = Shoprev.objects.create(
-#             shopRevTitle=request.POST["shoprevTitle"],
-#             shopRevRating=request.POST["shopRating"],
-#             shopRevContent=request.POST["shoprevCont"],
-#             shopRevImage=request.POST["shoprevImage"],
-#             shopRevDate=request.POST["shoprevDate"],
-#             shopRevWriteDate=request.POST["shoprevWDate"],
-#             shopRev_WriterID=request.user,
-#           )
-#           return redirect("detail_shopRev", new_shopRev.pk)
-#       return render(request, "new_shopRev.html")
-#     else:
-#       return render(request, 'registration/join.html')
-    
-
-# def edit_shopRev(request, shopRev_pk):
-#     shopRev = Shoprev.objects.get(pk=shopRev_pk)
-
-#     if request.method == "POST":
-#         shopRev.objects.filter(pk=shopRev_pk).update(
-#            shopRevTitle=request.POST["shopRevTitle"],
-#            shopRevRating=request.POST["shopRevRating"],
-#            shopRevContent=request.POST["shopRevContent"],
-#            shopRevImage=request.POST["shopRevImage"],
-#            shopRevDate=request.POST["shopRevDate"],
-#            shopRevWriteDate=request.POST["shopRevWriteDate"],
-#            shopRev_WriterID=request.user,
-#         )
-#         return redirect('detail_shopRev', shopRev_pk)
-
-#     return render(request, 'edit_shopRev.html', {'shopRev': shopRev})
-
-# def delete_shopRev(request, shopRev_pk):
-#     shopRev = Shoprev.objects.get(pk=shopRev_pk)
-#     shopRev.delete()
-#     return redirect('/shop/<int:shopRev_pk>')
-

@@ -110,6 +110,72 @@ if (one){
     })
   }))
 }
+
+
+
+//jquery 사용
+//테마 방문 날짜 선택기
+$(function() {
+  $( ".datepicker" ).datepicker({
+    changeMonth: true,
+    changeYear: true,
+    yearRange: "2020:2022",
+    // You can put more options here.
+
+  });
+});
+
+
+//선택 테마 이미지 불러오기
+function changeTheme(){
+  selectValue = $(".visitedTheme option:selected").val();
+  pk = selectValue
+
+  $.ajax({
+      type: "POST", url: '/selectImg/', data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, dataType: "json", 
+      success: function (response) { // 성공
+          $(".themeImg").html('<img src=/media/'+response+'>'); // 좋아요 개수 변경
+      },
+      error: function (request, status, error) { // 실패
+          alert("방문한 테마를 선택해주세요");
+      },
+  });
+  return false;  //새로고침 시키지 말라고 넣음
+};
+
+//select 유지시키기 위한 함수
+var getUrlParameter = function getUrlParameter(sParam) {
+  //url parameter를 얻어온다, 그 후 대부분의 문자를 디코딩하는 함수 사용
+  var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+      sURLVariables = sPageURL.split('&'),
+      sParameterName,
+      i;
+      // console.log(sPageURL);
+      //window.location.search는 ?sourid=chrom과 같은 부분을 가지고 온다. substring(1)로 객체의 시작인덱스부터 가져옴
+
+  for (i = 0; i < sURLVariables.length; i++) {
+      sParameterName = sURLVariables[i].split('=');
+
+      if (sParameterName[0] === sParam) {
+          return sParameterName[1] === undefined ? true : sParameterName[1];
+      }
+  }
+};
+
+$(function(){
+  var theme_val = getUrlParameter('theme_ID');
+  $('.visitedTheme').val(theme_val);
+  $('.visitedTheme').change(function () {
+    // console.log($(this).val());
+    theme = $('.visitedTheme option:selected').val();
+    $('.form').submit();
+  })
+});
+
+
+
+
+//수연님 js
 // $(document).ready(function() {
 //   $("form#ratingForm").click(function(e) 
 //   {
@@ -133,3 +199,4 @@ if (one){
 //   }
 // }
 // }
+//
