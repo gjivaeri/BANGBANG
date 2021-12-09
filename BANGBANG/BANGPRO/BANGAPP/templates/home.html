@@ -23,16 +23,30 @@
           </div>
       </div>
   </div>
+  <div class="loc-filter">
+      <div class="locations">
+        <div class="front">지역</div>
+        <button class="review-button" onclick="">서울 전체</button> 
+        <button class="review-button" onclick="">홍대</button> 
+        <button class="review-button" onclick="">대학로</button> 
+        <button class="review-button" onclick="">강남</button> 
+        <button class="review-button" onclick="">건대</button> 
+        <button class="review-button" onclick="">신촌</button> 
+        <button class="review-button" onclick="">수도권</button> 
+        <button class="review-button" onclick="">비수도권</button> 
+      </div>
+  </div>
+
   <div class="content">  
-    <p class="result-number">{{count}}개의 검색결과</p>
+    <p class="result-number">{{allcount}}개의 검색결과</p>
     <p class="search-box">
       {% for theme in theme_list %}
             {% comment %} <div>{{theme.themeName}}</div> {% endcomment %}
-            {% comment %} <a href="{% url 'detail_theme' theme.pk %}"> {% endcomment %}
+            <a href="{% url 'detail_theme' theme.pk %}">
               <img src="{{theme.themeImage.url}}">
-            {% comment %} </a> {% endcomment %}
+            </a>
       {% endfor %}
-      {% for shop in shops %}
+      {% for shop in shop_list %}
         <a href="{% url 'detail_shop' shop.pk %}">
           <img src="{{shop.shopImage.url}}">
         </a>

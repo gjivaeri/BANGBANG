@@ -97,21 +97,36 @@ def mypage(request):
 
     
 def home(request):
-    username = request.session.get('user')
-    user = User.objects.filter(userID = username).values('userID')
-    themes = Theme.objects.all()
-    shops = Shop.objects.all()
-    themescount = themes.count()
-    shopscount = shops.count()
-    content = {'user' : user, 'themes' : themes, 'shops' : shops, 'themescount' : themescount, 'shopscount' : shopscount}
-    count = themes.count()
+    shop_list = Shop.objects.all()
     theme_list = Theme.objects.all()
+    shopscount = shop_list.count()
+    themescount = theme_list.count()
+    allcount = shopscount + themescount
     q = request.GET.get('q','')
+
     if q :
       theme_list = theme_list.filter(themeName__icontains=q)
-      shops = shops.filter(shopName__icontains=q)
-    content = {'user' : user, 'shops' : shops, 'themes' : themes, 'count' : count, 'theme_list' : theme_list , 'q' : q}
+      shop_list = shop_list.filter(shopName__icontains=q)
+      allcount = theme_list.count() + shop_list.count()
+    content = {'shop_list' : shop_list, 'theme_list' : theme_list, 'allcount' : allcount, 'q' : q}
     return render(request, 'home.html', content)
+
+
+# def home(request):
+#     username = request.session.get('user')
+#     user = User.objects.filter(userID = username).values('userID')
+#     shops = Shop.objects.all()
+#     themescount = themes.count()
+#     shopscount = shops.count()
+#     content = {'user' : user, 'themes' : themes, 'shops' : shops, 'themescount' : themescount, 'shopscount' : shopscount}
+#     theme_list = Theme.objects.all()
+#     q = request.GET.get('q','')
+#     if q :
+#       theme_list = theme_list.filter(themeName__icontains=q)
+#       shops = shops.filter(shopName__icontains=q)
+#     content = {'user' : user, 'shops' : shops, 'themes' : themes, 'count' : count, 'theme_list' : theme_list , 'q' : q}
+#     return render(request, 'home.html', content)
+
 
 def detail_shop(request, shop_pk):
       shop = Shop.objects.get(pk=shop_pk)
