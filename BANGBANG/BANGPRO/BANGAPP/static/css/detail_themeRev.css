@@ -96,3 +96,140 @@ h2{
 .summary-bottom > div > .hate:hover{
   color:#F55C03;
 }
+
+
+
+
+/* detail_theme css */
+.detailTop{
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+  font-size: 1.3vw;
+  font-weight: 550;
+  display: flex;
+}
+
+.detailTop > .close{
+  flex-basis: 70%;
+}
+
+.detailTop > .close > a{
+  color: #53444F;
+}
+
+.detailTop > .change > a{
+  color:#F55C03;
+  margin-left:1vw;
+}
+
+.box{
+  border: 1px solid #53444F;
+  background-color: white;
+  border-radius: 15px;
+  /* vertical-align: middle; */
+  padding: 2vh 1.6vw 2vh 1.6vw;
+}
+
+.boxTitle{
+  font-size: 1.2rem;
+  font-weight: 550;
+  height:auto;
+  margin-top: 1.5vh;
+}
+
+/* writer css */
+.writer{
+  display: flex;
+  height: auto;
+  margin: auto;
+}
+
+.profile{
+  border-radius: 80px;
+  width: 5vmax;
+  height: 5vmax;
+  margin-right: 1vw;
+}
+
+.writerInfo{
+  flex-direction: column;
+}
+
+#writerName{
+  margin-top: 1.5vh;
+  margin-bottom: 0.4vh;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* star-review css */
+.star-review{
+  display:flex;
+  justify-content:space-between;
+  height:4vmax;
+}
+
+.text-top{
+  width: 20vw;
+}
+
+.rate{
+  height: 3vh;
+  margin: auto;
+  font-size:1.4rem;
+  font-weight: 600;
+}
+
+.rateit{
+  margin: auto;
+  margin-top: 1vh;
+}
+
+/* visited-theme css */
+.visited-theme{
+  display:flex;
+  height:22vh;
+  margin: auto;
+}
+
+.text-middle{
+  flex-basis:30%;
+}
+
+.themeImg{
+  height: auto;
+  margin: auto;
+}
+
+img{
+  width: 11vmax;
+  height: 11vmax;
+  border-radius:20px;
+}
+
+.theme-info{
+  height: auto;
+  margin: auto;
+}
+
+.themeName {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1vh;
+}
+
+.shopName{
+  margin-bottom: 1vh;
+
+}
+
+/* text-review css */
+.text-review{
+  height: 40vh;
+ 
+}
+
+.textCon{
+  margin-top: 2vh;
+  font-size: 1.1rem;
+}

@@ -131,7 +131,7 @@ $(function() {
 
 //선택 테마 이미지 불러오기
 function changeTheme(){
-  selectValue = $(".visitedTheme option:selected").val();
+  selectValue = $("#id_theme_ID option:selected").val();
   pk = selectValue
 
   $.ajax({
@@ -167,10 +167,10 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
 $(function(){
   var theme_val = getUrlParameter('theme_ID');
-  $('.visitedTheme').val(theme_val);
-  $('.visitedTheme').change(function () {
+  $('.#id_theme_ID').val(theme_val);
+  $('.#id_theme_ID').change(function () {
     // console.log($(this).val());
-    theme = $('.visitedTheme option:selected').val();
+    theme = $('.#id_theme_ID option:selected').val();
     $('.form').submit();
   })
 });

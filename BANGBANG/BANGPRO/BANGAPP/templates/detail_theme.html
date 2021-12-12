@@ -2,7 +2,7 @@
 {% load static %}
 {% block css %}
 <link href={% static 'css/detail_theme.css' %} rel="stylesheet" type="text/css">
-{% comment %} <link rel="black-arrow" type="image/png" href="http://127.0.0.1/static/images/black-arrow.png">  {% endcomment %}
+<link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
 {% endblock css %}
 
 {% block content %}
@@ -15,8 +15,16 @@
         </div>       
         <div class="themeInfo">
           <div><h2>{{theme.themeName}}</h2></div>
-          <div><span>난이도</span>{{theme.themeDifficulty}}</div>
-          <div><span>공포도</span>{{theme.themeHorror}}</div>
+          <div><span>난이도</span>
+            <div class="rateit" data-rateit-value="{{theme.themeDifficulty}}" data-rateit-ispreset="true" 
+            data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+            </div>  
+          </div>
+          <div><span>공포도</span>
+            <div class="rateit" data-rateit-value="{{theme.themeHorror}}" data-rateit-ispreset="true" 
+            data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+            </div>
+          </div>
           <div><span>인원</span>{{theme.themeRecomPeople}}</div>
         </div>
       </div>
@@ -96,4 +104,5 @@
 {% block js %}
 <script type="text/javascript" src="/static/js/like.js"></script>
 <script type="text/javascript" src="/static/js/hate.js"></script>
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
 {% endblock js %}

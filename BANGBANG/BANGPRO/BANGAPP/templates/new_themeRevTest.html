@@ -15,6 +15,7 @@
   <input type="range" name="grade" value="5" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
   <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px">
   </div> <br>
+  {{form.themeRevRating}}
   {{form.con}}<br>
   {{form.Date}}<br>
   {{form.theme_ID2}}<br>
@@ -28,6 +29,7 @@
 {% block js %}
   <script type="text/javascript" src="/static/js/new_themeRev.js"></script>
   <script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+  <script src="{% static 'widgets/rateit/jquery.rateit.js' %}" ></script>
   {% comment %} 이미지를 클릭했을 때 input value값이 변하도록(추후이동) {% endcomment %}
   <script>
     $('#star_id_grade').click(function(){

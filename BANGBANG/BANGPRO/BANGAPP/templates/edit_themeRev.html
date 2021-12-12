@@ -1,58 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Join
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+  <link href={% static 'css/new_themeRev.css' %} rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+{% endblock css %}
+{% block content %}
+  <div class="content">
     <form action="" method="post">
-        {% csrf_token %}
-        <div>
-            <label for='themeRevTitle'>Title</label>
-            <input type='text' id="themeRevTitle" name="themeRevTitle">
+      {% csrf_token %}
+        <div class="submit">
+          <h2>리뷰 작성</h2>
+          <button type="submit" class="write">작성 완료</button>
+          {% comment %} <input type="submit" value="제출 완료"> {% endcomment %}
         </div>
-        <div>
-            <label for='themeRevRating'>Rating</label>
-            <input type='number' min='1' max='5' step='1' id="themeRevRating" name="themeRevRating">
-        </div>
-        <div>
-            <label for='themeRevDifficulty'>Difficulty</label>
-            <input type='number' min='1' max='5' step='1' id="themeRevDifficulty" name="themeRevDifficulty">
-        </div>
-        <div>
-            <label for='themeRevHorror'>Horror</label>
-            <input type='number' min='1' max='5' step='1' id="themeRevHorror" name="themeRevHorror">
-        </div>
-        <div>
-            <label for='themeRevActivity'>Activity</label>
-            <input type='number' min='1' max='5' step='1' id="themeRevActivity" name="themeRevActivity">
-        </div>
+    
+    {% comment %} 별점 선택하면 숫자로 환산해서 themeRevRating에 반영 {% endcomment %}
+    <div class="star-review box">
+      <div class="boxTitle text-top">별점 리뷰</div>
+      <input type="range" name="themeRevRating" value="5" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
+      <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font" style="font-size:3vw">
+      </div>    
+    </div>
 
-        <div>
-            <label for='themeRevContent'>Content</label>
-            <input type='text' id="themeRevContent" name="themeRevContent">
-        </div>  
-        <div>
-            <label for='themeRevImage'>Image</label>
-            <input type='text' id='themeRevImage' name='themeRevImage'>
+    {% comment %} 테마 선택해서 이미지 불러오기 {% endcomment %}
+    <div class="visited-theme box">
+      <div class="boxTitle text-middle">방문한 방탈출 테마</div>
+      <div class="themeImg"></div>
+      <div class ="theme-info">
+        <div class="fieldWrapper">
+          <label for="themeid">테마명:</label>
+          {{form.theme_ID}}
         </div>
-        <div>
-            <label for='themeRevResult'>result</label>
-            실패 <input type='radio' id='themeRevResult' name='themeRevResult' value=False>
-            성공 <input type='radio' id='themeRevResult' name='themeRevResult' value=True>
+        <div class="fieldWrapper">
+          <label for="shopid">지점명:</label>
+          {{form.shop_ID}}
         </div>
-        <div>
-            <label for='themeRevOccurredTime'>OccurredTime</label>
-            <input type='time' id='themeRevOccurredTime' name='themeRevOccurredTime'>
+        <div class="fieldWrapper">
+          <label for="date">방문날짜:</label>
+          {{form.themeRevDate}}
         </div>
-        <div>
-            <label for='themeRevDate'>Date</label>
-            <input type='date' id='themeRevDate' name='themeRevDate' value='1'>
-        </div>
-        <button type="submit">수정하기</button>
-    </form>
-</body>
-</html>
+      </div>
+    </div>
+
+    <div class="text-review box">
+      <div class="boxTitle text-bottom">텍스트 리뷰</div>
+      {{form.themeRevContent}}
+    </div>
+  </form>
+  </div> 
+
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="/static/js/new_themeRev.js"></script>
+{% comment %} <script src="{% static 'widgets/rateit/jquery.rateit.js' %}" ></script> {% endcomment %}
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+<script>
+  $('#star_id_grade').click(function(){
+    star = $('#star_id_grade').rateit('value')
+    $('#id_grade').text(star)
+    $('#id_grade').val(star)
+    test = $('#id_grade')
+    console.log(test.val())
+  });
+  
+  </script>
+{% endblock js %}

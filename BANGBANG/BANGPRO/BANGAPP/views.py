@@ -112,22 +112,6 @@ def home(request):
     return render(request, 'home.html', content)
 
 
-# def home(request):
-#     username = request.session.get('user')
-#     user = User.objects.filter(userID = username).values('userID')
-#     shops = Shop.objects.all()
-#     themescount = themes.count()
-#     shopscount = shops.count()
-#     content = {'user' : user, 'themes' : themes, 'shops' : shops, 'themescount' : themescount, 'shopscount' : shopscount}
-#     theme_list = Theme.objects.all()
-#     q = request.GET.get('q','')
-#     if q :
-#       theme_list = theme_list.filter(themeName__icontains=q)
-#       shops = shops.filter(shopName__icontains=q)
-#     content = {'user' : user, 'shops' : shops, 'themes' : themes, 'count' : count, 'theme_list' : theme_list , 'q' : q}
-#     return render(request, 'home.html', content)
-
-
 def detail_shop(request, shop_pk):
       shop = Shop.objects.get(pk=shop_pk)
       themes = Theme.objects.filter(ShopID=shop_pk)
@@ -135,6 +119,7 @@ def detail_shop(request, shop_pk):
       topreview = review.order_by('-themeRevRecom').first()
 
       return render(request,'detail_shop.html', {'shop':shop, 'themes':themes, 'review':review, 'topreview':topreview})
+
 
 def detail_theme(request, theme_pk):
   #이 페이지에서 새로 뭘 작성할게 아니면 아래 두줄은 삭제
@@ -147,11 +132,13 @@ def detail_theme(request, theme_pk):
     # like = Like.objects.filter(article__in=review)
     return render(request, 'detail_theme.html', {'theme':theme, 'review':review, 'topreview':topreview})
     
+
 def detail_themeRevAdd(request, theme_pk):
   theme = Theme.objects.get(pk=theme_pk)
   reviews = ThemeRev.objects.filter(theme_ID=theme_pk)
   shops = Shop.objects.all()
   return render(request, 'detail_themeRevAdd.html', {'theme':theme ,'reviews': reviews, 'shops':shops})
+
 
 def detail_themeRevAddDetail(request, theme_pk, review_pk):
   theme = Theme.objects.get(pk=theme_pk)
@@ -160,39 +147,6 @@ def detail_themeRevAddDetail(request, theme_pk, review_pk):
   context = {'theme':theme, 'review':review, 'shops':shops}
   return render(request, 'detail_themeRevAddDetail.html', context)
 
-
-#theme Review
-# @login_required(login_url="/registration/login")
-# def new_themeRev(request):
-#     username = request.session.get('user')
-#     if User.objects.filter(userID = username).exists():
-#       if request.method == "POST":
-#           new_themeRev = ThemeRev.objects.create(
-#             themeRevTitle=request.POST["themeRevTitle"],
-#             themeRevRating=request.POST["themeRevRating"],
-#             themeRevDifficulty=request.POST["themeRevDifficulty"],
-#             themeRevHorror=request.POST["themeRevHorror"],
-#             themeRevActivity=request.POST["themeRevActivity"],
-#             themeRevContent=request.POST["themeRevContent"],
-#             themeRevImage=request.POST["themeRevImage"],
-#             themeRevResult=request.POST["themeRevResult"],
-#             themeRevOccurredTime=request.POST["themeRevOccurredTime"],
-#             themeRevDate=request.POST["themeRevDate"],
-#             #themeRev_WriterID=request.user,
-#           )
-#           return redirect("detail_themeRev", new_themeRev.pk)
-#       return render(request, "new_themeRev.html")
-#     else:
-#       return render(request, 'registration/join.html')
-
-@csrf_exempt
-def selectImg(request):
-    pk = request.POST.get('pk', None)
-    # username = request.session.get('user')
-    # user = get_object_or_404(User, userID = username)
-    selectTheme = get_object_or_404(Theme, pk=pk)
-    themeImg = selectTheme.themeImage
-    return HttpResponse(json.dumps(str(themeImg)), content_type="application/json")
 
 # 테스트용뷰
 def new_themeRevTest(request):
@@ -215,6 +169,16 @@ def new_themeRevTest(request):
   return render(request, "new_themeRevTest.html", context)
 
 
+@csrf_exempt
+def selectImg(request):
+    pk = request.POST.get('pk', None)
+    # username = request.session.get('user')
+    # user = get_object_or_404(User, userID = username)
+    selectTheme = get_object_or_404(Theme, pk=pk)
+    themeImg = selectTheme.themeImage
+    return HttpResponse(json.dumps(str(themeImg)), content_type="application/json")
+
+
 def new_themeRev(request):
   username = request.session.get('user')
   user = get_object_or_404(User, userID = username)
@@ -230,7 +194,9 @@ def new_themeRev(request):
       post = form.save(commit=False) #DB save를 지연시켜 중복 save 방지
       post.themeRev_WriterID = user
       post.save()
-      return render(request, "new_themeRevCom.html")
+      pk = post.pk
+      # return render(request, "new_themeRevCom.html")
+      return redirect("detail_themeRev", pk)
     else:
       messages.error(request, 'Error!')
       print('no')
@@ -239,45 +205,49 @@ def new_themeRev(request):
   context = {'form':form,}
   return render(request, "new_themeRev.html", context)
 
-def new_themeRevCom(request):
-    return render(request, "new_themeRevCom.html")
 
 def edit_themeRev(request, themeRev_pk):
-    themeRev = ThemeRev.objects.get(pk=themeRev_pk)
+    username = request.session.get('user')
+    user = get_object_or_404(User, userID = username)
+    themeRev = get_object_or_404(ThemeRev, pk = themeRev_pk)
+    # path-converter로 받은 pk로 수정하려는 post객체를 get
 
-    if request.method == "POST":
-        ThemeRev.objects.filter(pk=themeRev_pk).update(
-            themeRevTitle=request.POST["themeRevTitle"],
-            themeRevRating=request.POST["themeRevRating"],
-            themeRevDifficulty=request.POST["themeRevDifficulty"],
-            themeRevHorror=request.POST["themeRevHorror"],
-            themeRevActivity=request.POST["themeRevActivity"],
-            themeRevContent=request.POST["themeRevContent"],
-            themeRevImage=request.POST["themeRevImage"],
-            themeRevResult=request.POST["themeRevResult"],
-            themeRevOccurredTime=request.POST["themeRevOccurredTime"],
-            themeRevDate=request.POST["themeRevDate"],
-            themeRevWriteDate=request.POST["themeRevWriteDate"],
-            themeRev_WriterID=request.user,
-        )
-        return redirect('detail_themeRev', themeRev_pk)
+    if request.method == "GET":
+      form = ThemeRevForm(instance = themeRev)
 
-    return render(request, 'edit_themeRev.html', {'themeRev': themeRev})
-
-
-def detail_themeRev(request, themeRev_pk):
-    reviews = ThemeRev.objects.all()
-    themeRev = ThemeRev.objects.get(pk=themeRev_pk)
-    if request.method == "POST":
-        return redirect('detail_themeRev', themeRev_pk)
-
-    return render(request, 'detail_themeRev.html', {'reviews':reviews, 'themeRev': themeRev})
+    elif request.method == "POST":
+        form = ThemeRevForm(request.POST, instance=themeRev)
+        # ThemeRevForm의 인스턴스가 themeRev임을 표시
+        if form.is_valid():
+          print(form.cleaned_data)
+          post = form.save(commit=False) #DB save를 지연시켜 중복 save 방지
+          post.themeRev_WriterID = user
+          post.save()
+          # return render(request, "new_themeRevCom.html")
+          return redirect("detail_themeRev", themeRev_pk=post.pk)
+        else:
+          messages.error(request, 'Error!')
+          print('no')
+    context = {'form':form}
+    return render(request, 'edit_themeRev.html', context)
 
 
 def delete_themeRev(request, themeRev_pk):
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
     themeRev.delete()
-    return redirect('detail_themeRev')
+    return redirect('list_themeRevAll')
+
+
+def detail_themeRev(request, themeRev_pk):
+    reviews = ThemeRev.objects.all()
+    themeRev = ThemeRev.objects.get(pk=themeRev_pk)
+    theme = Theme.objects.get(themeName=themeRev.theme_ID)
+    writer = User.objects.get(userID=themeRev.themeRev_WriterID)
+    # writeDate = themeRev.themeRevWriteDate()
+    if request.method == "POST":
+        return redirect('detail_themeRev', themeRev_pk)
+
+    return render(request, 'detail_themeRev.html', {'reviews':reviews, 'themeRev': themeRev, 'theme': theme, 'writer': writer})
 
 
 def list_themeRev(request):
@@ -301,6 +271,7 @@ def list_themeRev(request):
     themes = Theme.objects.all()
     reviews = sorted
     shops = Shop.objects.all()
+    users = User.objects.all()
     #차후 구현할 페이지 파트
     paginator = Paginator(sorted,9)
     page = request.GET.get('page','')
@@ -310,9 +281,10 @@ def list_themeRev(request):
     #페이지 번호를 받아 해당 페이지를 리턴
     
     context = {
-      'posts':posts, 'themes':themes, 'sort':sorted, 'reviews':reviews, 'shops':shops
+      'posts':posts, 'themes':themes, 'sort':sorted, 'reviews':reviews, 'shops':shops, 'users':users
     }
     return render(request,'list_themeRev.html', context)
+
 
 def list_themeRevAll(request):
   reviews = ThemeRev.objects.all()
@@ -320,6 +292,7 @@ def list_themeRevAll(request):
     'reviews':reviews,
   }
   return render(request, 'list_themeRevAll.html', context)
+
 
 @csrf_exempt
 def like(request):
@@ -364,6 +337,7 @@ def hate(request):
     context = {'like_count':article.themeRevRecom, 'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")
 
+
 def mylike(request):
   username = request.session.get('user')
   user = get_object_or_404(User, userID = username)
@@ -373,6 +347,7 @@ def mylike(request):
 
   return render(request, 'mypage/mylike.html')
 
+
 def recommend(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
@@ -381,6 +356,7 @@ def recommend(request):
     content = {'user' : user, 'themes' : themes, 'shops' : shops}
     return render(request, 'recommend.html', content)
     
+
 def edit_profile(request):
     username = request.session.get('user') # 로그인 해야
     if User.objects.filter(userID = username).exists():

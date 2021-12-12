@@ -2,7 +2,7 @@
 {% load static %}
 {% block css %}
 <link href={% static 'css/detail_shop.css' %} rel="stylesheet" type="text/css">
-{% comment %} <link rel="black-arrow" type="image/png" href="http://127.0.0.1/static/images/black-arrow.png">  {% endcomment %}
+<link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
 {% endblock css %}
 
 {% block content %}
@@ -19,7 +19,9 @@
             <span class="material-icons">location_on</span>
             <div class="shop-location">{{shop.Location}}</div>
           </div>
-          <div class="shop-rating">{{shop.rating}}</div>
+          <div class="rateit" data-rateit-value="{{shop.Rating}}" data-rateit-ispreset="true" 
+          data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+          </div>
         </div>
         <div class="go-homepage">
           <button class="go-button">홈페이지 가기</button>
@@ -40,4 +42,5 @@
 {% block js %}
 <script type="text/javascript" src="/static/js/like.js"></script>
 <script type="text/javascript" src="/static/js/hate.js"></script>
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
 {% endblock js %}

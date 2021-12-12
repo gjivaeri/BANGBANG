@@ -2,6 +2,7 @@
 {% load static %}
 {% block css %}
 <link href="{% static 'css/detail_themeRevAdd.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
 <title>detail_themeRevAdd</title>
 {% endblock css %}
 
@@ -21,10 +22,18 @@
         {% endfor %}
           <div class="theme-name"><strong>{{theme.themeName}}</strong></div>
           <div class="difficulty">
-            <div class="difficulty-title"><span>난이도</span>  {{theme.themeDifficulty}}</div>
+            <div class="difficulty-title"><span>난이도</span>
+              <div class="rateit" data-rateit-value="{{theme.themeDifficulty}}" data-rateit-ispreset="true" 
+              data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+              </div>
+            </div>
           </div>
           <div class="horror">
-            <div class="horror-title"><span>공포도</span>  {{theme.themeHorror}}</div>
+            <div class="horror-title"><span>공포도</span>
+              <div class="rateit" data-rateit-value="{{theme.themeHorror}}" data-rateit-ispreset="true" 
+              data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+              </div>
+            </div>
           </div>
           <div class="number">
             <div class="number-title">인원수</div>
@@ -75,6 +84,6 @@
     </div>
   </div>
 {% endblock content %} 
-{% comment %} {% block js %}
-<script type="text/javascript" src="/static/js/detail_trad.js"></script>
-{% endblock js %} {% endcomment %}
+{% block js %}
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+{% endblock js %}

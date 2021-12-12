@@ -11,7 +11,6 @@
         <div class="submit">
           <h2>리뷰 작성</h2>
           <button type="submit" class="write">작성 완료</button>
-          {% comment %} <input type="submit" value="제출 완료"> {% endcomment %}
         </div>
     
     {% comment %} 별점 선택하면 숫자로 환산해서 themeRevRating에 반영 {% endcomment %}
@@ -19,7 +18,7 @@
       <div class="boxTitle text-top">별점 리뷰</div>
       <input type="range" name="themeRevRating" value="5" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
       <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font" style="font-size:3vw">
-      </div>    
+      </div>
     </div>
 
     {% comment %} 테마 선택해서 이미지 불러오기 {% endcomment %}
@@ -62,6 +61,5 @@
     test = $('#id_grade')
     console.log(test.val())
   });
-  
-  </script>
+</script>
 {% endblock js %}
