@@ -30,7 +30,9 @@
             </a>
         </div>
         <div class="under-buttons">
-            <button type="button" class="my-review" onclick="location.href=''">리뷰 관리</button>
+            <a href="{% url 'myreview' %}">
+              <button type="button" class="my-review" onclick="location.href=''">리뷰 관리</button>
+            </a>
             <button type="button" class="logout" onclick="location.href='/logout'">로그아웃</button>
         </div>
       </div>

@@ -353,11 +353,25 @@ def mylike(request):
   username = request.session.get('user')
   user = get_object_or_404(User, userID = username)
   mylikes = Like.objects.filter(user=user)
+  themes = Theme.objects.filter()
   #내가 좋아요한(Like) 테마의 이미지(Theme.themeImg)
   #테마리뷰의 like뷰 외에 테마의 like뷰를 만들어야 함
+  context = {'mylikes':mylikes}
 
-  return render(request, 'mypage/mylike.html')
+  return render(request, 'mypage/mylike.html', context)
 
+
+def myreview(request):
+  username = request.session.get('user')
+  if User.objects.filter(userID = username).exists():
+    user = get_object_or_404(User, userID = username)
+    myreviews = ThemeRev.objects.filter(themeRev_WriterID=user)
+    themes = Theme.objects.all()
+    context = {'myreviews':myreviews, 'themes':themes}
+
+    return render(request, 'mypage/myreview.html', context)
+  return render(request, 'registration.login.html')
+  
 
 def recommend(request):
     username = request.session.get('user')
