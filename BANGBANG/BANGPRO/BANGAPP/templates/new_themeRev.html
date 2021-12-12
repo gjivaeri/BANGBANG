@@ -50,9 +50,9 @@
 
 {% endblock content %}
 {% block js %}
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
 <script type="text/javascript" src="/static/js/new_themeRev.js"></script>
 {% comment %} <script src="{% static 'widgets/rateit/jquery.rateit.js' %}" ></script> {% endcomment %}
-<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
 <script>
   $('#star_id_grade').click(function(){
     star = $('#star_id_grade').rateit('value')

@@ -65,11 +65,11 @@ class LoginView(generic.View):
       loginform = LoginForm(request.POST)
       context = { 'forms' : loginform }
       if loginform.is_valid():
-          print(request.user)
           self.request.session['user'] = loginform.cleaned_data['userID']
-          username = self.request.session['user']
+          # username = self.request.session['user']
           # return super().form_valid(form)
-          return render(request, './home.html', {'username' : username})
+          # return render(request, 'home.html')
+          return redirect('home')
 
       else:
           context['forms'] = loginform
@@ -202,6 +202,7 @@ def new_themeRev(request):
     if form.is_valid():
       print(form.cleaned_data)
       post = form.save(commit=False) #DB save를 지연시켜 중복 save 방지
+      post.themeRevWriteDate = datetime.now()
       post.themeRev_WriterID = user
       post.save()
       pk = post.pk
@@ -249,7 +250,7 @@ def delete_themeRev(request, themeRev_pk):
 
 
 def detail_themeRev(request, themeRev_pk):
-    reviews = ThemeRev.objects.all()
+    reviews = ThemeRev.objects.all().order_by('-themeRevWriteDate')
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
     theme = Theme.objects.get(themeName=themeRev.theme_ID)
     writer = User.objects.get(userID=themeRev.themeRev_WriterID)
@@ -297,7 +298,7 @@ def list_themeRev(request):
 
 
 def list_themeRevAll(request):
-  reviews = ThemeRev.objects.all()
+  reviews = ThemeRev.objects.all().order_by('-themeRevWriteDate')
   context = {
     'reviews':reviews,
   }
