@@ -44,6 +44,7 @@ urlpatterns = [
     path('detail/themeRev/themeRevAdd/<int:theme_pk>', views.detail_themeRevAdd, name="detail_themeRevAdd"),
     path('detail/themeRev/themeRevAdd/<int:theme_pk>/<int:review_pk>', views.detail_themeRevAddDetail, name="detail_themeRevAddDetail"),
     path('mypage/mylike/', views.mylike, name="mylike"),
+    path('mypage/myreview/', views.myreview, name="myreview"),
     path('detail/shop/<int:shop_pk>', views.detail_shop, name="detail_shop"),
     path('edit_profile/', views.edit_profile, name="edit_profile"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

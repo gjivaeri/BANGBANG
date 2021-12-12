@@ -159,6 +159,10 @@ select:focus {
   pointer-events: none;
 }
 
+.ImgUpload { 
+  margin-left:1vw;
+ }
+
 @media (max-width: 550px) {
   .edit-title{
     margin-top: 10vmax;

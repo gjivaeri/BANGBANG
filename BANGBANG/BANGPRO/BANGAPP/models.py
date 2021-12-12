@@ -13,7 +13,7 @@ class User(models.Model):
     userGender = models.IntegerField(default=0)
     ShopRevID = models.IntegerField(default=0)
     ThRevID = models.IntegerField(default=0)
-    userImage = models.ImageField(upload_to='userImages/', height_field=None, width_field=None,blank=True)    
+    userImage = models.ImageField(upload_to='userImages/', height_field=None, width_field=None,blank=True, default='userImages/defalut.svg')    
 
     def __str__(self):
         return self.usersSubname

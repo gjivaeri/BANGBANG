@@ -49,7 +49,7 @@ def join(request):
               userGender = userGender
           )
             user.save()
-        return render(request, 'registration/complete.html')
+        return render(request, 'registration/complete.html', {'user':user})
 
 
 class LoginView(generic.View): 
@@ -65,11 +65,11 @@ class LoginView(generic.View):
       loginform = LoginForm(request.POST)
       context = { 'forms' : loginform }
       if loginform.is_valid():
-          print(request.user)
           self.request.session['user'] = loginform.cleaned_data['userID']
-          username = self.request.session['user']
+          # username = self.request.session['user']
           # return super().form_valid(form)
-          return render(request, './home.html', {'username' : username})
+          # return render(request, 'home.html')
+          return redirect('home')
 
       else:
           context['forms'] = loginform
@@ -91,7 +91,16 @@ def logout(request):
 def mypage(request):
     username = request.session.get('user')
     if User.objects.filter(userID = username).exists():
-        content = {'username' : username}
+      user = get_object_or_404(User, userID = username)
+
+      if request.method == "GET":
+          # test = request.FILES["imgfile"]
+          # print(test)
+          # form = user.update(
+          #   img = request.FILES["imgfile"],
+          # )
+          # form.save()
+        content = {'user' : user}
         return render(request, 'registration/mypage.html', content)
     return redirect('login')
 
@@ -144,7 +153,8 @@ def detail_themeRevAddDetail(request, theme_pk, review_pk):
   theme = Theme.objects.get(pk=theme_pk)
   review = ThemeRev.objects.get(pk=review_pk)
   shops = Shop.objects.all()
-  context = {'theme':theme, 'review':review, 'shops':shops}
+  writer = User.objects.get(userID=review.themeRev_WriterID)
+  context = {'theme':theme, 'review':review, 'shops':shops, 'writer':writer}
   return render(request, 'detail_themeRevAddDetail.html', context)
 
 
@@ -192,6 +202,7 @@ def new_themeRev(request):
     if form.is_valid():
       print(form.cleaned_data)
       post = form.save(commit=False) #DB save를 지연시켜 중복 save 방지
+      post.themeRevWriteDate = datetime.now()
       post.themeRev_WriterID = user
       post.save()
       pk = post.pk
@@ -239,7 +250,7 @@ def delete_themeRev(request, themeRev_pk):
 
 
 def detail_themeRev(request, themeRev_pk):
-    reviews = ThemeRev.objects.all()
+    reviews = ThemeRev.objects.all().order_by('-themeRevWriteDate')
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
     theme = Theme.objects.get(themeName=themeRev.theme_ID)
     writer = User.objects.get(userID=themeRev.themeRev_WriterID)
@@ -287,7 +298,7 @@ def list_themeRev(request):
 
 
 def list_themeRevAll(request):
-  reviews = ThemeRev.objects.all()
+  reviews = ThemeRev.objects.all().order_by('-themeRevWriteDate')
   context = {
     'reviews':reviews,
   }
@@ -342,11 +353,25 @@ def mylike(request):
   username = request.session.get('user')
   user = get_object_or_404(User, userID = username)
   mylikes = Like.objects.filter(user=user)
+  themes = Theme.objects.filter()
   #내가 좋아요한(Like) 테마의 이미지(Theme.themeImg)
   #테마리뷰의 like뷰 외에 테마의 like뷰를 만들어야 함
+  context = {'mylikes':mylikes}
 
-  return render(request, 'mypage/mylike.html')
+  return render(request, 'mypage/mylike.html', context)
 
+
+def myreview(request):
+  username = request.session.get('user')
+  if User.objects.filter(userID = username).exists():
+    user = get_object_or_404(User, userID = username)
+    myreviews = ThemeRev.objects.filter(themeRev_WriterID=user)
+    themes = Theme.objects.all()
+    context = {'myreviews':myreviews, 'themes':themes}
+
+    return render(request, 'mypage/myreview.html', context)
+  return render(request, 'registration.login.html')
+  
 
 def recommend(request):
     username = request.session.get('user')
@@ -357,6 +382,7 @@ def recommend(request):
     return render(request, 'recommend.html', content)
     
 
+# @app.route('/userImages/<filename>')
 def edit_profile(request):
     username = request.session.get('user') # 로그인 해야
     if User.objects.filter(userID = username).exists():
@@ -393,13 +419,19 @@ def edit_profile(request):
                     if request.POST.get('userPW1', '') != '':
                         user.userPW = PasswordHasher().hash(request.POST.get('userPW1', ''))
                     user.usersSubname = request.POST.get('usersSubname', '')
+                    if request.FILES.get('userImage') is not None:
+                      user.userImage = request.FILES.get('userImage')
                     user.userBirthday = request.POST.get('userBirthday', '')
                     user.userGender = int(request.POST.get('userGender', ''))
+                    
                     user.save()
                     user.userBirthday = datetime.strptime(user.userBirthday, "%Y-%m-%d")
+
                     content['user'] = user # 수정된 정보로 업데이트
                     content['message'] = '회원정보가 수정되었습니다.'
+                    return render(request, 'registration/mypage.html', content)
                 else:
+                    print('no')
                     content['error'] = '새 비밀번호를 확인해 주세요.' # 새비번 확인이 안 맞았을 때
         return render(request, 'registration/edit_profile.html', content)
     return redirect('login')
