@@ -1,8 +1,6 @@
 {% load static %}
+{% include "django/forms/widgets/input.html" %}
 
-{% comment %} {% include "django/forms/widgets/input.html" %} {% endcomment %}
-
-{{ form.media }}
 {% comment %} 
 <link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
 <script
@@ -10,20 +8,21 @@
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 <script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script> {% endcomment %}
-{% comment %} <div id="star_{{ widget.attrs.id }}" class="rateit" data-rateit-backingfld="#{{ widget.attrs.id }}"></div> {% endcomment %}
 
-{% comment %} <input type="rating" name="grade" value="0" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
-<div class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px"></div> {% endcomment %}
+{% comment %} 위의 주석 대신 사용. 덕분에 widgets.py와 연결됨 {% endcomment %}
+{{ form.media }}
 
+<input type="range" name="ThemeRevRating" value="5" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
+<div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px">
+</div> 
 
-{% comment %} include만으로 동작하는 코드 {% endcomment %}
-{% comment %} <form action="" method="post">
-  {% csrf_token %}
-      <input type="rating" name="grade" value="0" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
-      <div class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px"></div>
-      <input type="submit"/>
-</form> {% endcomment %}
+<script>
+$('#star_id_grade').click(function(){
+  star = $('#star_id_grade').rateit('value')
+  $('#id_grade').text(star)
+  $('#id_grade').val(star)
+  test = $('#id_grade')
+  console.log(test.val())
+});
 
-
-<input type="rating" name="grade" value="0" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
-<div class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px"></div> 
+</script> 

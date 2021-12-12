@@ -24,8 +24,8 @@ a.nav-search{
   display: flex;
   margin-left: 3vw;
   margin-right: 3vw;
-  display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 body{
@@ -118,17 +118,17 @@ body{
 }
 
 .loc-filter{
+  margin-right:8vw;
   margin-top: 1vh;
-  margin-left:8vw;
   display: flex;
   justify-content: left;
 }
 
 .loc-filter > .locations > .front {
-  font-size: 1.1em;
+  font-size: 1vw;
   font-weight:400;
   height:4vh;
-  width: 4vw;
+  width: 40px;
   text-align: center;
   margin-top: 4vh;
 }
@@ -144,7 +144,7 @@ body{
   background-color: white;
   border-radius: 30px;
   height:4vh;
-  width: 7.8vw;
+  width: 7.6vw;
   text-align: center;
   font-size: 1vw;
   margin-left:1vw;
@@ -154,10 +154,6 @@ body{
   border: 1px solid #F55C03;
   color:#F55C03;
   background-color: white;
-  border-radius: 30px;
-  height:4vh;
-  width: 8vw;
-  text-align: center;
   /* font-size: 1.1rem; */
 }
 

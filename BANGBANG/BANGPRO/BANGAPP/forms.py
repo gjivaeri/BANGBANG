@@ -59,58 +59,24 @@ class ThemeRevForm(ModelForm):
     model = ThemeRev
     fields = '__all__'
     js = ('js/new_themeRev.js',)
-    # fields = ('themeRevTitle', 'themeRevContent', 'themeRevDate', 'themeRev_WriterID', 'theme_ID', 'shop_ID', 'themeRevRating')
+    # fields = ('themeRevContent', 'themeRevDate', 'themeRev_WriterID', 'theme_ID', 'shop_ID', 'themeRevRating')
     widgets = {
-      'themeRevDate': forms.DateInput(attrs={'class':'datepicker'}),
-      'theme_ID': forms.NullBooleanSelect(attrs={'name':'theme', 'onchange':'changeTheme()', 'class':'visitedTheme', 'default':'1'}),
+      'themeRevDate': forms.DateInput(attrs={'class':'datepicker', 'id':'date'}),
+      'theme_ID': forms.Select(attrs={'name':'theme', 'onchange':'changeTheme()'}),
+      # 'theme_ID': forms.Select(attrs={'name':'theme', 'onchange':'changeTheme()', 'class':'visitedTheme'}),
+      # 'shop_ID': forms.NullBooleanSelect(attrs={'id':'shopid'}),
       'themeRevRating': starWidget,
     }
 
-    
+
 class TestForm(forms.ModelForm):
     class Meta:
         model = Test
         fields = '__all__'
         js = ('js/new_themeRev.js',)
+        # js = ('js/new_themeRev.js',)
         widgets = {
-            # 'grade': starWidget(attrs={'id':'star_id_grade','class':'rateit rateit-bg','data-rateit-backingfld':'#id_grade'}),
-            'grade': starWidget(attrs={'name':'grade'}),
+            # 'grade': starWidget(attrs={'name':'grade','id':'star_id_grade'}),
+            'grade': starWidget,
+            'Date': forms.DateInput(attrs={'class':'datepicker'}),
         }
-        
-    # <input type="rating" name="grade" value="4" required="" id="id_grade" min="0" max="5" step="1" style="display: none;">
-    # <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade">
-
-
-
-
-#     themeRevID = models.AutoField(primary_key=True)
-#     themeRevTitle = models.CharField(max_length=200)
-#     themeRevContent = models.TextField()
-#     themeRevDate = models.DateField()
-#     themeRevWriteDate = models.DateTimeField(auto_now_add=True)
-#     themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
-#     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
-#     shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id", default=1)
-#     themeRevRecom = models.IntegerField(default=0)
-#     themeRevNRecom = models.IntegerField(default=0) {% endcomment %}
-
-  
-  # class Meta:
-    # model = Theme
-    # fields = ('themeImage', 'themeName', 'themeRating')
-
-  # class Meta:
-  #   model = User
-  #   fields = ('usersSubname, userImage')
-
-  # class Meta:
-  #   model = Shop
-  #   fields = ('shopName')
-    # fields = ['themeRevTitle']
-# class ThemeRevWrite(forms.Form):
-#   class Meta:
-#       model = ThemeRev
-
-#       fields = ['themeRevTitle', '']
-
-#       theme = forms.ModelChoiceField(queryset=Theme.objects.all()) # Or whatever query you'd like
