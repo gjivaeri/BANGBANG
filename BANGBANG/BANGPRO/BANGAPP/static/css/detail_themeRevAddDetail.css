@@ -139,92 +139,111 @@
   margin-left: 6vw;
 }
 
-/* 여기서부터 다른 부분*/
 
-.right-side-title{
-  margin-top: 11vh;
-  margin-bottom: 20px;
-  cursor: pointer;
-  border: 0;
-  outline: 0;
-  font-family: 'NanumSquare';
+
+
+/* detail_theme css */
+.themeRevDetail{
+  margin-top:7vh;
+  width: 43vmax;
+  height: 100vh;
+  float:right;
+  background-color: rgb(238, 238, 238);
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+}
+
+.detailTop{
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+  font-size: 1.3vw;
+  font-weight: 550;
+  display: flex;
+}
+
+.detailTop > .close{
+  flex-basis: 70%;
+}
+
+.detailTop > .close > a{
   color: #53444F;
-  background-color: #e7e5e5;
-  font-size: 1.3vw;
 }
 
-.review-profile{
-  border: solid 1px;
-  border-radius: 10px;
-  display: flex;
+.detailTop > .change > a{
+  color:#F55C03;
+  margin-left:1vw;
+}
+
+.box{
+  border: 1px solid #53444F;
   background-color: white;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  align-items: center;
+  border-radius: 15px;
+  /* vertical-align: middle; */
+  padding: 2vh 1.6vw 2vh 1.6vw;
 }
 
-.profile-img{
-  width: 4vw;
-  height: 4vw;
-  border-radius: 50px;
+.boxTitle{
+  font-size: 1.2rem;
+  font-weight: 550;
+  height:auto;
+  margin-top: 1.5vh;
 }
 
-.name-date{
-  margin-left: 15px;
-}
-.profile-name{
-  margin-bottom: 4px;
+/* writer css */
+.writer{
+  display: flex;
+  height: auto;
+  margin: auto;
 }
 
+.profile{
+  border-radius: 80px;
+  width: 5vmax;
+  height: 5vmax;
+  margin-right: 1vw;
+}
+
+.writerInfo{
+  flex-direction: column;
+}
+
+#writerName{
+  margin-top: 1.5vh;
+  margin-bottom: 0.4vh;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* star-review css */
 .star-review{
-  display: flex;
-  border: solid 1px;
-  border-radius: 10px;
-  border-top: none;
-  background-color: white;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  justify-content: space-between;
+  display:flex;
+  justify-content:space-between;
+  height:4vmax;
 }
 
-.stars{
-  margin-right: 15px;
-  display: flex;
+.text-top{
+  width: 20vw;
 }
 
+.rate{
+  height: 3vh;
+  margin: auto;
+  font-size:1.4rem;
+  font-weight: 600;
+}
+
+.rateit{
+  margin: auto;
+  margin-top: 1vh;
+}
+
+/* text-review css */
 .text-review{
-  border: solid 1px;
-  border-radius: 10px;
-  border-top: none;
-  background-color: white;
-  padding-top: 20px;
-  padding-bottom: 40px;
-  min-height: 40vh;
+  height: 40vh;
+ 
 }
 
-.review-profile, .star-review, .text-review{
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.text-review-title{
-  margin-bottom: 15px;
-}
-
-.profile-name, .star-title, .text-review-title{
-  font-size: 1.3vw;
-}
-
-.date{
-  font-size: 1.1vw;
-}
-
-.star-number{
-  font-weight: 800;
-  font-size: 1.3vw;
-  margin-right: 10px;
-}
-
-.text-detail{
-  font-size: 1.2vw;
+.textCon{
+  margin-top: 2vh;
+  font-size: 1.1rem;
 }

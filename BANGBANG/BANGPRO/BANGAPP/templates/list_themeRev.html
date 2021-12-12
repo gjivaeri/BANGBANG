@@ -29,7 +29,10 @@
           <div class="post">
 {% comment %} 2.작성자 정보 해당 부분 {% endcomment %}
             <div class="writers">
+              <img src="" onerror="this.src={% static 'plus.png' %}">
+              {% if review.themeRev_WriterID.userImage %}
               <img class="profileImg" src="{{review.themeRev_WriterID.userImage.url}}" />
+              {% endif %}
               <div>
                 <div class="writeID">{{review.themeRev_WriterID}}</div>
                 <div class="writeDate">{{review.themeRevWriteDate|date:"Y년 m월 d일"}} 작성</div>

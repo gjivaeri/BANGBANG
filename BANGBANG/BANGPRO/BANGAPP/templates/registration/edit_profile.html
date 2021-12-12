@@ -11,7 +11,7 @@
         <div class="edit-title">
         회원정보 수정
         </div>
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="edit-form">
                     <input class="name" type="text" name='userName' value="{{user.userName}}" placeholder="이름" style="color:#53444F;"><br>
@@ -31,7 +31,11 @@
                         <option id='userGender' name='userGender' value='2'
                         {% if user.userGender == 2 %}selected="selected"{% endif %}
                         >여</option>
-                    </select>
+                    </select><br>
+                    <label class="ImgUpload" for="userImage" style="color:#53444F;">
+                    프로필 사진
+                    </label><br>    
+                    <input type="file" id='userImage' name='userImage' accept="image/*"/><br>
                     <div class="edit-button">
                         <button class="submit-button" type="submit">수정 완료</button>
                     </div>

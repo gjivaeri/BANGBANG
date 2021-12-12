@@ -49,7 +49,7 @@ def join(request):
               userGender = userGender
           )
             user.save()
-        return render(request, 'registration/complete.html')
+        return render(request, 'registration/complete.html', {'user':user})
 
 
 class LoginView(generic.View): 
@@ -91,7 +91,16 @@ def logout(request):
 def mypage(request):
     username = request.session.get('user')
     if User.objects.filter(userID = username).exists():
-        content = {'username' : username}
+      user = get_object_or_404(User, userID = username)
+
+      if request.method == "GET":
+          # test = request.FILES["imgfile"]
+          # print(test)
+          # form = user.update(
+          #   img = request.FILES["imgfile"],
+          # )
+          # form.save()
+        content = {'user' : user}
         return render(request, 'registration/mypage.html', content)
     return redirect('login')
 
@@ -144,7 +153,8 @@ def detail_themeRevAddDetail(request, theme_pk, review_pk):
   theme = Theme.objects.get(pk=theme_pk)
   review = ThemeRev.objects.get(pk=review_pk)
   shops = Shop.objects.all()
-  context = {'theme':theme, 'review':review, 'shops':shops}
+  writer = User.objects.get(userID=review.themeRev_WriterID)
+  context = {'theme':theme, 'review':review, 'shops':shops, 'writer':writer}
   return render(request, 'detail_themeRevAddDetail.html', context)
 
 
@@ -357,6 +367,7 @@ def recommend(request):
     return render(request, 'recommend.html', content)
     
 
+# @app.route('/userImages/<filename>')
 def edit_profile(request):
     username = request.session.get('user') # 로그인 해야
     if User.objects.filter(userID = username).exists():
@@ -393,13 +404,19 @@ def edit_profile(request):
                     if request.POST.get('userPW1', '') != '':
                         user.userPW = PasswordHasher().hash(request.POST.get('userPW1', ''))
                     user.usersSubname = request.POST.get('usersSubname', '')
+                    if request.FILES.get('userImage') is not None:
+                      user.userImage = request.FILES.get('userImage')
                     user.userBirthday = request.POST.get('userBirthday', '')
                     user.userGender = int(request.POST.get('userGender', ''))
+                    
                     user.save()
                     user.userBirthday = datetime.strptime(user.userBirthday, "%Y-%m-%d")
+
                     content['user'] = user # 수정된 정보로 업데이트
                     content['message'] = '회원정보가 수정되었습니다.'
+                    return render(request, 'registration/mypage.html', content)
                 else:
+                    print('no')
                     content['error'] = '새 비밀번호를 확인해 주세요.' # 새비번 확인이 안 맞았을 때
         return render(request, 'registration/edit_profile.html', content)
     return redirect('login')

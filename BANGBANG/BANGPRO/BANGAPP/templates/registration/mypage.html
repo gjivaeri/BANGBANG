@@ -10,13 +10,15 @@
   <div class="profile-form">
      <div class="profile">
         <div class="profile-image">
-          <img src="{% static 'images/plus.png' %}">
-          <img src="" onerror="this.src={% static 'plus.png' %}">
+          <img src="{{user.userImage.url}}">
+          {% comment %} <img src="" onerror="this.src={% static 'images/plus.png' %}"> {% endcomment %}
         </div>
-        <input type="file" class="image-upload">
+        {% comment %} <form action="" method="post">
+          <input type="file" class="image-upload" id="imgfile" name="imgfile">
+        </form> {% endcomment %}
      </div>
      <div class="profile-ment">
-      {{username}}님, 안녕하세요.
+      {{user.userName}}님, 안녕하세요.
      </div>
      <div class="buttons">
         <div class="on-buttons">
