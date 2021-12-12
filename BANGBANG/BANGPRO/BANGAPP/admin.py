@@ -10,11 +10,11 @@ from .forms import TestForm, ThemeRevForm
 admin.site.register(Shop)
 admin.site.register(Shoprev)
 admin.site.register(Theme)
-admin.site.register(ThemeRev)
+# admin.site.register(ThemeRev)
 
-# @admin.register(ThemeRev)
-# class ThemeRevAdmin(admin.ModelAdmin):
-#     form = ThemeRevForm
+@admin.register(ThemeRev)
+class ThemeRevAdmin(admin.ModelAdmin):
+    form = ThemeRevForm
 
 @admin.register(Test)
 class ThemeRevAdmin(admin.ModelAdmin):

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
-from .models import User, Shop, Shoprev, Theme, ThemeRev, Like, Hate
+from .models import User, Shop, Shoprev, Theme, ThemeRev, Like, Hate, Test
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -147,7 +147,6 @@ def detail_theme(request, theme_pk):
     # like = Like.objects.filter(article__in=review)
     return render(request, 'detail_theme.html', {'theme':theme, 'review':review, 'topreview':topreview})
     
-#개발중 임시 view
 def detail_themeRevAdd(request, theme_pk):
   theme = Theme.objects.get(pk=theme_pk)
   reviews = ThemeRev.objects.filter(theme_ID=theme_pk)
@@ -186,22 +185,6 @@ def detail_themeRevAddDetail(request, theme_pk, review_pk):
 #     else:
 #       return render(request, 'registration/join.html')
 
-def new_themeRevTest(request):
-  if request.method == "POST":
-    form = TestForm(request.POST)
-    if form.is_valid():
-      print('esy')
-      post = form.save()#DB save를 지연시켜 중복 save 방지
-      # post.ip = request.META['REMOTE_ADDR']
-      post.save()
-      return redirect("new_themeRevTest")
-    else:
-      print('no')
-  else:
-      form = TestForm()
-  context = {'form':form}
-  return render(request, "new_themeRevTest.html", context)
-
 @csrf_exempt
 def selectImg(request):
     pk = request.POST.get('pk', None)
@@ -211,35 +194,53 @@ def selectImg(request):
     themeImg = selectTheme.themeImage
     return HttpResponse(json.dumps(str(themeImg)), content_type="application/json")
 
+# 테스트용뷰
+def new_themeRevTest(request):
+  username = request.session.get('user')
+  user = get_object_or_404(User, userID = username)
+  if request.method == "POST":
+    form = TestForm(request.POST)
+
+    if form.is_valid():
+      print(form.cleaned_data)
+      post = form.save()
+      post.WriterID2 = user
+      post.save()
+      return redirect("new_themeRevTest")
+    else:
+      print('no')
+  else:
+      form = TestForm()
+  context = {'form':form}
+  return render(request, "new_themeRevTest.html", context)
+
 
 def new_themeRev(request):
+  username = request.session.get('user')
+  user = get_object_or_404(User, userID = username)
+  
   if request.method == "GET":
     form = ThemeRevForm()
 
   elif request.method == "POST":
-    form = ThemeRevForm(request.POST, request.FILES)
+    form = ThemeRevForm(request.POST)
+
     if form.is_valid():
       print(form.cleaned_data)
-      username = request.session.get('user')
-      user = get_object_or_404(User, userID = username)
-      # post = ThemeRev(
-        # themeRevContent = form.clean['themeRevContent'],
-        # themeRevDate = form.clean['themeRevDate'],
-        # themeRevRating = form.clean['themeRevRating'],
-        # theme_ID = form.clean['theme_ID'],
-        # shop_ID = form.clean['shop_ID'],
-      #   themeRev_WriterID = user,
-      # )
       post = form.save(commit=False) #DB save를 지연시켜 중복 save 방지
+      post.themeRev_WriterID = user
       post.save()
+      return render(request, "new_themeRevCom.html")
     else:
+      messages.error(request, 'Error!')
       print('no')
       # post.ip = request.META['REMOTE_ADDR']
-      return redirect("new_themeRev")
       
   context = {'form':form,}
   return render(request, "new_themeRev.html", context)
 
+def new_themeRevCom(request):
+    return render(request, "new_themeRevCom.html")
 
 def edit_themeRev(request, themeRev_pk):
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
@@ -397,11 +398,11 @@ def edit_profile(request):
             else:
                 verify = True
 
-            if request.POST.get('userName', '') is '': #이름이 없는 경우
+            if request.POST.get('userName', '') == '': #이름이 없는 경우
                 content['error'] = '이름을 입력해주세요.'
-            elif request.POST.get('usersSubname', '') is '': #닉네임이 없는 경우
+            elif request.POST.get('usersSubname', '') == '': #닉네임이 없는 경우
                 content['error'] = '닉네임을 입력해주세요.'  
-            elif request.POST.get('userPW', '') is '': # 현재 비밀번호 칸이 비었을 때
+            elif request.POST.get('userPW', '') == '': # 현재 비밀번호 칸이 비었을 때
                 content['error'] = '현재 비밀번호를 입력해주세요.' 
             elif not verify: # 현재 비밀번호가 올바른지
                 content['error'] = '현재 비밀번호가 올바르지 않습니다.' 
@@ -413,7 +414,7 @@ def edit_profile(request):
                 loginform = LoginForm(request.POST)
                 if loginform.is_valid():
                     user.userName = request.POST.get('userName', '')
-                    if request.POST.get('userPW1', '') is not '':
+                    if request.POST.get('userPW1', '') != '':
                         user.userPW = PasswordHasher().hash(request.POST.get('userPW1', ''))
                     user.usersSubname = request.POST.get('usersSubname', '')
                     user.userBirthday = request.POST.get('userBirthday', '')

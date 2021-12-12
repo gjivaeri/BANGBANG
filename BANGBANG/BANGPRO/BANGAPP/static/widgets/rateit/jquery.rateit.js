@@ -411,3 +411,15 @@
     $(function () { $('div.rateit, span.rateit').rateit(); });
 
 })(jQuery);
+
+
+//custom js
+//별점 input의 val값을 클릭할 때 마다 조정. (admin error있음)
+$('#star_id_grade').click(function(){
+  star = $('#star_id_grade').rateit('value')
+  $('#id_grade').text(star)
+  $('#id_grade').val(star)
+  test = $('#id_grade')
+  console.log(test.val())
+});
+

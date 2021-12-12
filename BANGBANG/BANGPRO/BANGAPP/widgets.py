@@ -1,7 +1,7 @@
 from django import forms
 
 class starWidget(forms.TextInput):
-    input_type = 'rating'
+    input_type = 'range'
     template_name =  "widgets/star_rate.html"
 
     class Media:

@@ -1,43 +1,65 @@
+<!--starWidget없이 직접 input 불러오는 하는 방식(성공)-->
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+  <style>
+    .content{margin-top: 20vh; margin-left:10vw;}
+  </style>
+{% endblock css %}
+
+{% block content %}
+<div class="content">
+  <form action="" method="post">
+    {% csrf_token %}
+  <input type="range" name="grade" value="5" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
+  <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px">
+  </div> <br>
+  {{form.con}}<br>
+  {{form.Date}}<br>
+  {{form.theme_ID2}}<br>
+  {{form.shop_ID2}}<br>
+
+  <button type="submit"></button>
+  </form>
+</div>
+  {% endblock content %}
+
+{% block js %}
+  <script type="text/javascript" src="/static/js/new_themeRev.js"></script>
+  <script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+  {% comment %} 이미지를 클릭했을 때 input value값이 변하도록(추후이동) {% endcomment %}
+  <script>
+    $('#star_id_grade').click(function(){
+      star = $('#star_id_grade').rateit('value')
+      $('#id_grade').text(star)
+      $('#id_grade').val(star)
+      test = $('#id_grade')
+      console.log(test.val())
+    });
+    
+  </script>   
+{% endblock js %}
+
+
+
+
+<!--별점 위젯 불러오고 form 필드로 post하는 방식 (실패)-->
+{% comment %} 
 {% include "widgets/star_rate.html" %}
 
 <form action="" method="post">
   {% csrf_token %}
   {% for field in form %}
   <div class="form-group">
-    <labl for="{{ field.id_for_label }}">{{ field.label }}</labl>
-    <input type="{{ field.field }}" class="form-control"
-        id="{{ field.id_for_label }}" placeholder="{{ field.label }}" name="{{ field.name }}">
+    {{field}}
   </div>
   {% if field.errors %}
   <span style="colro: red">{{ form.errors }} </span>
   {% endif %}
 
   {% endfor %}
-  <input type="submit" class="btn btn-primary">로그인</button>
+  <button type="submit" class="btn btn-primary"></button>
 </form> 
 
-{% comment %} 
-
-{% extends './base.html' %}
-{% load static %}
-{% block css %}
-  <link href={% static 'css/new_themeRev.css' %} rel="stylesheet" type="text/css">
-{% endblock css %}
-{% block content %}
-{% include "widgets/star_rate.html" %}
-  <div class="content">
-    <form action="" method="post">
-      {% csrf_token %}
-      <div class="submit">
-      <table>
-      {{form.as_table}}
-      </table>
-      <input type="submit"/>
-      </div>
-    </form>
-  </div> 
-
-{% endblock content %}
-{% block js %}
-<script type="text/javascript" src="/static/js/new_themeRev.js"></script>
-{% endblock js %}  {% endcomment %}
+<script type="text/javascript" src="/static/widgets/rateit/jquery.rateit.js"></script> {% endcomment %}

@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from datetime import datetime    
+
 # Create your models here.
 
 class User(models.Model):
@@ -76,13 +78,20 @@ class ThemeRev(models.Model):
     themeRevID = models.AutoField(primary_key=True)
     themeRevContent = models.TextField()
     themeRevDate = models.DateField()
-    themeRevWriteDate = models.DateTimeField(auto_now_add=True)
-    themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
+    themeRevWriteDate = models.DateTimeField(default=datetime.now(), blank=True)
+    themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID", blank=True)
     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
-    shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id", default=1)
-    themeRevRecom = models.IntegerField(default=0)
-    themeRevNRecom = models.IntegerField(default=0)
+    shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id")
+    themeRevRecom = models.IntegerField(default=0, blank=True)
+    themeRevNRecom = models.IntegerField(default=0, blank=True)
     themeRevRating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+    # con = models.TextField(null=True)
+    # Date = models.DateField(null=True)
+    # theme_ID2 = models.ForeignKey("Theme", related_name="test1", on_delete=models.CASCADE, db_column="test1", default=1)
+    # WriterID2 = models.ForeignKey("User", related_name="test3", on_delete=models.CASCADE, db_column="test3", null=True, blank=True)
+
+
 
 
 class Theme(models.Model):
@@ -119,5 +128,14 @@ class Hate(models.Model):
         unique_together = ('user','article')
 
 class Test(models.Model):
-    grade = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    grade = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     con = models.TextField(null=True)
+    Date = models.DateField(null=True)
+    WDate = models.DateTimeField(default=datetime.now(), blank=True)
+    themeRevRecom = models.IntegerField(default=0, blank=True)
+    themeRevNRecom = models.IntegerField(default=0, blank=True)
+    theme_ID2 = models.ForeignKey("Theme", related_name="test1", on_delete=models.CASCADE, db_column="test1", default=1)
+    shop_ID2 = models.ForeignKey("Shop", related_name="test2", on_delete=models.CASCADE, db_column="test2", default=1)
+    WriterID2 = models.ForeignKey("User", related_name="test3", on_delete=models.CASCADE, db_column="test3", null=True, blank=True)
+
+    

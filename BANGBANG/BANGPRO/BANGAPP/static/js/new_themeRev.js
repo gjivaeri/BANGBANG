@@ -119,9 +119,12 @@ $(function() {
   $( ".datepicker" ).datepicker({
     changeMonth: true,
     changeYear: true,
-    yearRange: "2020:2022",
-    // You can put more options here.
-
+    yearRange: "2017:2022",
+    showButtonPanel: true,
+    closeText: '닫기', // 닫기 버튼 패널 
+    dateFormat: "yy-mm-dd", // 텍스트 필드에 입력되는 날짜 형식. 
+    showAnim: "slide", //애니메이션을 적용한다.
+    numberOfMonths: [1,2], 
   });
 });
 
@@ -134,7 +137,7 @@ function changeTheme(){
   $.ajax({
       type: "POST", url: '/selectImg/', data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, dataType: "json", 
       success: function (response) { // 성공
-          $(".themeImg").html('<img src=/media/'+response+'>'); // 좋아요 개수 변경
+          $(".themeImg").html('<img src=/media/'+response+'>'); 
       },
       error: function (request, status, error) { // 실패
           alert("방문한 테마를 선택해주세요");
@@ -173,30 +176,3 @@ $(function(){
 });
 
 
-
-
-//수연님 js
-// $(document).ready(function() {
-//   $("form#ratingForm").click(function(e) 
-//   {
-//       e.preventDefault(); // prevent the default click action from being performed
-//       if ($("#ratingForm :radio:checked").length == 0) {
-//           $('#star_review_rate').html("nothing checked");
-//           return false;
-//       } else {
-//           $('#star_review_rate').html($('input:radio[name=themeRevStar]:checked').val() + '점');
-//       }
-//   });
-// });
-
-// function checkfunction(rating)
-// {
-// var rating = document.getElementsByName('rating');
-// var score = document.querySelector('star_review_rate');
-// for(i=0; i<rating.length; i++) {
-//   if(rating[i].checked==true) {
-//     cosole.log(star_review_rate.value = rating[i].value);
-//   }
-// }
-// }
-//

@@ -32,6 +32,7 @@ urlpatterns = [
     path('detail/theme/<int:theme_pk>', views.detail_theme, name="detail_theme"),
     path('new/themeRev', views.new_themeRev, name="new_themeRev"),
     path('new/themeRevTest', views.new_themeRevTest, name="new_themeRevTest"),
+    path('new/themeRevCom', views.new_themeRevCom, name="new_themeRevCom"),
     path('edit/themeRev/<int:themeRev_pk>', views.edit_themeRev, name="edit_themeRev"),
     path('delete/themeRev/<int:themeRev_pk>', views.delete_themeRev, name="delete_themeRev"),
     path('detail/themeRev/<int:themeRev_pk>', views.detail_themeRev, name="detail_themeRev"),

@@ -59,12 +59,28 @@ class ThemeRevForm(ModelForm):
     model = ThemeRev
     fields = '__all__'
     js = ('js/new_themeRev.js',)
-    # fields = ('themeRevTitle', 'themeRevContent', 'themeRevDate', 'themeRev_WriterID', 'theme_ID', 'shop_ID', 'themeRevRating')
+    # fields = ('themeRevContent', 'themeRevDate', 'themeRev_WriterID', 'theme_ID', 'shop_ID', 'themeRevRating')
     widgets = {
-      'themeRevDate': forms.DateInput(attrs={'class':'datepicker'}),
-      'theme_ID': forms.NullBooleanSelect(attrs={'name':'theme', 'onchange':'changeTheme()', 'class':'visitedTheme', 'default':'1'}),
+      'themeRevDate': forms.DateInput(attrs={'class':'datepicker', 'id':'date'}),
+      'theme_ID': forms.Select(attrs={'name':'theme', 'onchange':'changeTheme()', 'class':'visitedTheme'}),
+      # 'shop_ID': forms.NullBooleanSelect(attrs={'id':'shopid'}),
       'themeRevRating': starWidget,
     }
+
+    # def clean(self):
+    #   form_data = self.cleaned_data
+    #   if userID and userPW:
+    #       try:
+    #           user = User.objects.get(userID=userID)
+    #       except User.DoesNotExist:
+    #           self.add_error('userID', '아이디가 존재하지 않습니다')
+    #           return
+    #       try:
+    #           PasswordHasher().verify(user.userPW, userPW)
+    #       except exceptions.VerifyMismatchError:
+    #           return self.add_error('userPW', '비밀번호가 다릅니다')
+    #       else:
+    #           self.userID = user.userID
 
     
 class TestForm(forms.ModelForm):
@@ -72,9 +88,11 @@ class TestForm(forms.ModelForm):
         model = Test
         fields = '__all__'
         js = ('js/new_themeRev.js',)
+        # js = ('js/new_themeRev.js',)
         widgets = {
-            # 'grade': starWidget(attrs={'id':'star_id_grade','class':'rateit rateit-bg','data-rateit-backingfld':'#id_grade'}),
-            'grade': starWidget(attrs={'name':'grade'}),
+            # 'grade': starWidget(attrs={'name':'grade','id':'star_id_grade'}),
+            'grade': starWidget,
+            'Date': forms.DateInput(attrs={'class':'datepicker'}),
         }
         
     # <input type="rating" name="grade" value="4" required="" id="id_grade" min="0" max="5" step="1" style="display: none;">
