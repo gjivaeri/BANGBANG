@@ -39,6 +39,7 @@ urlpatterns = [
     path('list_themeRevAll/', views.list_themeRevAll, name="list_themeRevAll"),
     path('like/', views.like, name="like"),
     path('hate/', views.hate, name="hate"),
+    path('themelike/', views.themelike, name="themelike"),
     path('selectImg/', views.selectImg, name="selectImg"),
     path('mypage/', views.mypage, name="mypage"),
     path('detail/themeRev/themeRevAdd/<int:theme_pk>', views.detail_themeRevAdd, name="detail_themeRevAdd"),

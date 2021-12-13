@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
-from .models import User, Shop, Shoprev, Theme, ThemeRev, Like, Hate, Test
+from .models import User, Shop, Theme, ThemeRev, Like, Hate, ThemeLike
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -134,12 +134,12 @@ def detail_theme(request, theme_pk):
   #이 페이지에서 새로 뭘 작성할게 아니면 아래 두줄은 삭제
     if request.method == "POST":
       return redirect('detail_theme', theme_pk)
-
     theme = Theme.objects.get(pk=theme_pk)
     review = ThemeRev.objects.filter(theme_ID=theme_pk)
     topreview = review.order_by('-themeRevRecom').first()
+    shop = Shop.objects.get(shopID=theme.ShopID.pk)
     # like = Like.objects.filter(article__in=review)
-    return render(request, 'detail_theme.html', {'theme':theme, 'review':review, 'topreview':topreview})
+    return render(request, 'detail_theme.html', {'theme':theme, 'review':review, 'topreview':topreview, 'shop':shop})
     
 
 def detail_themeRevAdd(request, theme_pk):
@@ -346,6 +346,28 @@ def hate(request):
       message = '비추천'
     
     context = {'like_count':article.themeRevRecom, 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+    
+@csrf_exempt
+def themelike(request):
+    pk = request.POST.get('pk', None)
+    username = request.session.get('user')
+    user = get_object_or_404(User, userID = username)
+    article = get_object_or_404(Theme, pk=pk)
+
+    if ThemeLike.objects.filter(user=user, liketheme=article).exists():
+      ThemeLike.objects.filter(user=user, liketheme=article).delete()
+      article.themeLike -= 1
+      article.save()
+      message = '좋아요 취소'
+    else:
+      ThemeLike(user=user, liketheme=article).save()
+      article.themeLike += 1
+      article.save()
+      message = '좋아요'
+    
+    context = {'like_count':article.themeLike, 'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")
 
 

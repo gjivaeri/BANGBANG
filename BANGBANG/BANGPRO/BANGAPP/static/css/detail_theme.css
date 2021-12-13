@@ -48,20 +48,49 @@ h2{
 }
 
 .themeInfo{
-  margin-top: 4vh;
   width: 15vmax;
   margin-left: 3vw;
   font-weight: 700;
+  margin-top: -1vh;
+}
+
+.themeInfo > .info{
+  display: flex;
+  margin-top:-0.1vh;
+  /* padding-top:2vh; */
+}
+
+.themeInfo > .info > .text{
+  /* margin-top:4.5px; */
+  margin-top:0.5vmax;
+  margin-right: 1vw;
+}
+
+.themeInfo > button{
+  border: 1px solid #53444F;
+  color:#53444F;
+  background-color: white;
+  border-radius: 30px;
+  width: 6vw;
+  height: 2vmax;
+  font-size: 1vw;
+  margin-top:0.8vmax;
+}
+
+.themeInfo > button:hover{
+  color:white;
+  background-color: #F55C03;
+  border: 1px solid white;
+}
+
+#num{
+  margin-left:1.1vmax;
+  margin-top:0.5vmax;
 }
 
 .themeInfo > div{
   font-size: 1vw;
   margin-top: 1vh;
-}
-
-.themeInfo > div > span{
-  margin-right: 3vh;
-  margin-left: 10px;
 }
 
 .themeDetail{
@@ -101,6 +130,11 @@ h2{
 
 .themeRev > a > span{
   margin-left: 10px;
+  color: black;
+}
+
+.themeRev > a > span:hover{
+  color: #F55C03;
 }
 
 /* like count  */

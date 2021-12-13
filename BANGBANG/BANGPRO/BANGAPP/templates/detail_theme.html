@@ -14,18 +14,22 @@
           <img src="{{theme.themeImage.url}}"> 
         </div>       
         <div class="themeInfo">
+          <div>{{shop.shopName}}</div>
           <div><h2>{{theme.themeName}}</h2></div>
-          <div><span>난이도</span>
+          <div class="info"><div class="text">난이도</div>
             <div class="rateit" data-rateit-value="{{theme.themeDifficulty}}" data-rateit-ispreset="true" 
             data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
-            </div>  
+            </div> 
           </div>
-          <div><span>공포도</span>
+          <div class="info"><div class="text">공포도</div>
             <div class="rateit" data-rateit-value="{{theme.themeHorror}}" data-rateit-ispreset="true" 
             data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
             </div>
           </div>
-          <div><span>인원</span>{{theme.themeRecomPeople}}</div>
+          <div class="info"><div class="text">인원</div>
+            <div id="num">{{theme.themeRecomPeople}}</div>
+          </div>
+          <button type="submit" class="themelike" name="{{ theme.pk }}" id="count-{{ theme.pk }}">♡   {{ theme.themeLike }}</button>
         </div>
       </div>
       <div class="themeDetail">
@@ -48,9 +52,8 @@
             </div>
             <div>
             <input type="button" class="hate" name="{{ topreview.pk }}" value="비추천">
-            </div>        
+            </div>       
           </div>
-
         </div>
       </div>
     </div>
@@ -104,5 +107,6 @@
 {% block js %}
 <script type="text/javascript" src="/static/js/like.js"></script>
 <script type="text/javascript" src="/static/js/hate.js"></script>
+<script type="text/javascript" src="/static/js/themelike.js"></script>
 <script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
 {% endblock js %}
