@@ -7,6 +7,15 @@ a.nav-review{
   border-bottom: solid 3px #F55C03;
 }
 
+a{
+  text-decoration: none;
+  color: #53444F;
+}
+
+a:hover{
+  color:#F55C03;
+}
+
 .content{
   font-family: 'NanumSquare';
   flex-direction: column; 
@@ -119,8 +128,7 @@ a.nav-review{
 }
 
 .writers > div > .writeID{
-  font-size: 1.8vw;
-  /* width: 1vw; */
+  font-size: 1.6vw;
 }
 
 .writers > div > .writeDate{
@@ -143,18 +151,21 @@ a.nav-review{
 .info > a > img {
   border-radius: 20px;
   margin: 0 0.8vw 0 0;
-  height:18vh;
+  height: auto;
   width: 10vmax;
-  min-width: 130px;
+  min-width: 110px;
+  min-height: 110px; 
+  max-height: 200px;
 }
 
 .info > div > .themeName{
-  font-size: 1.5vw;
+  font-size: 1.4rem;
+  font-weight: 600;
   margin: 1vh 0 1vh 0;
 }
 
 .info > div > .shopName{
-  font-size: 1vw;
+  font-size: 1rem;
   margin: 1vh 0 1vh 0;
 }
 
@@ -179,7 +190,7 @@ a.nav-review{
   display: -webkit-box;
   -webkit-line-clamp : 7;
   -webkit-box-orient: vertical;
-  font-size: 1vw;
+  font-size: 1.1rem;
 }
 
 .summary > .summary-cont > a {
@@ -192,9 +203,7 @@ a.nav-review{
   display:flex;
   height: 3vh;
   margin-top: 3.5vh;
-  /* margin-bottom: -1vh; */
-  /* margin-bottom: -3vh; */
-  font-size: 1.5vw;
+  font-size: 1.3rem;
   color: #53444F;
 }
 
@@ -203,14 +212,14 @@ a.nav-review{
 }
 
 .summary-bottom > div > .like{
-  font-size: 1vw;
+  font-size: 1.3rem;
   border: none;
   color: #53444F;
   background-color: white;
 }
 
 .summary-bottom > div > .hate{
-  font-size: 1vw;
+  font-size: 1.3rem;
   border: none;
   color: #53444F;
   background-color: white;
@@ -224,9 +233,9 @@ a.nav-review{
   color:#F55C03;
 }
 
-.themeRevRating{
+/* .themeRevRating{
   font-size: 1.1vw;
-}
+} */
 
 
 /* 타블릿 */

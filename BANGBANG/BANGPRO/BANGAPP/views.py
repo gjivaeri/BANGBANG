@@ -145,16 +145,16 @@ def detail_theme(request, theme_pk):
 def detail_themeRevAdd(request, theme_pk):
   theme = Theme.objects.get(pk=theme_pk)
   reviews = ThemeRev.objects.filter(theme_ID=theme_pk)
-  shops = Shop.objects.all()
-  return render(request, 'detail_themeRevAdd.html', {'theme':theme ,'reviews': reviews, 'shops':shops})
+  shop = Shop.objects.get(shopID=theme.ShopID.pk)
+  return render(request, 'detail_themeRevAdd.html', {'theme':theme ,'reviews': reviews, 'shop':shop})
 
 
 def detail_themeRevAddDetail(request, theme_pk, review_pk):
   theme = Theme.objects.get(pk=theme_pk)
   review = ThemeRev.objects.get(pk=review_pk)
-  shops = Shop.objects.all()
+  shop = Shop.objects.get(shopID=theme.ShopID.pk)
   writer = User.objects.get(userID=review.themeRev_WriterID)
-  context = {'theme':theme, 'review':review, 'shops':shops, 'writer':writer}
+  context = {'theme':theme, 'review':review, 'shop':shop, 'writer':writer}
   return render(request, 'detail_themeRevAddDetail.html', context)
 
 
@@ -373,14 +373,17 @@ def themelike(request):
 
 def mylike(request):
   username = request.session.get('user')
-  user = get_object_or_404(User, userID = username)
-  mylikes = Like.objects.filter(user=user)
-  themes = Theme.objects.filter()
-  #내가 좋아요한(Like) 테마의 이미지(Theme.themeImg)
-  #테마리뷰의 like뷰 외에 테마의 like뷰를 만들어야 함
-  context = {'mylikes':mylikes}
+  if User.objects.filter(userID = username).exists():
+    user = get_object_or_404(User, userID = username)
+    mylikes = ThemeLike.objects.filter(user=user)
+    # themes = Theme.objects.filter()
+    #내가 좋아요한(Like) 테마의 이미지(Theme.themeImg)
+    #테마리뷰의 like뷰 외에 테마의 like뷰를 만들어야 함
+    context = {'mylikes':mylikes}
 
-  return render(request, 'mypage/mylike.html', context)
+    return render(request, 'mypage/mylike.html', context)
+  # return redirect(request, 'mypage/mylike.html', context)
+  return render(request, 'registration.login.html')
 
 
 def myreview(request):

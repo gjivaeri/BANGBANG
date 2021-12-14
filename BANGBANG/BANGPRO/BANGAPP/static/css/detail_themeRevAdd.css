@@ -3,195 +3,194 @@ a{
   color: black;
 }
 
-.wrap{
-  height: 100%;
-}
-
 .sides{
-  display: flex;
-  height: 100%;
-  justify-content: space-around;
+  color: #53444F;
+  font-family: 'NanumSquare';
+  display:flex;
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  line-height: 1.5;
+  font-size: 1.2vw;
 }
 
-.right-side{
-  background-color: #e7e5e5;
-  width: 42vw;
-  margin: 0;
-  padding: 25px;
-  overflow: scroll;
-  margin-right: 10px;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none;
+
+/* left-side themeinfo */
+.left-side{
+  margin-top: 5.5vh;
+  width: 35vmax;
   height: 100vh;
+  float: left;
 }
+
+.themeInfoBox{
+  margin-top: 28vh;
+  width: 35vmax;
+  height: 100vh;
+  float: left;
+}
+
+.themeInfo-top{
+  width: 32vmax;
+  /* height: 30vh; */
+  margin-bottom: 3vh;
+  display: flex;
+}
+
+img{
+  width: 14vw;
+  height: 14vw;
+  border-radius: 15px;
+  min-width: 120px;
+  min-height: 120px;
+}
+
+h2{
+  width: 20vw;
+  margin-bottom: 1vmax;
+}
+
+.themeInfo{
+  width: 15vmax;
+  margin-left: 3vw;
+  font-weight: 700;
+  margin-top: -1vh;
+}
+
+.themeInfo > .info{
+  display: flex;
+  margin-top:-0.1vh;
+  /* padding-top:2vh; */
+}
+
+.themeInfo > .info > .text{
+  /* margin-top:4.5px; */
+  margin-top:0.5vmax;
+  margin-right: 1vw;
+}
+
+.themeInfo > button{
+  border: 1px solid #53444F;
+  color:#53444F;
+  background-color: white;
+  border-radius: 30px;
+  width: 6vw;
+  height: 2vmax;
+  min-width: 50px;
+  font-size: 1vw;
+  margin-top:0.8vmax;
+}
+
+.themeInfo > button:hover{
+  color:white;
+  background-color: #F55C03;
+  border: 1px solid white;
+}
+
+#num{
+  margin-left:1.1vmax;
+  margin-top:0.5vmax;
+}
+
+.themeInfo > div{
+  font-size: 1vw;
+  margin-top: 1vh;
+}
+
+.themeDetail{
+  width: 32vmax;
+  min-height: 10vh;
+  height:auto;
+  margin-bottom: 5vh;
+}
+
+
+.theme-describe{
+  font-size: 1vw;
+  margin-top: 2vw;
+  width: 30vw;
+  line-height: 1.5vw;
+}
+
+
+
+
+/* right-sdie theme review */
+.right-side{  
+  width: 43vmax;
+  height: 100vh;
+  float:right;
+  background-color: rgb(238, 238, 238);
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  cursor: pointer;
+}
+
 /* 스크롤 안보이게 */
 .right-side::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
 }
 
-.pic{
-  width: 14vw;
-  height: 14vw;
-  border-radius: 20px;
-  margin-top: 26vh;
+h3{
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 }
 
-.shop-name{
-  font-size: 0.8vw;
-  margin-bottom: 4px;
-  margin-top: 26vh;
-  padding-top: 6px;
-}
-
-
-.theme-info{
-  display: flex;
-}
-
-
-.theme-name{
-  font-size: 1.8vw;
-  margin-bottom: 1vw;
-}
-
-.difficulty, .horror, .number{
-  display: flex;
-  align-items: center;
-}
-
-.likes{
-  display: flex;
+.review-box{
   border: solid 1px;
-  border-radius: 15px;
-  align-items: center;
-  justify-content: center;
-  padding-top: 0.4vw;
-  padding-bottom: 0.4vw;
+  border-radius: 30px;
   background-color: white;
-}
-
-.heart-number{
-  font-size: 1vw;
-}
-
-.box-form{
-  border: solid 1px;
-  border-radius: 10px;
-  background-color: white;
-  margin-top: 15px;
-  padding-left: 18px;
-  padding-right: 18px;
-  padding-top: 18px;
-  padding-bottom: 12px;
+  margin-top: 3vh;
   cursor: pointer;
+  height: 11vw;
+  width: 40vw;
+  margin: 3vh auto;
+  padding: 3vh;
 }
 
-.theme-likes{
-  display: flex;
-  align-items: center;
-  flex: 1;
-}
-
-.box-under{
-  display: flex;
-  align-items: center;
-  margin-top: 25px;
-}
-
-.heart-icon{
-  /* height: 1.4vw; */
-  margin-right: 4px;
-  display: flex;
-  justify-content: center;
-}
-
-.difficulty-title{
-  margin-right: 10px;
+.summary-cont{
   font-size: 1.2vw;
+  font-weight: 300;
+  line-height: 2vw;
+  height: 9vmax;
+  overflow:hidden;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp : 6;
+  -webkit-box-orient: vertical;
 }
 
-.horror-title{
-  margin-right: 10px;
-  font-size: 1.2vw;
+
+/* like count in review box  */
+.summary-bottom{
+  display:flex;
+  font-size:1.3vw;
+  margin-left:0.8vw;
+  margin-top:1vw;
 }
 
-.number-title{
-  margin-right: 10px;
-  font-size: 1.2vw;
+.summary-bottom > .like-count{
+  flex-basis: 70%;
 }
 
-.number{
-  margin-bottom: 12px;
-  font-size: 1.2vw;
-}
-
-.info-detail{
-  margin-left: 20px;
-}
-
-/* 이미지 테두리 */
-.info-pic > img{
-  margin-top:26vh;
-  border: solid 1px;
-  width: 14vw;
-  height: 14vw;
-  border-radius: 15px;
-}
-
-.difficulty{
-  margin-bottom: 0.8vw;
-}
-
-.horror{
-  margin-bottom: 0.8vw;
-}
-
-.difficulty-star, .horror-star{
-  height: 17px;
-}
-
-.theme-describe{
-  font-size: 1vw;
-  margin-top: 35px;
-  width: 30vw;
-}
-
-.theme-heart{
-  height: 22px;
-}
-
-.right-side-title{
-  margin-top: 11vh;
-  margin-bottom: 22px;
-}
-
-.detail-ment{
-  font-size: 13px;
-}
-
-.theme-heart-number{
-  font-size: 14px;
-}
-
-.left-side{
-  margin-left: 6vw;
-}
-
-.like-button, .dislike-button{
+.summary-bottom > div > .like{
+  width:5vw;
+  border: none;
   background-color: white;
-  cursor: pointer;
-  border: 0;
-  outline: 0;
+  font-size: 1.2vw;
 }
 
-.dislike-button{
-  margin-left: 10px;
+.summary-bottom > div > .hate{
+  width:8vw;
+  border: none;
+  font-size: 1.2vw;
+  background-color: white;
 }
-/* .box-form:hover{
-  border: solid 2px #F55C03;;
-} */
 
+.summary-bottom > div > .like:hover{
+  color:#F55C03;
+}
 
-
-
-
+.summary-bottom > div > .hate:hover{
+  color:#F55C03;
+}

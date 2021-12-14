@@ -1,160 +1,123 @@
-
-.wrap{
-  height: 100%;
+a{
+  text-decoration: none;
+  color: #53444F;
 }
 
 .sides{
+  color: #53444F;
+  font-family: 'NanumSquare';
+  display:flex;
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  line-height: 1.5;
+  /* font-size: 1.2rem; */
+}
+
+.left-side{
+  margin-top: 5.5vh;
+  width: 35vmax;
+  height: 100vh;
+  float: left;
+}
+
+.themeInfoBox{
+  margin-top: 28vh;
+  width: 35vmax;
+  height: 100vh;
+  float: left;
+}
+
+.themeInfo-top{
+  width: 32vmax;
+  /* height: 30vh; */
+  margin-bottom: 3vh;
   display: flex;
-  height: 100%;
-  justify-content: space-around;
 }
 
-.right-side{
-  background-color: #e7e5e5;
-  width: 42vw;
-  margin: 0;
-  padding: 25px;
-  overflow: scroll;
-  margin-right: 10px;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none;
-  height:100% 
-}
-/* 스크롤 안보이게 */
-.right-side::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera*/
-}
-
-.pic{
+.imageField > img{
   width: 14vw;
   height: 14vw;
-  border-radius: 20px;
-  margin-top: 26vh;
-}
-
-.shop-name{
-  font-size: 0.8vw;
-  margin-bottom: 4px;
-  margin-top: 26vh;
-  padding-top: 6px;
-}
-
-
-.theme-info{
-  display: flex;
-}
-
-
-.theme-name{
-  font-size: 1.8vw;
-  margin-bottom: 1vw;
-}
-
-.difficulty, .horror, .number{
-  display: flex;
-  align-items: center;
-}
-
-.likes{
-  display: flex;
-  border: solid 1px;
   border-radius: 15px;
-  align-items: center;
-  justify-content: center;
-  padding-top: 0.4vw;
-  padding-bottom: 0.4vw;
+  min-width: 120px;
+  min-height: 120px;
+}
+
+h2{
+  width: 20vw;
+  margin-bottom: 1vmax;
+}
+
+.themeInfo{
+  width: 15vmax;
+  margin-left: 3vw;
+  font-weight: 700;
+  margin-top: -1vh;
+}
+
+.themeInfo > .info{
+  display: flex;
+  margin-top:-0.1vh;
+  /* padding-top:2vh; */
+}
+
+.themeInfo > .info > .text{
+  /* margin-top:4.5px; */
+  margin-top:0.5vmax;
+  margin-right: 1vw;
+}
+
+.themeInfo > button{
+  border: 1px solid #53444F;
+  color:#53444F;
   background-color: white;
-}
-
-.heart-number{
+  border-radius: 30px;
+  width: 6vw;
+  height: 2vmax;
+  min-width: 50px;
   font-size: 1vw;
+  margin-top:0.8vmax;
 }
 
-.box-under{
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
+.themeInfo > button:hover{
+  color:white;
+  background-color: #F55C03;
+  border: 1px solid white;
 }
 
-.heart-icon{
-  /* height: 1.4vw; */
-  margin-right: 4px;
-  display: flex;
-  justify-content: center;
+#num{
+  margin-left:1.1vmax;
+  margin-top:0.5vmax;
 }
 
-.difficulty-title{
-  margin-right: 10px;
-  font-size: 1.2vw;
+.themeInfo > div{
+  font-size: 1vw;
+  /* font-size: 1rem; */
+  margin-top: 1vh;
 }
 
-.horror-title{
-  margin-right: 10px;
-  font-size: 1.2vw;
-}
-
-.number-title{
-  margin-right: 10px;
-  font-size: 1.2vw;
-}
-
-.number{
-  margin-bottom: 12px;
-  font-size: 1.2vw;
-}
-
-.info-detail{
-  margin-left: 20px;
-}
-
-/* 이미지 테두리 */
-.info-pic > img{
-  margin-top:26vh;
-  border: solid 1px;
-  width: 14vw;
-  height: 14vw;
-  border-radius: 15px;
-}
-
-.difficulty{
-  margin-bottom: 0.8vw;
-}
-
-.horror{
-  margin-bottom: 0.8vw;
-}
-
-.difficulty-star, .horror-star{
-  height: 17px;
-}
 
 .theme-describe{
   font-size: 1vw;
-  margin-top: 35px;
+  margin-top: 2vw;
   width: 30vw;
+  line-height: 1.5vw;
 }
-
-
-.left-side{
-  margin-left: 6vw;
-}
-
-
 
 
 /* detail_theme css */
 .themeRevDetail{
-  margin-top:7vh;
   width: 43vmax;
   height: 100vh;
   float:right;
   background-color: rgb(238, 238, 238);
   padding-left: 3.5vw;
   padding-right: 3.5vw;
+  cursor: pointer;
 }
 
 .detailTop{
-  margin-top: 4vh;
+  margin-top: 4.8vh;
   margin-bottom: 4vh;
   font-size: 1.3vw;
   font-weight: 550;
@@ -163,10 +126,8 @@
 
 .detailTop > .close{
   flex-basis: 70%;
-}
-
-.detailTop > .close > a{
-  color: #53444F;
+  font-size: 1.4vw;
+  margin-bottom: 0.7vh;
 }
 
 .detailTop > .change > a{
@@ -177,7 +138,7 @@
 .box{
   border: 1px solid #53444F;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 30px;
   /* vertical-align: middle; */
   padding: 2vh 1.6vw 2vh 1.6vw;
 }
@@ -232,7 +193,7 @@
   font-weight: 600;
 }
 
-.rateit{
+.star-review > .rateit{
   margin: auto;
   margin-top: 1vh;
 }

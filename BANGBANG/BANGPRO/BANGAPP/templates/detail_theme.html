@@ -32,6 +32,7 @@
           <button type="submit" class="themelike" name="{{ theme.pk }}" id="count-{{ theme.pk }}">♡   {{ theme.themeLike }}</button>
         </div>
       </div>
+      
       <div class="themeDetail">
         {{theme.themeIntro}}
       </div>
@@ -45,7 +46,6 @@
           <div class="summary-bottom">
             <div class="like-count" id="count-{{ topreview.pk }}">
               ♡{{ topreview.themeRevRecom }}+</p>
-              {% comment %} 이미지 삽입 오류 수정되면 하트 이미지로 대체 {% endcomment %}
             </div>
             <div>
             <input type="button" class="like" name="{{ topreview.pk }}" value="추천">
@@ -57,6 +57,7 @@
         </div>
       </div>
     </div>
+
 
     <div class="reservation">
       <h3>예약 시뮬레이션</h3>
@@ -102,6 +103,7 @@
         홈페이지에서 예약하기
       </div>
     </div>
+
 </div>
 {% endblock content %}
 {% block js %}

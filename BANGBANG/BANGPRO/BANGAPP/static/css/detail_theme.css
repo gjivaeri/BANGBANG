@@ -12,6 +12,8 @@ body{position: relative;width: 100%;height: 100%;}
   font-size: 1.2vw;
 }
 
+/* themeinfo */
+
 .themeInfoBox{
   margin-top: 8vh;
   width: 35vmax;
@@ -19,17 +21,6 @@ body{position: relative;width: 100%;height: 100%;}
   float: left;
 }
 
-.reservation{  
-  width: 43vmax;
-  height: 100vh;
-  float:right;
-  background-color: rgb(238, 238, 238);
-  padding-left: 3.5vw;
-  padding-right: 3.5vw;
-  cursor: pointer;
-}
-
-/* themeinfo */
 .themeInfo-top{
   width: 32vmax;
   /* height: 30vh; */
@@ -41,10 +32,13 @@ img{
   width: 14vw;
   height: 14vw;
   border-radius: 15px;
+  min-width: 120px;
+  min-height: 120px;
 }
 
 h2{
   width: 20vw;
+  margin-bottom: 1vmax;
 }
 
 .themeInfo{
@@ -73,6 +67,7 @@ h2{
   border-radius: 30px;
   width: 6vw;
   height: 2vmax;
+  min-width: 50px;
   font-size: 1vw;
   margin-top:0.8vmax;
 }
@@ -137,7 +132,7 @@ h2{
   color: #F55C03;
 }
 
-/* like count  */
+/* like count in review   */
 .summary-bottom{
   display:flex;
   /* padding: 3vh 2vh 2vh 3vh; */
@@ -170,7 +165,22 @@ h2{
 .summary-bottom > div > .hate:hover{
   color:#F55C03;
 }
+
+
+
+
 /* reservation */
+
+.reservation{  
+  width: 43vmax;
+  height: 100vh;
+  float:right;
+  background-color: rgb(238, 238, 238);
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  cursor: pointer;
+}
+
 h3{
   margin-top: 5vh;
   margin-bottom: 5vh;
@@ -219,6 +229,7 @@ label{
 input{
   width: 4.3vw;
   height: 4.5vh;
+  min-width: 50px;
   border-radius: 35px;
   border-color: #5c4f59;
   padding-left: 1.5vw;
@@ -229,8 +240,8 @@ input{
 
 /* reservation-time */
 .reservation-time > div > div{
-  width: 9.5vw;
-  height: 12.5vh;
+  width: 9.5vmax;
+  height: 7.5vmax;
   border-radius: 25px;
   background-color: white;
   margin-bottom: 2vh;
