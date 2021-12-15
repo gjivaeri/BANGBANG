@@ -7,50 +7,52 @@ a.nav-review{
   border-bottom: solid 3px #F55C03;
 }
 
-.content{
-  font-family: 'NanumSquare';
-  position: absolute;
-  top: 6.5%;
-  left: 4.5%;
-  border-color: #53444F;
-  background-color: #e7e5e5;
-  width: 90vw;
-  height: 100vmax;
+a{
+  text-decoration: none;
+  color: black;
 }
 
-.title{
-  margin-top: 8vh;
-  margin-bottom: 4vh;
-  margin-left: 3vw;
-  width: 100vmax;
+.content{
+  font-family: 'NanumSquare';
+  /* position: absolute; */
+  margin: 6vh auto 0 auto;
+  border-color: #53444F;
+  background-color: rgb(238, 238, 238);
+  width: 90vw;
+  /* height: 100vmax; */
+}
+
+h2{
+  /* margin: 4vw 10vw 5vw 10vw; */
   font-size: 1.6rem;
   font-weight: 600;
+  padding-top: 9vh;
+  padding-left: 7vw;
+  margin-bottom: 3vh;
 }
 /* review box */
 .themeRev{
-  margin-left: 2vw;
-  display: flex;
-  width: 85vw;
+  margin: 0 auto;
+  display: flex; 
   flex-wrap: wrap;
-  justify-content: space-around;
-  /* width: 80vw;
-  height: 100vmax; */
+  width: 80vw;
+  justify-content: center;
 }
 
 .review-box{
   background-color: white;
   vertical-align: middle;
   border: 1px solid black;
-  border-radius: 20px;
-  padding: 10px 10px 20px 10px;
-  height: 23vh;
-  width: 38vmax;
-  margin-bottom: 3vh;
+  border-radius: 30px;
+  height: 25vh;
+  width: 37vmax;
+  margin: 1vw 1.4vw;
 }
 
 .review-box > .summary-cont{
-  padding: 2vh 2vh 1vh 3vh;
-  height: 14.5vh;
+  /* height: 8.5vw; */
+  height: 18vh;
+  padding: 3vh 2vw 0 2.3vw;
   font-size: 1.1rem;
   line-height: 1.7;
   overflow:hidden;
@@ -60,15 +62,11 @@ a.nav-review{
   -webkit-box-orient: vertical;
 }
 
-.themeRev > a > span{
-  margin-left: 10px;
-}
-
 /* like count  */
 .summary-bottom{
   display:flex;
-  /* padding: 3vh 2vh 2vh 3vh; */
-  padding: 2vh 0vh 0vh 3vh;
+  padding-left: 2vw;
+  padding: 0 auto;
   font-size:1.2rem;
 }
 
@@ -77,16 +75,15 @@ a.nav-review{
 }
 
 .summary-bottom > div > .like{
-  width:5vw;
   border: none;
   background-color: white;
-  font-size: 1.1vw;
+  font-size: 1.1rem;
+  margin: 0 1.2vw;
 }
 
 .summary-bottom > div > .hate{
-  width:8vw;
   border: none;
-  font-size: 1.1vw;
+  font-size: 1.1rem;
   background-color: white;
 }
 

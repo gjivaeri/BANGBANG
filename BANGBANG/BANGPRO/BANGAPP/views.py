@@ -106,19 +106,49 @@ def mypage(request):
 
     
 def home(request):
-    shop_list = Shop.objects.all()
+    ordering_priority = []
+    sort = request.GET.get('sort')
+    ordering_priority.append(sort)
     theme_list = Theme.objects.all()
+    
+    # 테마에 속한 리뷰들의 개수를 불러옴 / 그 개수가 많은 순서대로 정렬
+
+
+    # theme_list = Theme.objects.all().order_by(*ordering_priority)
+    shop_list = Shop.objects.all()
+
     shopscount = shop_list.count()
     themescount = theme_list.count()
     allcount = shopscount + themescount
-    q = request.GET.get('q','')
 
+    q = request.GET.get('q','')
+    
     if q :
       theme_list = theme_list.filter(themeName__icontains=q)
       shop_list = shop_list.filter(shopName__icontains=q)
       allcount = theme_list.count() + shop_list.count()
     content = {'shop_list' : shop_list, 'theme_list' : theme_list, 'allcount' : allcount, 'q' : q}
     return render(request, 'home.html', content)
+
+# def home(request):
+#     shop_list = Shop.objects.all()
+#     theme_list = Theme.objects.all()
+#     shopscount = shop_list.count()
+#     themescount = theme_list.count()
+#     allcount = shopscount + themescount
+#     q = request.GET.get('q','')
+
+#     ordering_priority = []
+#     sort = request.GET.get('sort')
+#     ordering_priority.append(sort)
+#     themes = Theme.objects.all().order_by(*ordering_priority)
+
+#     if q :
+#       theme_list = theme_list.filter(themeName__icontains=q)
+#       shop_list = shop_list.filter(shopName__icontains=q)
+#       allcount = theme_list.count() + shop_list.count()
+#     content = {'shop_list' : shop_list, 'theme_list' : theme_list, 'allcount' : allcount, 'q' : q}
+#     return render(request, 'home.html', content)
 
 
 def detail_shop(request, shop_pk):
@@ -154,7 +184,8 @@ def detail_themeRevAddDetail(request, theme_pk, review_pk):
   review = ThemeRev.objects.get(pk=review_pk)
   shop = Shop.objects.get(shopID=theme.ShopID.pk)
   writer = User.objects.get(userID=review.themeRev_WriterID)
-  context = {'theme':theme, 'review':review, 'shop':shop, 'writer':writer}
+  username = request.session.get('user')
+  context = {'theme':theme, 'review':review, 'shop':shop, 'writer':writer, 'username':username}
   return render(request, 'detail_themeRevAddDetail.html', context)
 
 
@@ -191,13 +222,20 @@ def selectImg(request):
 
 def new_themeRev(request):
   username = request.session.get('user')
-  user = get_object_or_404(User, userID = username)
+  # user = get_object_or_404(User, userID = username)
   
   if request.method == "GET":
-    form = ThemeRevForm()
+    if User.objects.filter(userID = username).exists():
+      form = ThemeRevForm()
+      context = {'form':form,}
+      return render(request, "new_themeRev.html", context)
+    else:
+      # return render(request, './registration.login.html')
+      return redirect('login')
 
   elif request.method == "POST":
     form = ThemeRevForm(request.POST)
+    user = get_object_or_404(User, userID = username)
 
     if form.is_valid():
       print(form.cleaned_data)
@@ -212,7 +250,6 @@ def new_themeRev(request):
       messages.error(request, 'Error!')
       print('no')
       # post.ip = request.META['REMOTE_ADDR']
-      
   context = {'form':form,}
   return render(request, "new_themeRev.html", context)
 
@@ -221,6 +258,7 @@ def edit_themeRev(request, themeRev_pk):
     username = request.session.get('user')
     user = get_object_or_404(User, userID = username)
     themeRev = get_object_or_404(ThemeRev, pk = themeRev_pk)
+    # if themeRev.themeRev_WriterID == user.userID:
     # path-converter로 받은 pk로 수정하려는 post객체를 get
 
     if request.method == "GET":
@@ -240,13 +278,21 @@ def edit_themeRev(request, themeRev_pk):
           messages.error(request, 'Error!')
           print('no')
     context = {'form':form}
-    return render(request, 'edit_themeRev.html', context)
+    if themeRev.themeRev_WriterID == user.userID:
+      return render(request, 'edit_themeRev.html', context)
+    else:
+      return render(request, 'warning.html')
 
 
 def delete_themeRev(request, themeRev_pk):
+    username = request.session.get('user')
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
-    themeRev.delete()
-    return redirect('list_themeRevAll')
+    theme = Theme.objects.get(themeName=themeRev.theme_ID)
+    user = get_object_or_404(User, userID = username)
+    print(themeRev.themeRev_WriterID, user.userID)
+    if themeRev.themeRev_WriterID == user.userID:
+      themeRev.delete()
+    return redirect('detail_themeRevAdd', theme_pk=theme.pk)
 
 
 def detail_themeRev(request, themeRev_pk):
@@ -254,11 +300,12 @@ def detail_themeRev(request, themeRev_pk):
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
     theme = Theme.objects.get(themeName=themeRev.theme_ID)
     writer = User.objects.get(userID=themeRev.themeRev_WriterID)
+    username = request.session.get('user')
     # writeDate = themeRev.themeRevWriteDate()
     if request.method == "POST":
         return redirect('detail_themeRev', themeRev_pk)
-
-    return render(request, 'detail_themeRev.html', {'reviews':reviews, 'themeRev': themeRev, 'theme': theme, 'writer': writer})
+    context = {'username':username, 'reviews':reviews, 'themeRev': themeRev, 'theme': theme, 'writer': writer}
+    return render(request, 'detail_themeRev.html', context)
 
 
 def list_themeRev(request):

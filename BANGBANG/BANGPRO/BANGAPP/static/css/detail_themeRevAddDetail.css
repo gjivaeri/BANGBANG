@@ -1,3 +1,7 @@
+body{
+  margin: 0;
+}
+
 a{
   text-decoration: none;
   color: #53444F;
@@ -17,14 +21,12 @@ a{
 .left-side{
   margin-top: 5.5vh;
   width: 35vmax;
-  height: 100vh;
   float: left;
 }
 
 .themeInfoBox{
   margin-top: 28vh;
   width: 35vmax;
-  height: 100vh;
   float: left;
 }
 
@@ -133,6 +135,14 @@ h2{
 .detailTop > .change > a{
   color:#F55C03;
   margin-left:1vw;
+}
+
+.change > span{
+  display:none;
+}
+
+.hidden{
+  display:none;
 }
 
 .box{

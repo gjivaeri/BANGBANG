@@ -38,11 +38,13 @@
             리뷰 닫기
           </a>
         </div>
-        <div class="change">
+        <div class="change hidden">
+          <span id="user_name">{{ username }}</span>
+          <span id="writer_name">{{ writer.userID }}</span>
           <a href="{% url 'edit_themeRev' themeRev.pk %}" class="edit">
             수정하기
           </a>
-          <a href="{% url 'delete_themeRev' themeRev.pk %}" class="delete">
+          <a href="{% url 'delete_themeRev' themeRev.pk %}" class="delete" onclick="return confirm('정말 삭제 하시겠습니까?')">
             삭제하기
           </a>
         </div>
@@ -95,4 +97,5 @@
 <script type="text/javascript" src="/static/js/like.js"></script>
 <script type="text/javascript" src="/static/js/hate.js"></script>
 <script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+<script type="text/javascript" src="/static/js/post_edit.js"></script>
 {% endblock js %}

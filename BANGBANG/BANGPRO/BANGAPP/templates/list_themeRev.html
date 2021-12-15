@@ -12,7 +12,9 @@
   <div class="content">
 {% comment %} 1.필터 해당 부분  {% endcomment %}
     <div class="content-top">
-      <div class="write"><a href="/new/themeRev">리뷰 작성하기 + </a></div> 
+      <div class="write">
+        <a href="/new/themeRev" >리뷰 작성하기 + </a>
+      </div> 
       <div class="more"><a href="/list_themeRevAll">더보기 </a></div>
       {% comment %} <div class="more"><a href="{% url '' %}">더보기</a></div> {% endcomment %}
       <div class="filter">
@@ -34,7 +36,7 @@
               <img class="profileImg" src="{{review.themeRev_WriterID.userImage.url}}" />
               {% endif %}
               <div>
-                <div class="writeID">{{review.themeRev_WriterID}}</div>
+                <div class="writeID">{{review.themeRev_WriterID.usersSubname}} 님</div>
                 <div class="writeDate">{{review.themeRevWriteDate|date:"Y년 m월 d일"}} 작성</div>
               </div>
             </div>

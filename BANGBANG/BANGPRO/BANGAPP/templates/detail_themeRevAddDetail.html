@@ -49,14 +49,19 @@
           <a href="{% url 'detail_themeRevAdd' theme.pk %}">
             리뷰 닫기
           </a>
-        </div>
-        <div class="change">
+        </div>        
+        {% comment %} 자기 게시글만 수정,삭제 가능하도록 {% endcomment %}
+        <div class="change hidden">
+          <span id="user_name">{{ username }}</span>
+          <span id="writer_name">{{ writer.userID }}</span>
           <a href="{% url 'edit_themeRev' review.pk %}" class="edit">
             수정하기
           </a>
-          <a href="{% url 'delete_themeRev' review.pk %}" class="delete">
+          <a href="{% url 'delete_themeRev' review.pk %}" class="delete" onclick="return confirm('정말 삭제 하시겠습니까?')">
             삭제하기
           </a>
+          <span id="user_name">{{ username }}</span>
+          <span id="writer_name">{{ writer.userID }}</span>
         </div>
       </div>
       
@@ -64,7 +69,7 @@
         <div class="profileImg">
           <img class="profile" src="{{ writer.userImage.url }}" /></div>
         <div class="writerInfo">
-          <div id="writerName">{{ writer.userName }}님</div>
+          <div id="writerName">{{ writer.usersSubname }}님</div>
           <div class="writeDate">{{ review.themeRevWriteDate|date:'Y년 m월 d일'}} 작성</div>
         </div>
       </div>
@@ -88,4 +93,5 @@
 {% block js %}
 <script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
 <script type="text/javascript" src="/static/js/themelike.js"></script>
+<script type="text/javascript" src="/static/js/post_edit.js"></script>
 {% endblock js %}

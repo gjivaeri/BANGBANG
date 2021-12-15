@@ -16,7 +16,7 @@ class User(models.Model):
     userImage = models.ImageField(upload_to='userImages/', height_field=None, width_field=None,blank=True, default='userImages/defalut.svg')    
 
     def __str__(self):
-        return self.usersSubname
+        return self.userID
 
 
 class Shoprev(models.Model):

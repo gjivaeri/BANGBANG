@@ -16,11 +16,19 @@
           <button class="options" id="options" onclick="dp_menu()">메뉴 <span id="triangle">▼</span> </button>
           <div style="display: none;" id="drop-content" class="drop-content">
               <div class="display-menus">
-                  <button class="review-button" onclick="review()">리뷰순 </button> 
+                  <button type="submit" class="review-button" onclick="review(); location.href='/home/?sort=reviews'">리뷰순 </button> 
                   <button class="distance-button" onclick="distance()">거리순</button> 
                   <button class="price-button" onclick="price()">가격낮은순</button>
               </div>
           </div>
+          {% comment %} <button class="options" id="options" onclick="dp_menu()">메뉴 <span id="triangle">▼</span> </button>
+          <div style="display: none;" id="drop-content" class="drop-content">
+              <div class="display-menus">
+                  <button class="review-button" onclick="review()">리뷰순 </button> 
+                  <button class="distance-button" onclick="distance()">거리순</button> 
+                  <button class="price-button" onclick="price()">가격낮은순</button>
+              </div>
+          </div> {% endcomment %}
       </div>
       <div class="loc-filter">
         <div class="locations">

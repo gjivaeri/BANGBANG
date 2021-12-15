@@ -1,3 +1,7 @@
+body{
+  margin: 0;
+}
+
 a{
   text-decoration: none;
   color: black;
@@ -19,14 +23,12 @@ a{
 .left-side{
   margin-top: 5.5vh;
   width: 35vmax;
-  height: 100vh;
   float: left;
 }
 
 .themeInfoBox{
   margin-top: 28vh;
   width: 35vmax;
-  height: 100vh;
   float: left;
 }
 
