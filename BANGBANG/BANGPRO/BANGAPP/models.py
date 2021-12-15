@@ -1,6 +1,6 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
-# from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator, MaxValueValidator
+from datetime import datetime    
 
 # Create your models here.
 
@@ -13,7 +13,7 @@ class User(models.Model):
     userGender = models.IntegerField(default=0)
     ShopRevID = models.IntegerField(default=0)
     ThRevID = models.IntegerField(default=0)
-    userImage = models.ImageField(upload_to='userImages/', height_field=None, width_field=None,blank=True)    
+    userImage = models.ImageField(upload_to='userImages/', height_field=None, width_field=None,blank=True, default='userImages/plus.png')    
 
     def __str__(self):
         return self.userID
@@ -35,6 +35,7 @@ class Shoprev(models.Model):
     def __str__(self):
         return self.shoprevTitle
 
+
 class Shop(models.Model):
     shopID = models.AutoField(primary_key=True, unique=True)
     shopName = models.CharField(max_length=200)
@@ -47,61 +48,37 @@ class Shop(models.Model):
     ShopIntro = models.TextField()
     shopImage = models.ImageField(upload_to='shopImages/', height_field=None, width_field=None,blank=True)    
 
+    def __str__(self):
+      return self.shopName
+
 
 class ThemeRev(models.Model):
     themeRevID = models.AutoField(primary_key=True)
-    themeRevTitle = models.CharField(max_length=200)
-    themeRevRating = models.IntegerField(default=0)
-    themeRevDifficulty = models.IntegerField(default=0)
-    themeRevHorror = models.IntegerField(default=0)
-    themeRevActivity = models.IntegerField(default=0)
     themeRevContent = models.TextField()
-    themeRevImage = models.ImageField(upload_to='themeRevImages', height_field=None, width_field=None,blank=True)    
-    # themeRevImage = models.ImageField(upload_to=None, height_field=None, width_field=None,blank=True)
-    themeRevResult = models.BooleanField(null=True)
-    themeRevOccurredTime = models.TimeField(auto_now=False, auto_now_add=False)
     themeRevDate = models.DateField()
-    themeRevWriteDate = models.DateTimeField(auto_now_add=True)
+    themeRevWriteDate = models.DateTimeField(default=datetime.now(), blank=True)
+    themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.DO_NOTHING, db_column="themeRev_WriterID", blank=True)
     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
-    ResID = models.IntegerField(default=0)
-    themeRevRecom = models.IntegerField(default=0)
-    themeRevNRecom = models.IntegerField(default=0)
-    themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
-    
-    def __str__(self):
-        return self.themeRevTitle
+    shop_ID = models.ForeignKey("Shop", related_name="shop_ID", on_delete=models.CASCADE, db_column="shop_id")
+    themeRevRecom = models.IntegerField(default=0, blank=True)
+    themeRevNRecom = models.IntegerField(default=0, blank=True)
+    themeRevRating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
 
-# class ThemeRev(models.Model):
-#     themeRevID = models.AutoField(primary_key=True)
-#     themeRevTitle = models.CharField(max_length=200)
-#     themeRevContent = models.TextField()
-#     themeRevDate = models.DateField()
-#     themeRevWriteDate = models.DateTimeField(auto_now_add=True)
-#     themeRev_WriterID = models.ForeignKey("User", related_name="themeRev_WriterID", on_delete=models.CASCADE, db_column="themeRev_WriterID")
-#     theme_ID = models.ForeignKey("Theme", related_name="theme_ID", on_delete=models.CASCADE, db_column="theme_id")
-#     themeRevRecom = models.IntegerField(default=0)
-#     themeRevNRecom = models.IntegerField(default=0)
-#     userImage = models.ForeignKey("User", related_name="userImage", on_delete=models.CASCADE, db_column="userImage")    
-#     usersSubname = 
-    
+
 class Theme(models.Model):
     themeID = models.AutoField(primary_key=True, unique=True)
     themeName = models.CharField(max_length=128)
     themeTimeLimit = models.CharField(max_length=64)
-    themeRating = models.IntegerField(default=0,
-        validators =[
-            MaxValueValidator(5),
-            MinValueValidator(0),
-        ]
-        )
+    themeRating = models.IntegerField(default=0)
     themeDifficulty = models.IntegerField(default=0)
     themeHorror = models.IntegerField(default=0)
     themeActivity = models.IntegerField(default=0)
     themeRecomPeople = models.IntegerField()
-    ShopID = models.ForeignKey("Shop", related_name="ShopId", on_delete=models.CASCADE, db_column="ShopID")
+    ShopID = models.ForeignKey("Shop", related_name="ShopId", on_delete=models.CASCADE, db_column="ShopID", default=1)
     themeGenre = models.CharField(max_length=64)
     themeImage = models.ImageField(upload_to='themeImages/', height_field=None, width_field=None,blank=True)    
     themeIntro = models.TextField(null=True)
+    themeLike = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
       return self.themeName
@@ -114,10 +91,31 @@ class Like(models.Model):
     class Meta:
         unique_together = ('user','article')
 
-
 class Hate(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="hate_record")
     article = models.ForeignKey('ThemeRev', on_delete=models.CASCADE, related_name="hate_record")
     
     class Meta:
         unique_together = ('user','article')
+
+
+class ThemeLike(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="themelike_record")
+    liketheme = models.ForeignKey('Theme', on_delete=models.CASCADE, related_name="themelike_record")
+    
+    class Meta:
+        unique_together = ('user','liketheme')
+
+
+class Test(models.Model):
+    grade = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
+    con = models.TextField(null=True)
+    Date = models.DateField(null=True)
+    WDate = models.DateTimeField(default=datetime.now(), blank=True)
+    themeRevRecom = models.IntegerField(default=0, blank=True)
+    themeRevNRecom = models.IntegerField(default=0, blank=True)
+    theme_ID2 = models.ForeignKey("Theme", related_name="test1", on_delete=models.CASCADE, db_column="test1", default=1)
+    shop_ID2 = models.ForeignKey("Shop", related_name="test2", on_delete=models.CASCADE, db_column="test2", default=1)
+    WriterID2 = models.ForeignKey("User", related_name="test3", on_delete=models.CASCADE, db_column="test3", null=True, blank=True)
+
+    

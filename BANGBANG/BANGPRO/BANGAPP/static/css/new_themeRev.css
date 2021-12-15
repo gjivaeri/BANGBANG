@@ -1,110 +1,134 @@
 /* vx, vh단위로 수정할 것 */
-html{height: 100%;}
+html{height: 100%; font-size:16px;}
 body{position: relative;width: 100%;height: 100%;}
 
-.checked {
-  color: orange;
-}
-
-.my-btn {
-  background-color: inherit impor !important;
-  border: 0 !important;
+a.nav-review{
+  color:#F55C03;
+  border-bottom: solid 3px #F55C03;
 }
 
 .content{
-  color: #53444F;
-  font-family: 'NanumSquare';
-  display:flex;
-  flex-direction: column; 
-  position: absolute;
-  width: 80vmax;
-  top: 8%;
-  left: 25vw;
-}
-
-.board_wrap{
-  display: flex;
-  flex-direction: column;
-  width: 740px;
-  height: auto;
-  padding: 25px;
+  margin: 5vh auto;
+  width: 40vw;
+  height: 100vmax;
   background-color: #e7e5e5;
-  height: 100vh;
+  padding: 0 5vw;
 }
 
-.board_title{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 15px;;
+.box{
+  border: 1px solid #53444F;
+  background-color: white;
+  border-radius: 15px;
+  /* vertical-align: middle; */
+  padding: 2vh 1.6vw 0vh 1.6vw;
 }
 
-.board_title_btn {
-    width: 100px;
-    height: 26px;
-    text-align: center;
-    border: 1px solid #F55C03;
-    background-color: #ffff;
-    border-radius: 25px; 
+.boxTitle{
+  font-size: 1.2rem;
+  font-weight: 550;
+  height:auto;
 }
 
-.board_title_btn a{
-    color:#F55C03;
-    font-size: 10px;
-}
-.star_review {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-.star_review, .visited, .booked, .text-review {
-    padding: 15px;
-    width: 700px;
-    background-color: #ffff;
-    border: 1px solid #b3aba7;
-    border-radius: 15px;
+/* submit div */
+.submit{
+  margin-top:6vh;
+  padding-top:6vw;
+  padding-bottom: 2vw;
+  display:flex;
 }
 
-.star_review:hover, .visited:hover, .booked:hover, .text-review:hover {
-    border: 1px solid #F55C03;
-    border-radius: 15px;
+.submit > h2{
+  padding-left: 20px;
+  text-align: left;
+  flex-basis: 80%;
 }
 
-.star, .starDifficulty{
-    font-size: 36px;
-    color:#ffe400;
+.submit > button {
+  border: 1px solid #F55C03;
+  border-radius: 20px;
+  padding: 1.2vh 1.5vw 1.2vh 1.5vw;
+  background-color: white;
+  text-decoration: none;
+  color: #F55C03;
+  width:12vw;
 }
 
-.star input, .starDifficulty input, .starHorror input, .starActivity input {
-    display: none;
+.submit > button:hover{
+  background-color: #F55C03;
+  color: white;
 }
 
-
-.star input:checked + label ~ label, .starDifficulty input:checked + label ~ label {
-    color: #838383;
-}
-.star label:active, .starDifficulty label:active {
-    transform: scale(0.8);
-    transition: 0.3s ease;
+/* star-review css */
+.star-review{
+  display:flex;
+  justify-content:space-between;
+  height:4vmax;
 }
 
-.rating {
-	cursor: pointer;
+.text-top{
+  width: 20vw;
 }
 
-.rating .rating-star {
-  display: inline-block;
-  position: relative;
-  padding-right: 5px;
-  margin-left: -5px;
-  color: #e3cf7a;
-}
-.rating .selected:before {
-  content: '\f005';
+/* visited-theme css */
+.visited-theme.box{
+  display:flex;
+  height:20vh;
 }
 
-.text-review textarea {
-    border: #ffff;
+.text-middle{
+  flex-basis:30%;
+}
+img{
+  width: 10vmax;
+  height: 10vmax;
+  margin-right:2vw;
+  border-radius:20px;
 }
 
+.theme-info{
+  flex-basis:30%;
+}
+
+.fieldWrapper{
+  width:8vw;
+}
+
+#date{
+  width: 6vw; /* 원하는 너비 설정 */ 
+  height: 0.3vh; /* 높이값 초기화 */ 
+  line-height : normal; /* line-height 초기화 */ 
+  padding: .7em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+}
+
+/* text-review css */
+.text-review{
+  height: 40vh;
+}
+
+.text-bottom{
+  margin-bottom: 2vh;
+  margin-top:1vh;
+}
+
+#id_theme_ID {
+  width: 10vw;
+}
+
+#id_shop_ID{
+  width: 10vw;
+}
+
+#id_themeRevContent{
+  width: 34.5vw; /* 원하는 너비 설정 */ 
+  /* width: 34.5vw;*/
+  height: 28vh; /* 높이값 초기화 */ 
+  line-height : normal; /* line-height 초기화 */ 
+  padding: 1em 1em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  font-size:1.2rem;
+  border: 1px solid #999; 
+  border-radius: 0; /* iSO 둥근모서리 제거 */ 
+  outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */ 
+  -webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */ 
+  -moz-appearance: none; appearance: none;}

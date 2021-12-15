@@ -1,0 +1,49 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href={% static 'css/detail_shop.css' %} rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+<title>shop detail</title>
+{% endblock css %}
+
+{% block content %}
+<div class="content">
+
+    <div class="shopInfoBox">
+      <div class="shopInfo-top">
+        <div class="imageField">
+          <img class="shop-pic" src="{{shop.shopImage.url}}"> 
+        </div>       
+        <div class="shopInfo">
+          <h2>{{shop.shopName}}</h2>
+          <div class="location">
+            <span class="material-icons">location_on</span>
+            <div class="shop-location">{{shop.Location}}</div>
+          </div>
+          <div class="rateit" data-rateit-value="{{shop.Rating}}" data-rateit-ispreset="true" 
+          data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+          </div>
+        </div>
+        <div class="go-homepage">
+          <button class="go-button">홈페이지 가기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="themes">
+      <h3><strong>테마</strong></h3>
+      <div class="theme-box">
+        {% for theme in themes %}
+        <a href="{% url 'detail_theme' theme.pk %}">
+        <img class="theme-pic" src="{{theme.themeImage.url}}">
+        {% endfor %}
+        </a>
+      </div>
+    </div>
+</div>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="/static/js/like.js"></script>
+<script type="text/javascript" src="/static/js/hate.js"></script>
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+{% endblock js %}

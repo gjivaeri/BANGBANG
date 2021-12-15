@@ -1,8 +1,9 @@
 from enum import auto
 from django import forms
-from .models import User, Theme, ThemeRev
+from django.forms import ModelForm
+from .models import User, Theme, ThemeRev, Test
 from argon2 import PasswordHasher, exceptions
-
+from .widgets import starWidget
 
 class LoginForm(forms.Form):
   userID = forms.CharField(
@@ -53,13 +54,29 @@ class LoginForm(forms.Form):
         else:
             self.userID = user.userID
 
-class PostSearchForm(forms.Form):
-    search_word = forms.CharField(label='Search Word')
+class ThemeRevForm(ModelForm):
+  class Meta:
+    model = ThemeRev
+    fields = '__all__'
+    js = ('js/new_themeRev.js',)
+    # fields = ('themeRevContent', 'themeRevDate', 'themeRev_WriterID', 'theme_ID', 'shop_ID', 'themeRevRating')
+    widgets = {
+      'themeRevDate': forms.DateInput(attrs={'class':'datepicker', 'id':'date'}),
+      'theme_ID': forms.Select(attrs={'name':'theme', 'onchange':'changeTheme()'}),
+      # 'theme_ID': forms.Select(attrs={'name':'theme', 'onchange':'changeTheme()', 'class':'visitedTheme'}),
+      # 'shop_ID': forms.NullBooleanSelect(attrs={'id':'shopid'}),
+      'themeRevRating': starWidget,
+    }
 
-# class ThemeRevWrite(forms.Form):
-#   class Meta:
-#       model = ThemeRev
 
-#       fields = ['themeRevTitle', '']
-
-#       theme = forms.ModelChoiceField(queryset=Theme.objects.all()) # Or whatever query you'd like
+class TestForm(forms.ModelForm):
+    class Meta:
+        model = Test
+        fields = '__all__'
+        js = ('js/new_themeRev.js',)
+        # js = ('js/new_themeRev.js',)
+        widgets = {
+            # 'grade': starWidget(attrs={'name':'grade','id':'star_id_grade'}),
+            'grade': starWidget,
+            'Date': forms.DateInput(attrs={'class':'datepicker'}),
+        }
