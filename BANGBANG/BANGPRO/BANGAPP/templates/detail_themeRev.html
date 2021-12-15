@@ -3,6 +3,7 @@
 {% block css %}
 <link href={% static 'css/detail_themeRev.css' %} rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+<title>detail review</title>
 {% endblock css %}
 
 {% block content %}
@@ -10,6 +11,7 @@
   <div class="themeRevList">
     <h2>리뷰 목록</h2>
     {% for review in reviews %}
+    <a href="{% url 'detail_themeRev' review.pk%}">
       <div class="review-box">
         <div class="summary-cont">
           {% comment %} <a href="{% url 'detail_themeRev' review.pk %}"> {% endcomment %}
@@ -28,6 +30,7 @@
           </div>
         </div>
       </div>
+    </a>
     {% endfor %}
   </div>
 
@@ -54,7 +57,7 @@
         <div class="profileImg">
           <img class="profile" src="{{ writer.userImage.url }}" /></div>
         <div class="writerInfo">
-          <div id="writerName">{{ writer.userName }}님</div>
+          <div id="writerName">{{ writer.usersSubname }}님</div>
           <div class="writeDate">{{ themeRev.themeRevWriteDate|date:'Y년 m월 d일'}} 작성</div>
         </div>
       </div>

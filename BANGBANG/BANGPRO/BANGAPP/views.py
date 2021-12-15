@@ -22,6 +22,7 @@ from django.views.decorators.csrf import csrf_exempt
 #for sort 
 from django.core.paginator import Paginator
 from datetime import datetime
+from django.db.models import Count
 
 # Create your views here.
 def join(request):
@@ -110,12 +111,13 @@ def home(request):
     sort = request.GET.get('sort')
     ordering_priority.append(sort)
     theme_list = Theme.objects.all()
-    
-    # 테마에 속한 리뷰들의 개수를 불러옴 / 그 개수가 많은 순서대로 정렬
-
-
-    # theme_list = Theme.objects.all().order_by(*ordering_priority)
+    themerev = ThemeRev.objects.all()
     shop_list = Shop.objects.all()
+    
+    # count = test1.aggregate(count=Count('theme_ID'))
+    # print(count, test1.count())
+    # 테마에 속한 리뷰들의 개수를 불러옴 / 그 개수가 많은 순서대로 정렬
+    # theme_list = Theme.objects.all().order_by(*ordering_priority)
 
     shopscount = shop_list.count()
     themescount = theme_list.count()
@@ -127,28 +129,8 @@ def home(request):
       theme_list = theme_list.filter(themeName__icontains=q)
       shop_list = shop_list.filter(shopName__icontains=q)
       allcount = theme_list.count() + shop_list.count()
-    content = {'shop_list' : shop_list, 'theme_list' : theme_list, 'allcount' : allcount, 'q' : q}
+    content = {'shop_list' : shop_list, 'theme_list' : theme_list, 'allcount' : allcount, 'q' : q, 'themerev' : themerev}
     return render(request, 'home.html', content)
-
-# def home(request):
-#     shop_list = Shop.objects.all()
-#     theme_list = Theme.objects.all()
-#     shopscount = shop_list.count()
-#     themescount = theme_list.count()
-#     allcount = shopscount + themescount
-#     q = request.GET.get('q','')
-
-#     ordering_priority = []
-#     sort = request.GET.get('sort')
-#     ordering_priority.append(sort)
-#     themes = Theme.objects.all().order_by(*ordering_priority)
-
-#     if q :
-#       theme_list = theme_list.filter(themeName__icontains=q)
-#       shop_list = shop_list.filter(shopName__icontains=q)
-#       allcount = theme_list.count() + shop_list.count()
-#     content = {'shop_list' : shop_list, 'theme_list' : theme_list, 'allcount' : allcount, 'q' : q}
-#     return render(request, 'home.html', content)
 
 
 def detail_shop(request, shop_pk):
@@ -190,24 +172,24 @@ def detail_themeRevAddDetail(request, theme_pk, review_pk):
 
 
 # 테스트용뷰
-def new_themeRevTest(request):
-  username = request.session.get('user')
-  user = get_object_or_404(User, userID = username)
-  if request.method == "POST":
-    form = TestForm(request.POST)
+# def new_themeRevTest(request):
+#   username = request.session.get('user')
+#   user = get_object_or_404(User, userID = username)
+#   if request.method == "POST":
+#     form = TestForm(request.POST)
 
-    if form.is_valid():
-      print(form.cleaned_data)
-      post = form.save()
-      post.WriterID2 = user
-      post.save()
-      return redirect("new_themeRevTest")
-    else:
-      print('no')
-  else:
-      form = TestForm()
-  context = {'form':form}
-  return render(request, "new_themeRevTest.html", context)
+#     if form.is_valid():
+#       print(form.cleaned_data)
+#       post = form.save()
+#       post.WriterID2 = user
+#       post.save()
+#       return redirect("new_themeRevTest")
+#     else:
+#       print('no')
+#   else:
+#       form = TestForm()
+#   context = {'form':form}
+#   return render(request, "new_themeRevTest.html", context)
 
 
 @csrf_exempt
@@ -278,7 +260,7 @@ def edit_themeRev(request, themeRev_pk):
           messages.error(request, 'Error!')
           print('no')
     context = {'form':form}
-    if themeRev.themeRev_WriterID == user.userID:
+    if themeRev.themeRev_WriterID.pk == user.userID:
       return render(request, 'edit_themeRev.html', context)
     else:
       return render(request, 'warning.html')
@@ -289,8 +271,8 @@ def delete_themeRev(request, themeRev_pk):
     themeRev = ThemeRev.objects.get(pk=themeRev_pk)
     theme = Theme.objects.get(themeName=themeRev.theme_ID)
     user = get_object_or_404(User, userID = username)
-    print(themeRev.themeRev_WriterID, user.userID)
-    if themeRev.themeRev_WriterID == user.userID:
+    print(themeRev.themeRev_WriterID.pk, user.userID)
+    if themeRev.themeRev_WriterID.pk == user.userID:
       themeRev.delete()
     return redirect('detail_themeRevAdd', theme_pk=theme.pk)
 

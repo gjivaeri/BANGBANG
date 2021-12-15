@@ -3,7 +3,7 @@
 {% block css %}
 <link href="{% static 'css/detail_themeRevAdd.css' %}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
-<title>detail_themeRevAdd</title>
+<title>theme review</title>
 {% endblock css %}
 
 {% block content %}
@@ -13,7 +13,9 @@
       <div class="themeInfoBox">
         <div class="themeInfo-top">
           <div class="imageField">
+            <a href="{% url 'detail_theme' theme.pk %}">
             <img src="{{theme.themeImage.url}}"> 
+            </a>
           </div>       
           <div class="themeInfo">
             <div>{{shop.shopName}}</div>

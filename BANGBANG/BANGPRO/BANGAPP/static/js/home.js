@@ -16,8 +16,6 @@ function review(){
   click.style.display = "none";
   const element = document.getElementById('options');
   element.innerHTML = '리뷰순 <span id="triangle">▼</span>';
-  element.value = '리뷰'
-  console.log(element.value)
   // const spanTag = document.createElement("span");
   // const textNode = document.createTextNode('▼');
   // spanTag.appendChild(textNode);
@@ -39,35 +37,36 @@ function price(){
 }
 
 
-var getUrlParameter = function getUrlParameter(sParam) {
-  //url parameter를 얻어온다, 그 후 대부분의 문자를 디코딩하는 함수 사용
-  var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-      sURLVariables = sPageURL.split('&'),
-      sParameterName,
-      i;
-      // console.log(sPageURL);
-      //window.location.search는 ?sourid=chrom과 같은 부분을 가지고 온다. substring(1)로 객체의 시작인덱스부터 가져옴
+// var getUrlParameter = function getUrlParameter(sParam) {
+//   //url parameter를 얻어온다, 그 후 대부분의 문자를 디코딩하는 함수 사용
+//   var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+//       sURLVariables = sPageURL.split('&'),
+//       sParameterName,
+//       i;
+//       // console.log(sPageURL);
+//       //window.location.search는 ?sourid=chrom과 같은 부분을 가지고 온다. substring(1)로 객체의 시작인덱스부터 가져옴
 
-  for (i = 0; i < sURLVariables.length; i++) {
-      sParameterName = sURLVariables[i].split('=');
+//   for (i = 0; i < sURLVariables.length; i++) {
+//       sParameterName = sURLVariables[i].split('=');
 
-      if (sParameterName[0] === sParam) {
-          return sParameterName[1] === undefined ? true : sParameterName[1];
-      }
-  }
-};
-// 정렬방식 셀렉트 박스 유지
-$(document).ready(function(){
-  var sort = getUrlParameter('sort');
+//       if (sParameterName[0] === sParam) {
+//           return sParameterName[1] === undefined ? true : sParameterName[1];
+//       }
+//   }
+// };
+// // 정렬방식 셀렉트 박스 유지
+// $(document).ready(function(){
+//   var sort = getUrlParameter('sort');
+//   print(sort)
 
-  if(sort == 'themeRevRecom'){
-    $('.sort-likes').prop('selected', true)
-  }else if(sort == 'themeRevRating'){
-    $('.sort-rating').prop('selected', true)
-  }else{
-    $('.sort-date').prop('selected', true)
-  }
-  });
+//   if(sort == 'themeRevRecom'){
+//     $('.sort-likes').prop('selected', true)
+//   }else if(sort == 'themeRevRating'){
+//     $('.sort-rating').prop('selected', true)
+//   }else{
+//     $('.sort-date').prop('selected', true)
+//   }
+//   });
 
 
 

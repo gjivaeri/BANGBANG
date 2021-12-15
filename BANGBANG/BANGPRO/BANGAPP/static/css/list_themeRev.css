@@ -151,7 +151,7 @@ a:hover{
 .info > a > img {
   border-radius: 20px;
   margin: 0 0.8vw 0 0;
-  height: auto;
+  height: 10vmax;
   width: 10vmax;
   min-width: 110px;
   min-height: 110px; 

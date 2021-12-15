@@ -3,6 +3,7 @@
 {% block css %}
 <link href={% static 'css/detail_shop.css' %} rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+<title>shop detail</title>
 {% endblock css %}
 
 {% block content %}
@@ -33,8 +34,10 @@
       <h3><strong>테마</strong></h3>
       <div class="theme-box">
         {% for theme in themes %}
+        <a href="{% url 'detail_theme' theme.pk %}">
         <img class="theme-pic" src="{{theme.themeImage.url}}">
         {% endfor %}
+        </a>
       </div>
     </div>
 </div>
