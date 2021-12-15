@@ -3,6 +3,94 @@
 {% block css %}
 <link href="{% static 'css/detail_themeRevAdd.css' %}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+<title>theme review</title>
+{% endblock css %}
+
+{% block content %}
+  <div class="sides">
+
+    <div class="left-side">
+      <div class="themeInfoBox">
+        <div class="themeInfo-top">
+          <div class="imageField">
+            <a href="{% url 'detail_theme' theme.pk %}">
+            <img src="{{theme.themeImage.url}}"> 
+            </a>
+          </div>       
+          <div class="themeInfo">
+            <div>{{shop.shopName}}</div>
+            <div><h2>{{theme.themeName}}</h2></div>
+            <div class="info"><div class="text">난이도</div>
+              <div class="rateit" data-rateit-value="{{theme.themeDifficulty}}" data-rateit-ispreset="true" 
+              data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+              </div> 
+            </div>
+            <div class="info"><div class="text">공포도</div>
+              <div class="rateit" data-rateit-value="{{theme.themeHorror}}" data-rateit-ispreset="true" 
+              data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+              </div>
+            </div>
+            <div class="info"><div class="text">인원</div>
+              <div id="num">{{theme.themeRecomPeople}}</div>
+            </div>
+            <button type="submit" class="themelike" name="{{ theme.pk }}" id="count-{{ theme.pk }}">♡   {{ theme.themeLike }}</button>
+          </div>
+        </div>
+        <div class="theme-describe">
+          {{theme.themeIntro}}
+        </div>
+      </div>
+    </div>
+
+    <div class="right-side">
+      <h3>테마 리뷰</h3>
+      <div class="theme-reviews">
+        <!-- 리뷰 폼 -->
+        {% for review in reviews %}
+        <div class="review-box">
+          <a href="{% url 'detail_themeRevAddDetail' theme.pk review.pk %}">
+              {% comment %} <a href=" theme.pk review.pk %}"> {% endcomment %}
+            <div class="summary-cont" id="listButton"> 
+            {{review.themeRevContent}}  
+            </div>
+          </a>
+          <div class="summary-bottom">
+            <div class="like-count" id="count-{{ review.pk }}">
+              ♡{{ review.themeRevRecom }}+</p>
+            </div>
+            <div>
+            <input type="button" class="like" name="{{ review.pk }}" value="추천">
+            </div>
+            <div>
+            <input type="button" class="hate" name="{{ review.pk }}" value="비추천">
+            </div>       
+          </div>
+        </div>    
+        {% endfor %}
+          
+          
+        </div>      
+      </div>
+      
+
+    </div>
+  </div>
+{% endblock content %} 
+{% block js %}
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+<script type="text/javascript" src="/static/js/themelike.js"></script>
+<script type="text/javascript" src="/static/js/like.js"></script>
+<script type="text/javascript" src="/static/js/hate.js"></script>
+{% endblock js %}
+
+
+
+{% comment %}
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/detail_themeRevAdd.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
 <title>detail_themeRevAdd</title>
 {% endblock css %}
 
@@ -58,7 +146,7 @@
         {% for review in reviews %}
         <div class="box-form">
           <a href="{% url 'detail_themeRevAddDetail' theme.pk review.pk %}">
-              {% comment %} <a href=" theme.pk review.pk %}"> {% endcomment %}
+              {% comment %} <a href=" theme.pk review.pk %}"> 
           <div class="detail-ment" id="listButton"> 
           {{review.themeRevContent}}  
           </div>
@@ -87,3 +175,5 @@
 {% block js %}
 <script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
 {% endblock js %}
+
+{% endcomment %}

@@ -2,12 +2,13 @@
 {% load static %}
 {% block css %}
   <link href={% static 'css/recommend.css' %} rel="stylesheet" type="text/css">
+  <title>recommend</title>
 {% endblock css %}
 {% block content %}
-<div class="content">  
   <div class="recommend-top">
-  <p>추천 키워드</p>
-  <div class="keywords">
+  <p class="title">추천 키워드</p>
+  {% comment %} <div class="keywords"> {% endcomment %}
+    <p>
     <button class="review-button" onclick="">셋이 놀기 좋은</button> 
     <button class="review-button" onclick="">스토리가 치밀한</button> 
     <button class="review-button" onclick="">내가 탐정이라면?</button> 
@@ -15,24 +16,22 @@
     <button class="review-button" onclick="">동화속 주인공되기</button> 
     <button class="review-button" onclick="">오싹오싹 공포체험</button> 
     <button class="review-button" onclick="">방탈출 초보 추천</button> 
-  </div>
+    </p>
+  {% comment %} </div> {% endcomment %}
   
   </div>  
-  <div class="recommend-bottom">
+  <div class="content">
+    <p class="recommend-box">
     {% for theme in themes %}
-        <div class="themeImg">
           <a href="{% url 'detail_theme' theme.pk %}">
             <img src="{{theme.themeImage.url}}">
           </a>
-        </div>
     {% endfor %}
     {% for shop in shops %}
-      <div class="themeImg">
         <a href="{% url 'detail_shop' shop.pk %}">
           <img src="{{shop.shopImage.url}}">
         </a>
-      </div>
     {% endfor %}
+    </p>
   </div> 
-</div>
 {% endblock content %}

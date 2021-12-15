@@ -18,7 +18,7 @@
     <div class="star-review box">
       <div class="boxTitle text-top">별점 리뷰</div>
       <input type="range" name="themeRevRating" value="5" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
-      <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font" style="font-size:3vw">
+      <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font" style="font-size:2vw;">
       </div>    
     </div>
 
@@ -51,9 +51,9 @@
 
 {% endblock content %}
 {% block js %}
-<script type="text/javascript" src="/static/js/new_themeRev.js"></script>
-{% comment %} <script src="{% static 'widgets/rateit/jquery.rateit.js' %}" ></script> {% endcomment %}
 <script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+<script src="{% static 'widgets/rateit/jquery.rateit.js' %}" ></script>
+<script type="text/javascript" src="/static/js/new_themeRev.js"></script>
 <script>
   $('#star_id_grade').click(function(){
     star = $('#star_id_grade').rateit('value')

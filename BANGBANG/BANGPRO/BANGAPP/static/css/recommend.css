@@ -6,71 +6,87 @@ a.nav-recommend{
   border-bottom: solid 3px #F55C03;
 }
 
-.content{
-  color: #53444F;
-  font-family: 'NanumSquare';
-  display:flex;
-  flex-direction: column;
-  top: 15%;
-  left: 8%;
-  position: absolute;
+/* 추천 키워드 css */
+.recommend-top{
+  padding: auto;
 }
 
-.recommend-top{
-  width:80vw;
-  height:15vh;
+.recommend-top > .title{
+  font-size:1.5vw;
+  font-weight: 700;
+  text-align:left;
+  margin-left:9vw;
+  margin-bottom: 2vmax;
+  height: 2vh;
+  margin-top: 15vh;
 }
 
 .recommend-top > p {
   font-size: 1vw;
+  margin-left: 8.5vw;
+  height: 5vh;
 }
 
-.recommend-top > .keywords{
-  margin-top: 2vh;
-  display: flex;
-  justify-content: space-around;
-}
-.recommend-top > .keywords > button{
+.recommend-top > p > button{
   border: 1px solid #53444F;
   color:#53444F;
   background-color: white;
   border-radius: 30px;
-  height:5vh;
-  width: 10vw;
-  text-align: center;
+  width: 10.5vw;
+  height: 100%;
+  /* text-align: center; */
   font-size: 1vw;
+  margin: 0 0.5vw;
 }
 
-.recommend-top > .keywords > button:hover{
+.recommend-top > p > button:hover{
   border: 1px solid #F55C03;
   color:#F55C03;
-  background-color: white;
-  border-radius: 30px;
-  height:5vh;
-  width: 10vw;
   text-align: center;
   /* font-size: 1.1rem; */
 }
 
 
-.recommend-bottom{
-  border: 1px soloid black;
-  height:40vh;
-  width: 80vw;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  float: left;
+/* 이미지 css */
+.content{
+  color: #53444F;
+  font-family: 'NanumSquare';
+  margin-left:9vw;
+  margin-top: 5vh;
 }
 
-.recommend-bottom > .themeImg {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1vh;
+img{
+  width: 13vw;
+  height: 13vw;
+  margin-right: 7px;
+  margin-bottom: 7px;
+  border-radius: 10px;
 }
 
-.recommend-bottom > .themeImg > a > img{
-  height: 24vh;
-  width: 15vmax;
-  border-radius: 20px;
-} 
+.recommend-box{
+  /* text-align:center; */
+  margin-top:2vh;
+  margin-bottom: 2vh;
+}
+
+@media (max-width: 600px){
+  .recommend-top > p {
+    font-size: 1vw;
+    margin-left: 8.5vw;
+    width: 80vw;
+    /* margin-bottom: -4vh; */
+
+  }
+  
+  .recommend-top > p > button{
+    border: 1px solid #53444F;
+    color:#53444F;
+    background-color: white;
+    border-radius: 30px;
+    height:3vh;
+    width: 10.5vw;
+    margin-bottom: 1vh;
+    /* text-align: center; */
+    font-size: 1vw;
+  }
+}

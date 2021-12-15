@@ -2,12 +2,15 @@
 {% load static %}
 {% block css %}
 <link href={% static 'css/list_themeRevAll.css' %} rel="stylesheet" type="text/css">
+<title>review all</title>
 {% endblock css %}
 {% block content %}
   <div class="content">
+    <h2>리뷰 목록</h2>
+
     <div class="themeRev">
-      <div class="title">리뷰 목록</div>
       {% for review in reviews %}
+      <a href="{% url 'detail_themeRev' review.pk%}">
       <div class="review-box">
         <div class="summary-cont">{{review.themeRevContent}}</div>
         <div class="summary-bottom">
@@ -23,7 +26,8 @@
         </div>        
       </div>
     </div>
-    {% endfor %}
+      </a>
+      {% endfor %}
   <div>
 {% endblock content %}
 {% block js %}

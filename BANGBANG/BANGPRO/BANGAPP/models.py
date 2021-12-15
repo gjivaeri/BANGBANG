@@ -13,10 +13,10 @@ class User(models.Model):
     userGender = models.IntegerField(default=0)
     ShopRevID = models.IntegerField(default=0)
     ThRevID = models.IntegerField(default=0)
-    userImage = models.ImageField(upload_to='userImages/', height_field=None, width_field=None,blank=True, default='userImages/defalut.svg')    
+    userImage = models.ImageField(upload_to='userImages/', height_field=None, width_field=None,blank=True, default='userImages/plus.png')    
 
     def __str__(self):
-        return self.usersSubname
+        return self.userID
 
 
 class Shoprev(models.Model):
@@ -78,6 +78,7 @@ class Theme(models.Model):
     themeGenre = models.CharField(max_length=64)
     themeImage = models.ImageField(upload_to='themeImages/', height_field=None, width_field=None,blank=True)    
     themeIntro = models.TextField(null=True)
+    themeLike = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
       return self.themeName
@@ -90,13 +91,20 @@ class Like(models.Model):
     class Meta:
         unique_together = ('user','article')
 
-
 class Hate(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="hate_record")
     article = models.ForeignKey('ThemeRev', on_delete=models.CASCADE, related_name="hate_record")
     
     class Meta:
         unique_together = ('user','article')
+
+
+class ThemeLike(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name="themelike_record")
+    liketheme = models.ForeignKey('Theme', on_delete=models.CASCADE, related_name="themelike_record")
+    
+    class Meta:
+        unique_together = ('user','liketheme')
 
 
 class Test(models.Model):

@@ -1,5 +1,5 @@
 html{height: 100%; font-size: 16px;}
-body{position: relative;width: 100%;height: 100%;}
+body{position: relative;width: 100%;height: 100%; margin:0}
 
 .content{
   color: #53444F;
@@ -12,24 +12,14 @@ body{position: relative;width: 100%;height: 100%;}
   font-size: 1.2vw;
 }
 
+/* themeinfo */
+
 .themeInfoBox{
   margin-top: 8vh;
   width: 35vmax;
-  height: 100vh;
   float: left;
 }
 
-.reservation{  
-  width: 43vmax;
-  height: 100vh;
-  float:right;
-  background-color: rgb(238, 238, 238);
-  padding-left: 3.5vw;
-  padding-right: 3.5vw;
-  cursor: pointer;
-}
-
-/* themeinfo */
 .themeInfo-top{
   width: 32vmax;
   /* height: 30vh; */
@@ -41,27 +31,60 @@ img{
   width: 14vw;
   height: 14vw;
   border-radius: 15px;
+  min-width: 120px;
+  min-height: 120px;
 }
 
 h2{
   width: 20vw;
+  margin-bottom: 1vmax;
 }
 
 .themeInfo{
-  margin-top: 4vh;
   width: 15vmax;
   margin-left: 3vw;
   font-weight: 700;
+  margin-top: -1vh;
+}
+
+.themeInfo > .info{
+  display: flex;
+  margin-top:-0.1vh;
+  /* padding-top:2vh; */
+}
+
+.themeInfo > .info > .text{
+  /* margin-top:4.5px; */
+  margin-top:0.5vmax;
+  margin-right: 1vw;
+}
+
+.themeInfo > button{
+  border: 1px solid #53444F;
+  color:#53444F;
+  background-color: white;
+  border-radius: 30px;
+  width: 6vw;
+  height: 2vmax;
+  min-width: 50px;
+  font-size: 1vw;
+  margin-top:0.8vmax;
+}
+
+.themeInfo > button:hover{
+  color:white;
+  background-color: #F55C03;
+  border: 1px solid white;
+}
+
+#num{
+  margin-left:1.1vmax;
+  margin-top:0.5vmax;
 }
 
 .themeInfo > div{
   font-size: 1vw;
   margin-top: 1vh;
-}
-
-.themeInfo > div > span{
-  margin-right: 3vh;
-  margin-left: 10px;
 }
 
 .themeDetail{
@@ -101,9 +124,14 @@ h2{
 
 .themeRev > a > span{
   margin-left: 10px;
+  color: black;
 }
 
-/* like count  */
+.themeRev > a > span:hover{
+  color: #F55C03;
+}
+
+/* like count in review   */
 .summary-bottom{
   display:flex;
   /* padding: 3vh 2vh 2vh 3vh; */
@@ -136,7 +164,22 @@ h2{
 .summary-bottom > div > .hate:hover{
   color:#F55C03;
 }
+
+
+
+
 /* reservation */
+
+.reservation{  
+  width: 43vmax;
+  height: 100vh;
+  float:right;
+  background-color: rgb(238, 238, 238);
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  cursor: pointer;
+}
+
 h3{
   margin-top: 5vh;
   margin-bottom: 5vh;
@@ -185,6 +228,7 @@ label{
 input{
   width: 4.3vw;
   height: 4.5vh;
+  min-width: 50px;
   border-radius: 35px;
   border-color: #5c4f59;
   padding-left: 1.5vw;
@@ -195,8 +239,8 @@ input{
 
 /* reservation-time */
 .reservation-time > div > div{
-  width: 9.5vw;
-  height: 12.5vh;
+  width: 9.5vmax;
+  height: 7.5vmax;
   border-radius: 25px;
   background-color: white;
   margin-bottom: 2vh;
