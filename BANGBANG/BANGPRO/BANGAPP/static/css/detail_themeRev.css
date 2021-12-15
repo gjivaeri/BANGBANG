@@ -71,7 +71,7 @@ h2{
 /* like count  */
 .summary-bottom{
   display:flex;
-  padding: 3vh 2vh 1.5vh 3vh;
+  padding: 2.5vh 2vh 1.5vh 3vh;
 }
 
 .summary-bottom > .like-count{
@@ -244,5 +244,6 @@ img{
 
 .textCon{
   margin-top: 2vh;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  line-height: 1.6;
 }

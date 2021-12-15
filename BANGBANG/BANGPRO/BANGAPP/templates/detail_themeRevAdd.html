@@ -54,6 +54,7 @@
             {{review.themeRevContent}}  
             </div>
           </a>
+
           <div class="summary-bottom">
             <div class="like-count" id="count-{{ review.pk }}">
               ♡{{ review.themeRevRecom }}+</p>
@@ -65,14 +66,12 @@
             <input type="button" class="hate" name="{{ review.pk }}" value="비추천">
             </div>       
           </div>
+
         </div>    
         {% endfor %}
-          
-          
-        </div>      
+                
       </div>
-      
-
+    
     </div>
   </div>
 {% endblock content %} 

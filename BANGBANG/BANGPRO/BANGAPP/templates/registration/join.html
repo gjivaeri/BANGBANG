@@ -17,11 +17,11 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="signup-form">
-                    <input class="name" type="text" name='userName' placeholder="이름" style="color:#53444F;"><br>
-                    <input class="id" type="text" name="userID" placeholder="아이디" style="color:#53444F;"><br>
-                    <input class="password" type="password" name="userPW1" placeholder="비밀번호" style="color:#53444F;"><br>
+                    <input class="name" type="text" name='userName' placeholder="이름" style="color:#53444F;" autocomplete="off"><br>
+                    <input class="id" type="text" name="userID" placeholder="아이디" style="color:#53444F;" autocomplete="off"><br>
+                    <input class="password" type="password" name="userPW1" placeholder="비밀번호" style="color:#53444F;" autocomplete="off"><br>
                     <input class="password" type="password" name="userPW2" placeholder="비밀번호 확인" style="color:#53444F;"><br>
-                    <input class="nickname" type="text" name="usersSubname" placeholder="닉네임" style="color:#53444F;"><br>
+                    <input class="nickname" type="text" name="usersSubname" placeholder="닉네임" style="color:#53444F;" autocomplete="off"><br>
                     <input class="birthday" type="date" data-placeholder="생년월일" name='userBirthday' style="color:#53444F;"><br>
                     <!-- <input class="gander" type="password" name="password" placeholder="성별"> -->
                     <!-- 성별 -->

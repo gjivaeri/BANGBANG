@@ -2,6 +2,11 @@ body{
   margin: 0;
 }
 
+a.nav-review{
+  color:#F55C03;
+  border-bottom: solid 3px #F55C03;
+}
+
 a{
   text-decoration: none;
   color: #53444F;
@@ -46,7 +51,7 @@ a{
 }
 
 h2{
-  width: 20vw;
+  width: 18vw;
   margin-bottom: 1vmax;
 }
 

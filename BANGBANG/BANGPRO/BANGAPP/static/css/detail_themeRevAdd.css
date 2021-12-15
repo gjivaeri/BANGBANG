@@ -1,5 +1,18 @@
+html{
+  height: 100%;
+}
+
 body{
+  height: 100%;
   margin: 0;
+}
+.wrap{
+  height: 100%;
+} 
+
+a.nav-review{
+  color:#F55C03;
+  border-bottom: solid 3px #F55C03;
 }
 
 a{
@@ -16,6 +29,7 @@ a{
   left: 10%;
   line-height: 1.5;
   font-size: 1.2vw;
+  /* height: 100%; */
 }
 
 
@@ -24,6 +38,7 @@ a{
   margin-top: 5.5vh;
   width: 35vmax;
   float: left;
+  height: 100vh;
 }
 
 .themeInfoBox{
@@ -48,7 +63,7 @@ img{
 }
 
 h2{
-  width: 20vw;
+  width: 18vw;
   margin-bottom: 1vmax;
 }
 
@@ -120,7 +135,6 @@ h2{
 /* right-sdie theme review */
 .right-side{  
   width: 43vmax;
-  height: 100vh;
   float:right;
   background-color: rgb(238, 238, 238);
   padding-left: 3.5vw;

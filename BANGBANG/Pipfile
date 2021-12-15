@@ -13,3 +13,5 @@ pillow = "*"
 
 [requires]
 python_version = "3.8"
+
+web:node src/server.js
