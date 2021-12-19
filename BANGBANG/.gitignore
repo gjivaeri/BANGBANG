@@ -4,8 +4,9 @@
 *.pyc
 __pycache__/
 local_settings.py
-# db.sqlite3
-# .Python
+db.sqlite3
+.Python
 venu/
 .DS_Store
 .vscode/
+secrets.json

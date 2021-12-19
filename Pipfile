@@ -4,21 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-argon2 = "*"
-argon2-cffi = "*"
-pillow = "*"
-toml = "*"
 dj-database-url = "*"
 gunicorn = "*"
 whitenoise = "==3.3.1"
-psycopg2-binary = "*"
-lock = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
-
-[pipenv]
-allow_prereleases = true
+python_version = "3.9"
