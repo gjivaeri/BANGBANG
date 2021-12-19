@@ -1,0 +1,134 @@
+/* vx, vh단위로 수정할 것 */
+html{height: 100%; font-size:16px;}
+body{position: relative;width: 100%;height: 100%;}
+
+a.nav-review{
+  color:#F55C03;
+  border-bottom: solid 3px #F55C03;
+}
+
+.content{
+  margin: 5vh auto;
+  width: 40vw;
+  height: 100vmax;
+  background-color: #e7e5e5;
+  padding: 0 5vw;
+}
+
+.box{
+  border: 1px solid #53444F;
+  background-color: white;
+  border-radius: 15px;
+  /* vertical-align: middle; */
+  padding: 2vh 1.6vw 0vh 1.6vw;
+}
+
+.boxTitle{
+  font-size: 1.2rem;
+  font-weight: 550;
+  height:auto;
+}
+
+/* submit div */
+.submit{
+  margin-top:6vh;
+  padding-top:6vw;
+  padding-bottom: 2vw;
+  display:flex;
+}
+
+.submit > h2{
+  padding-left: 20px;
+  text-align: left;
+  flex-basis: 80%;
+}
+
+.submit > button {
+  border: 1px solid #F55C03;
+  border-radius: 20px;
+  padding: 1.2vh 1.5vw 1.2vh 1.5vw;
+  background-color: white;
+  text-decoration: none;
+  color: #F55C03;
+  width:12vw;
+}
+
+.submit > button:hover{
+  background-color: #F55C03;
+  color: white;
+}
+
+/* star-review css */
+.star-review{
+  display:flex;
+  justify-content:space-between;
+  height:4vmax;
+}
+
+.text-top{
+  width: 20vw;
+}
+
+/* visited-theme css */
+.visited-theme.box{
+  display:flex;
+  height:20vh;
+}
+
+.text-middle{
+  flex-basis:30%;
+}
+img{
+  width: 10vmax;
+  height: 10vmax;
+  margin-right:2vw;
+  border-radius:20px;
+}
+
+.theme-info{
+  flex-basis:30%;
+}
+
+.fieldWrapper{
+  width:8vw;
+}
+
+#date{
+  width: 6vw; /* 원하는 너비 설정 */ 
+  height: 0.3vh; /* 높이값 초기화 */ 
+  line-height : normal; /* line-height 초기화 */ 
+  padding: .7em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+}
+
+/* text-review css */
+.text-review{
+  height: 40vh;
+}
+
+.text-bottom{
+  margin-bottom: 2vh;
+  margin-top:1vh;
+}
+
+#id_theme_ID {
+  width: 10vw;
+}
+
+#id_shop_ID{
+  width: 10vw;
+}
+
+#id_themeRevContent{
+  width: 34.5vw; /* 원하는 너비 설정 */ 
+  /* width: 34.5vw;*/
+  height: 28vh; /* 높이값 초기화 */ 
+  line-height : normal; /* line-height 초기화 */ 
+  padding: 1em 1em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */ 
+  font-family: inherit; /* 폰트 상속 */ 
+  font-size:1.2rem;
+  border: 1px solid #999; 
+  border-radius: 0; /* iSO 둥근모서리 제거 */ 
+  outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */ 
+  -webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */ 
+  -moz-appearance: none; appearance: none;}

@@ -1,0 +1,81 @@
+.content{
+  color: #53444F;
+  font-family: 'NanumSquare';
+  display:flex;
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  line-height: 1.5;
+  font-size: 1.2vw;
+}
+
+.shopInfoBox{
+  margin-top: 8vh;
+  width: 28vw;
+  margin-right: 7vw;
+  height: 100vh;
+  float: left;
+}
+
+h3{
+  margin-top: 6vh;
+  margin-bottom: 15px;
+}
+
+.themes{  
+  width: 43vmax;
+  height: 100vh;
+  float:right;
+  background-color: rgb(238, 238, 238);
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  cursor: pointer;
+/* 스크롤 바 */
+  overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.theme-pic{
+  width: 13vw;
+  height: 13vw;
+  border-radius: 12px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.shop-pic{
+  width: 28vmax;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  margin-top: 8vh;
+}
+
+.go-button{
+  background-color: #53444F;
+  color: white;
+  border-radius: 8px;
+  width: 28vw;
+  height: 3.5vw;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+
+.location{
+  display: flex;
+  margin-bottom: 2px;
+}
+
+.material-icons{
+  margin-right: 2px;
+}
+
+.shopInfo{
+  margin-bottom: 8px;
+}
+
+h2{
+  margin-bottom: 2px;
+}

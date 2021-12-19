@@ -1,0 +1,225 @@
+body{
+  margin: 0;
+}
+
+a.nav-review{
+  color:#F55C03;
+  border-bottom: solid 3px #F55C03;
+}
+
+a{
+  text-decoration: none;
+  color: #53444F;
+}
+
+.sides{
+  color: #53444F;
+  font-family: 'NanumSquare';
+  display:flex;
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  line-height: 1.5;
+  /* font-size: 1.2rem; */
+}
+
+.left-side{
+  margin-top: 5.5vh;
+  width: 35vmax;
+  float: left;
+}
+
+.themeInfoBox{
+  margin-top: 20vh;
+  width: 35vmax;
+  float: left;
+}
+
+.themeInfo-top{
+  width: 32vmax;
+  /* height: 30vh; */
+  margin-bottom: 3vh;
+  display: flex;
+}
+
+.imageField > img{
+  width: 14vw;
+  height: 14vw;
+  border-radius: 15px;
+  min-width: 120px;
+  min-height: 120px;
+}
+
+h2{
+  width: 18vw;
+  margin-bottom: 1vmax;
+}
+
+.themeInfo{
+  width: 15vmax;
+  margin-left: 3vw;
+  font-weight: 700;
+  margin-top: -1vh;
+}
+
+.themeInfo > .info{
+  display: flex;
+  margin-top:-0.1vh;
+  /* padding-top:2vh; */
+}
+
+.themeInfo > .info > .text{
+  /* margin-top:4.5px; */
+  margin-top:0.5vmax;
+  margin-right: 1vw;
+}
+
+.themeInfo > button{
+  border: 1px solid #53444F;
+  color:#53444F;
+  background-color: white;
+  border-radius: 30px;
+  width: 6vw;
+  height: 2vmax;
+  min-width: 50px;
+  font-size: 1vw;
+  margin-top:0.8vmax;
+}
+
+.themeInfo > button:hover{
+  color:white;
+  background-color: #F55C03;
+  border: 1px solid white;
+}
+
+#num{
+  margin-left:1.1vmax;
+  margin-top:0.5vmax;
+}
+
+.themeInfo > div{
+  font-size: 1vw;
+  /* font-size: 1rem; */
+  margin-top: 1vh;
+}
+
+
+.theme-describe{
+  font-size: 1vw;
+  margin-top: 2vw;
+  width: 30vw;
+  line-height: 1.5vw;
+}
+
+
+/* detail_theme css */
+.themeRevDetail{
+  width: 43vmax;
+  height: 100vh;
+  float:right;
+  background-color: rgb(238, 238, 238);
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  cursor: pointer;
+}
+
+.detailTop{
+  margin-top: 4.8vh;
+  margin-bottom: 4vh;
+  font-size: 1.3vw;
+  font-weight: 550;
+  display: flex;
+}
+
+.detailTop > .close{
+  flex-basis: 70%;
+  font-size: 1.4vw;
+  margin-bottom: 0.7vh;
+}
+
+.detailTop > .change > a{
+  color:#F55C03;
+  margin-left:1vw;
+}
+
+.change > span{
+  display:none;
+}
+
+.hidden{
+  display:none;
+}
+
+.box{
+  border: 1px solid #53444F;
+  background-color: white;
+  border-radius: 30px;
+  /* vertical-align: middle; */
+  padding: 2vh 1.6vw 2vh 1.6vw;
+}
+
+.boxTitle{
+  font-size: 1.2rem;
+  font-weight: 550;
+  height:auto;
+  margin-top: 1.5vh;
+}
+
+/* writer css */
+.writer{
+  display: flex;
+  height: auto;
+  margin: auto;
+}
+
+.profile{
+  border-radius: 80px;
+  width: 5vmax;
+  height: 5vmax;
+  margin-right: 1vw;
+}
+
+.writerInfo{
+  flex-direction: column;
+}
+
+#writerName{
+  margin-top: 1.5vh;
+  margin-bottom: 0.4vh;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* star-review css */
+.star-review{
+  display:flex;
+  justify-content:space-between;
+  height:4vmax;
+}
+
+.text-top{
+  width: 20vw;
+}
+
+.rate{
+  height: 3vh;
+  margin: auto;
+  font-size:1.4rem;
+  font-weight: 600;
+}
+
+.star-review > .rateit{
+  margin: auto;
+  margin-top: 1vh;
+}
+
+/* text-review css */
+.text-review{
+  height: 40vh;
+ 
+}
+
+.textCon{
+  margin-top: 2vh;
+  font-size: 1.1rem;
+}
