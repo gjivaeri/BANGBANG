@@ -5,21 +5,21 @@
   <title>recommend</title>
 {% endblock css %}
 {% block content %}
+<form action="" method='GET'>
   <div class="recommend-top">
   <p class="title">추천 키워드</p>
-  {% comment %} <div class="keywords"> {% endcomment %}
     <p>
-    <button class="review-button" onclick="">셋이 놀기 좋은</button> 
-    <button class="review-button" onclick="">스토리가 치밀한</button> 
-    <button class="review-button" onclick="">내가 탐정이라면?</button> 
-    <button class="review-button" onclick="">연인과 함께</button> 
-    <button class="review-button" onclick="">동화속 주인공되기</button> 
-    <button class="review-button" onclick="">오싹오싹 공포체험</button> 
-    <button class="review-button" onclick="">방탈출 초보 추천</button> 
+    <button class="rev-button" name="people" value="{{ '3' }}">셋이 놀기 좋은</button> 
+    <button class="rev-button" name="rating" value="{{ '4' }}">스토리가 치밀한</button> 
+    <button class="rev-button" name="genre" value="{{ '미스터리' }}">내가 탐정이라면?</button> 
+    <button class="rev-button" name="people" value="{{ '2' }}">연인과 함께</button> 
+    <button class="rev-button" name="genre" value="{{ '힐링' }}">마음이 따뜻해지는</button> 
+    <button class="rev-button" name="horror" value="{{ '4' }}">오싹오싹 공포체험</button> 
+    <button class="rev-button" name="difficulty" value="{{ '3' }}">방탈출 초보 추천</button> 
     </p>
-  {% comment %} </div> {% endcomment %}
-  
   </div>  
+</form>
+
   <div class="content">
     <p class="recommend-box">
     {% for theme in themes %}

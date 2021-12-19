@@ -8,10 +8,9 @@ django = "*"
 argon2 = "*"
 argon2-cffi = "*"
 pillow = "*"
+toml = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.8"
-
-web:node src/server.js

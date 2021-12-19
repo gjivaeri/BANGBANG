@@ -113,7 +113,8 @@ def home(request):
     theme_list = Theme.objects.all()
     themerev = ThemeRev.objects.all()
     shop_list = Shop.objects.all()
-    
+    # test = Theme.objects.filter(ShopID_id=shop_list.shopName)
+    # print(test)
     # count = test1.aggregate(count=Count('theme_ID'))
     # print(count, test1.count())
     # 테마에 속한 리뷰들의 개수를 불러옴 / 그 개수가 많은 순서대로 정렬
@@ -124,7 +125,11 @@ def home(request):
     allcount = shopscount + themescount
 
     q = request.GET.get('q','')
-    
+    t = request.GET.get('t', '')
+    if t :
+      theme_list = theme_list.filter(ShopID__shopName__icontains=t)
+      shop_list = shop_list.filter(shopName__icontains=t)
+      allcount = theme_list.count() + shop_list.count()
     if q :
       theme_list = theme_list.filter(themeName__icontains=q)
       shop_list = shop_list.filter(shopName__icontains=q)
@@ -431,8 +436,28 @@ def recommend(request):
     username = request.session.get('user')
     user = User.objects.filter(userID = username).values('userID')
     themes = Theme.objects.all()
-    shops = Shop.objects.all()
-    content = {'user' : user, 'themes' : themes, 'shops' : shops}
+    # shops = Shop.objects.all()
+
+    people = request.GET.get('people', '')
+    difficulty = request.GET.get('difficulty', '')
+    horror = request.GET.get('horror', '')
+    genre = request.GET.get('genre', '')
+    rating = request.GET.get('rating', '')
+    if people :
+      themes = themes.filter(themeRecomPeople=people)
+    if difficulty :
+      if(int(difficulty) >= 4):
+        themes = themes.filter(themeDifficulty__gte=difficulty)
+      else:
+        themes = themes.filter(themeDifficulty__lte=difficulty)
+    if horror :
+      themes = themes.filter(themeHorror__gte=horror)
+    if genre :
+      themes = themes.filter(themeGenre__icontains=genre)
+    if rating :
+      themes = themes.filter(themeRating__gte=rating)
+
+    content = {'user' : user, 'themes' : themes}
     return render(request, 'recommend.html', content)
     
 

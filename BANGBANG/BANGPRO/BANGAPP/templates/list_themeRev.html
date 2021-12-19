@@ -32,7 +32,7 @@
           <div class="post">
 {% comment %} 2.작성자 정보 해당 부분 {% endcomment %}
             <div class="writers">
-              <img src="" onerror="this.src={% static 'plus.png' %}">
+              {% comment %} <img src="" onerror="this.src={% static 'plus.png' %}"> {% endcomment %}
               {% if review.themeRev_WriterID.userImage %}
               <img class="profileImg" src="{{review.themeRev_WriterID.userImage.url}}" />
               {% endif %}

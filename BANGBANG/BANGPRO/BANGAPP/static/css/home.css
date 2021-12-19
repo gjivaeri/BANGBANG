@@ -117,20 +117,20 @@ body{
   font-family: 'NanumSquare'; 
 }
 
-.loc-filter{
+.locations{
   margin-right:8vw;
-  margin-top: 1vh;
+  margin-top: 3vh;
   display: flex;
   justify-content: left;
+
 }
 
-.loc-filter > .locations > .front {
+.locations > .front {
   font-size: 1vw;
   font-weight:400;
-  height:4vh;
   width: 40px;
+  margin:auto;
   text-align: center;
-  margin-top: 4vh;
 }
 
 .loc-filter > .locations{
@@ -138,7 +138,8 @@ body{
   display: flex;
   justify-content: space-around;
 }
-.loc-filter > .locations > button{
+
+.locations > .loc-button{
   border: 1px solid #53444F;
   color:#53444F;
   background-color: white;
@@ -150,7 +151,7 @@ body{
   margin-left:1vw;
 }
 
-.loc-filter > .locations > button:hover{
+.locations > .loc-button:hover{
   border: 1px solid #F55C03;
   color:#F55C03;
   background-color: white;
