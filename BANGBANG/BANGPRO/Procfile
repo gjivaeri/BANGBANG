@@ -1,1 +1,1 @@
-web: gunicorn bangbange.wsgi --log-file -
+web: gunicorn BANGPRO.wsgi --log-file -
