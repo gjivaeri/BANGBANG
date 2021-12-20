@@ -1,0 +1,315 @@
+/* vx, vh단위로 수정할 것 */
+html{height: 100%; }
+body{position: relative;width: 100%;height: 100%;}
+
+a.nav-review{
+  color:#F55C03;
+  border-bottom: solid 3px #F55C03;
+}
+
+a{
+  text-decoration: none;
+  color: #53444F;
+}
+
+a:hover{
+  color:#F55C03;
+}
+
+.content{
+  font-family: 'NanumSquare';
+  flex-direction: column; 
+  position: absolute;
+  top: 10%;
+  left: 12%;
+  border-color: #53444F;
+}
+
+/* write review, filter */
+.content-top{
+  display: flex;
+  margin-bottom: 3vh;
+  margin-left: 1.5vw;
+  align-items: center;
+  width: 73vw;
+}
+
+.content-top > .write{
+  flex-basis: 79%;
+  font-size: 1vw;
+}
+
+.content-top > .write > a{
+  border: 1px solid #F55C03;
+  border-radius: 20px;
+  padding: 1.2vh 1.5vw 1.2vh 1.5vw;
+  background-color: white;
+  text-decoration: none;
+  color: #F55C03;
+}
+
+.content-top > .write > a:hover{
+  background-color: #F55C03;
+  color: white;
+}
+
+
+.content-top > .more{
+  width:5vw;
+  text-align: center;
+  font-size: 1.2vw;
+}
+
+.content-top > .filter{
+  background-color:white;
+  border: 1px solid #53444F;
+  border-radius: 30px;
+  width:6.8vw;
+  height:4.2vh;
+  line-height: 2.7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-top > .filter > select {
+  width: 5vw;
+  height: 3vh;
+  background-color: none;
+  color: #53444F;
+  text-align: center;
+  font-size: 1vw;
+  border: none;
+  /* background: url(../images/black-arrow.png); */
+  /*필터가 세개라 화살표가 세개 뜨는 오류 수정해야 함 */
+  /* background: url('/images/black-arrow.png') no-repeat 95% 50%; */
+  background-size: 20px;
+  border-radius: 0px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  }
+
+.content-top > .filterselect::-ms-expand {
+  display: none;
+  }
+  
+/* each review */
+.posts{
+  display:flex;
+  width: 73vw;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.post{
+  width: 22vw;
+  margin-bottom: 2vh;
+}
+
+/* writer info */
+.writers{
+  border: 1px solid #53444F;
+  background-color: white;
+  display:flex;
+  border-radius: 15px;
+  height: 3.5vmax;
+  border-bottom: none;
+  padding: 1.1vh 1vw 1vh 1vw;
+  align-items: center;
+}
+
+.writers > .profileImg{
+  border-radius: 70%;
+  overflow: hidden;
+  margin-right: 10px;
+  width: 3.5vmax;
+  height: 3.5vmax;
+}
+
+.writers > div > .writeID{
+  font-size: 1.6vw;
+}
+
+.writers > div > .writeDate{
+  font-size: 0.9vw;
+  
+}
+
+/* store info */
+.info{
+  border: 1px solid #53444F;
+  background-color: white;
+  border-bottom: none;
+  border-radius: 15px;
+  display:flex;
+  padding:1vh 1vw 1vh 1vw;
+  height:20vh;
+  align-items: center;
+}
+
+.info > a > img {
+  border-radius: 20px;
+  margin: 0 0.8vw 0 0;
+  height: 10vmax;
+  width: 10vmax;
+  min-width: 110px;
+  min-height: 110px; 
+  max-height: 200px;
+}
+
+.info > div > .themeName{
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 1vh 0 1vh 0;
+}
+
+.info > div > .shopName{
+  font-size: 1rem;
+  margin: 1vh 0 1vh 0;
+}
+
+/* review summary */
+.summary{
+  vertical-align: middle;
+  border: 1px solid #53444F;
+  background-color: white;
+  border-radius: 15px;
+  display:flex;
+  flex-direction: column;
+  height: 32vh;
+  padding: 1vh 1.6vw 0vh 1.6vw;
+  justify-content: center;
+}
+
+.summary > .summary-cont{
+  line-height: 1.7;
+  height: 21vh;
+  overflow:hidden;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp : 7;
+  -webkit-box-orient: vertical;
+  font-size: 1.1rem;
+}
+
+.summary > .summary-cont > a {
+  text-decoration: none;
+  color: #53444F;
+}
+
+/* like count  */
+.summary-bottom{
+  display:flex;
+  height: 3vh;
+  margin-top: 3.5vh;
+  font-size: 1.3rem;
+  color: #53444F;
+}
+
+.summary-bottom > .like-count{
+  flex-basis: 75%;
+}
+
+.summary-bottom > div > .like{
+  font-size: 1.3rem;
+  border: none;
+  color: #53444F;
+  background-color: white;
+}
+
+.summary-bottom > div > .hate{
+  font-size: 1.3rem;
+  border: none;
+  color: #53444F;
+  background-color: white;
+}
+
+.summary-bottom > div > .like:hover{
+  color:#F55C03;
+}
+
+.summary-bottom > div > .hate:hover{
+  color:#F55C03;
+}
+
+/* .themeRevRating{
+  font-size: 1.1vw;
+} */
+
+
+/* 타블릿 */
+@media(max-width:1023px) {
+  .post{
+    width: 34vw;
+  }
+  
+  .content-top{
+    margin-left: 3.2vw;
+    width: 73vw;
+  }
+  
+  .content-top > .write{
+    flex-basis: 70%;
+  }
+  
+  .content-top > .more{
+    width:6vw;
+    margin-right: 1vw;
+  }
+  
+  .content-top > .filter{
+    width: 8vw;
+    height: 4vh;
+  }
+  .content-top > .filter > select {
+    font-size:0.9rem;
+    width: 5vw;
+    }
+  .writers > div > .writeID{
+    font-size: 3vw;
+  }  
+  .writers > div > .writeDate{
+    font-size: 2vw;
+  }    
+}
+
+/* 스마트폰 */
+@media(max-width:767px){  
+  .post{
+    width: 60vw;
+  }
+
+  .content-top{
+    margin-left: 6.5vw;
+    width: 73vw;
+  }
+  
+  .content-top > .write{
+    flex-basis: 58%;
+  }
+  
+  .content-top > .more{
+    width:7vw;
+    margin-right: 1vw;
+  }
+  
+  .content-top > .filter{
+    width: 15vw;
+    height: 3.8vh;
+  }
+  .content-top > .filter > select {
+    font-size:0.9vw;
+    width: 6vw;
+    }
+  .info > a > img {
+    width: 16vmax;
+    margin: 0 2vw 0 2vw;
+  }
+  .writers > div > .writeID{
+    font-size: 4vw;
+  }  
+  .writers > div > .writeDate{
+    font-size: 2vw;
+  }  
+}

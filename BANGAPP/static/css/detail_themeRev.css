@@ -1,0 +1,249 @@
+html{height: 100%; font-size:16px;}
+body{position: relative;width: 100%;height: 100%; margin:0;}
+
+a{
+  text-decoration:none;
+  color: black;
+}
+
+.content{
+  color: #53444F;
+  font-family: 'NanumSquare';
+  display:flex;
+  position: absolute;
+  top: 8%;
+  left: 10%;
+}
+
+.themeRevList{
+  width: 35vmax;
+  margin-left:1vw;
+  float: left;
+}
+
+.themeRevDetail{
+  width: 43vmax;
+  float:right;
+  background-color: rgb(238, 238, 238);
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+}
+
+h2{
+  padding-left:0.5vw;
+  margin-top: 7vh;
+  margin-bottom: 4vh;
+  font-size: 1.6rem;
+}
+/* review summary */
+.review-box{
+  vertical-align: middle;
+  border: 1px solid black;
+  border-radius: 30px;
+  display:flex;
+  flex-direction: column;
+  padding:1% 1% 1% 1%;
+  height: 24vh;
+  width: 32vmax;
+  margin-bottom: 5%;
+  background-color: white;
+}
+
+.review-box > .summary-cont{
+  padding: 3vh 2vh 0vh 3vh;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  height: 25vh;
+  overflow:hidden;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp : 6;
+  -webkit-box-orient: vertical;
+
+}
+
+.review-box > .summary-cont > a {
+  text-decoration: none;
+  color: #53444F;
+}
+
+
+/* like count  */
+.summary-bottom{
+  display:flex;
+  padding: 2.5vh 2vh 1.5vh 3vh;
+}
+
+.summary-bottom > .like-count{
+  flex-basis: 70vh;
+  font-size: 1.5vw;
+}
+
+.summary-bottom > div > .like{
+  /* width:5vh; */
+  border: none;
+  background-color: white;
+  font-size: 1.1vw;
+}
+
+.summary-bottom > div > .hate{
+  /* width:5vh; */
+  border: none;
+  background-color: white;
+  font-size: 1.1vw;
+
+}
+
+.summary-bottom > div > .like:hover{
+  color:#F55C03;
+}
+
+.summary-bottom > div > .hate:hover{
+  color:#F55C03;
+}
+
+
+
+
+/* detail_theme css */
+.detailTop{
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+  font-size: 1.3vw;
+  font-weight: 550;
+  display: flex;
+}
+
+.detailTop > .close{
+  flex-basis: 70%;
+}
+
+.detailTop > .close > a{
+  color: #53444F;
+}
+
+.detailTop > .change > a{
+  color:#F55C03;
+  margin-left:1vw;
+}
+
+.change > span{
+  display:none;
+}
+
+.hidden{
+  display:none;
+}
+
+.box{
+  border: 1px solid #53444F;
+  background-color: white;
+  border-radius: 15px;
+  /* vertical-align: middle; */
+  padding: 2vh 1.6vw 2vh 1.6vw;
+}
+
+.boxTitle{
+  font-size: 1.2rem;
+  font-weight: 550;
+  height:auto;
+  margin-top: 1.5vh;
+}
+
+/* writer css */
+.writer{
+  display: flex;
+  height: auto;
+  margin: auto;
+}
+
+.profile{
+  border-radius: 80px;
+  width: 5vmax;
+  height: 5vmax;
+  margin-right: 1vw;
+}
+
+.writerInfo{
+  flex-direction: column;
+}
+
+#writerName{
+  margin-top: 1.5vh;
+  margin-bottom: 0.4vh;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* star-review css */
+.star-review{
+  display:flex;
+  justify-content:space-between;
+  height:4vmax;
+}
+
+.text-top{
+  width: 20vw;
+}
+
+.rate{
+  height: 3vh;
+  margin: auto;
+  font-size:1.4rem;
+  font-weight: 600;
+}
+
+.rateit{
+  margin: auto;
+  margin-top: 1vh;
+}
+
+/* visited-theme css */
+.visited-theme{
+  display:flex;
+  height:22vh;
+  margin: auto;
+}
+
+.text-middle{
+  flex-basis:30%;
+}
+
+.themeImg{
+  height: auto;
+  margin: auto;
+}
+
+img{
+  width: 11vmax;
+  height: 11vmax;
+  border-radius:20px;
+}
+
+.theme-info{
+  height: auto;
+  margin: auto;
+}
+
+.themeName {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1vh;
+}
+
+.shopName{
+  margin-bottom: 1vh;
+
+}
+
+/* text-review css */
+.text-review{
+  height: 40vh;
+ 
+}
+
+.textCon{
+  margin-top: 2vh;
+  font-size: 1.3rem;
+  line-height: 1.6;
+}

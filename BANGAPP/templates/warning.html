@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<style>
+  .content{
+    margin-top: 50vh;
+    margin-left: 30vw;
+  }
+</style>
+{% endblock css %}
+{% block content %}
+<div class="content">
+잘못된 경로로 접근 하셨습니다.<br>
+<a href="{% url 'login' %}">
+로그인페이지로 돌아가기
+</a><br>
+<a href="{% url 'home' %}">
+  홈화면으로 돌아가기
+</a>
+</content>
+{% endblock content %}

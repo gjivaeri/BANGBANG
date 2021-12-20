@@ -1,0 +1,28 @@
+{% load static %}
+{% include "django/forms/widgets/input.html" %}
+
+{% comment %} 
+<link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script> {% endcomment %}
+
+{% comment %} 위의 주석 대신 사용. 덕분에 widgets.py와 연결됨 {% endcomment %}
+{{ form.media }}
+
+<input type="range" name="ThemeRevRating" value="5" required="" id="id_grade" min="0" max="5" step="1" style="display:none;">
+<div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade" data-rateit-mode="font"  style="font-size:50px">
+</div> 
+
+<script>
+$('#star_id_grade').click(function(){
+  star = $('#star_id_grade').rateit('value')
+  $('#id_grade').text(star)
+  $('#id_grade').val(star)
+  test = $('#id_grade')
+  console.log(test.val())
+});
+
+</script> 

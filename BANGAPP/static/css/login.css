@@ -1,0 +1,204 @@
+.under-menu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+form{
+  height: 100%;
+}
+
+body{
+  color: #53444F;  /* base */
+  font-family: 'NanumSquare';  /* base */
+  background-color: #F8F8F8;  /* base */
+}
+
+
+html, body{
+  height: 100%;
+}
+
+.wrap {
+  height: 100%;
+}
+
+.form{
+  margin-bottom: 0;
+  margin-top: 0;
+  margin-left: 26%;
+  margin-right: 26%;
+  height: 100%;
+  background-color: rgb(243, 243, 243);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-title{
+  margin-bottom: 8vh;
+  font-size: 1.5vw;
+  font-weight: 800;
+  margin-top: 11vh;
+}
+
+.login{
+  display: flex;
+  align-items: center; 
+  flex-direction: column;
+}
+
+img{
+  width: auto; height: auto;
+  max-width: 1.9vw;
+  max-height: 1.9vw;
+  margin: 0px;
+}
+
+.cacao-login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9e000;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 1vw;
+  text-align: center;
+}
+
+
+.signup-go, .find-id, .find-password{
+  padding-right: 2.3vw;
+  padding-left: 2.3vw;
+  font-size: 0.8vw;
+}
+
+.signup-go, .find-id {
+  border-right: solid 1.4px rgb(150, 150, 150);
+}
+
+.submit-button{
+  background-color: #F55C03;
+  border-color: #F55C03; 
+  border: 0;
+  outline: 0;
+  color: white;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  font-size: 1vw;
+  font-family: 'NanumSquare';
+}
+
+a:link, a:visited {
+  text-decoration: none;
+  color: #53444F;
+}
+
+.cacao-login{
+ width: 24vw;
+ height: 2.2vw;
+ border-radius: 35px;
+}
+
+input{
+  width: 23vw;
+  height: 2.1vw;
+  border-radius: 35px;
+  border-color: #5c4f59;
+}
+
+.submit-button{
+  width: 24vw;
+  height: 2.4vw;
+  border-radius: 35px;
+}
+
+.cacao-login{
+  margin-bottom: 2.5vh;
+}
+
+.submit-button{
+  margin-bottom: 2.2vh;
+  cursor: pointer;
+}
+
+input{
+  text-align: center;
+  border-width: 1px;
+  margin-bottom: 2.2vh;
+}
+
+input::placeholder{
+  color: rgb(219, 219, 219);
+  font-size: 1vw;
+  font-family: 'NanumSquare';
+}
+
+
+a.nav-mypage{
+  color:#F55C03;
+  border-bottom: solid 3px #F55C03;
+}
+
+.cacao-go{
+  font-weight: 700;
+}
+
+input:focus {
+  outline: 1.5px solid #F55C03;
+  border-color: #F55C03;
+}
+
+@media (max-width: 550px) {
+  .login-title{
+    margin-bottom: 6vh;
+    font-size: 4.8vmin;
+    font-weight: 800;
+    margin-top: 7vh;
+  }
+
+  .form{
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+
+  img{
+    max-width: 4vw;
+    max-height: 4vw;
+  }
+  
+  input{
+    width: 51vw;
+    height: 3.7vh;
+    margin-bottom: 2vh;
+  }
+
+  input::placeholder{
+    font-size: 2.3vmin;
+  }
+
+  .submit-button{
+    width: 52vw;
+    height: 4.2vh;
+    font-size: 2.3vmin;
+    margin-bottom: 2vh;
+  }
+
+  .cacao-login{
+    width: 52vw;
+    height: 4.2vh;
+    font-size: 2.3vw;
+    padding: 0px;
+  }
+
+  .signup-go, .find-id, .find-password{
+    padding-right: 2.3vw;
+    padding-left:  2.3vw;
+    font-size: 1.8vw;
+  }
+
+}
+
+
+  

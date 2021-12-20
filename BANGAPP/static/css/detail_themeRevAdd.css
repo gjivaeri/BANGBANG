@@ -1,0 +1,212 @@
+html{
+  height: 100%;
+}
+
+body{
+  height: 100%;
+  margin: 0;
+}
+.wrap{
+  height: 100%;
+} 
+
+a.nav-review{
+  color:#F55C03;
+  border-bottom: solid 3px #F55C03;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.sides{
+  color: #53444F;
+  font-family: 'NanumSquare';
+  display:flex;
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  line-height: 1.5;
+  font-size: 1.2vw;
+  /* height: 100%; */
+}
+
+
+/* left-side themeinfo */
+.left-side{
+  margin-top: 5.5vh;
+  width: 35vmax;
+  float: left;
+  height: 100vh;
+}
+
+.themeInfoBox{
+  margin-top: 20vh;
+  width: 35vmax;
+  float: left;
+}
+
+.themeInfo-top{
+  width: 32vmax;
+  /* height: 30vh; */
+  margin-bottom: 3vh;
+  display: flex;
+}
+
+img{
+  width: 14vw;
+  height: 14vw;
+  border-radius: 15px;
+  min-width: 120px;
+  min-height: 120px;
+}
+
+h2{
+  width: 18vw;
+  margin-bottom: 1vmax;
+}
+
+.themeInfo{
+  width: 15vmax;
+  margin-left: 3vw;
+  font-weight: 700;
+  margin-top: -1vh;
+}
+
+.themeInfo > .info{
+  display: flex;
+  margin-top:-0.1vh;
+  /* padding-top:2vh; */
+}
+
+.themeInfo > .info > .text{
+  /* margin-top:4.5px; */
+  margin-top:0.5vmax;
+  margin-right: 1vw;
+}
+
+.themeInfo > button{
+  border: 1px solid #53444F;
+  color:#53444F;
+  background-color: white;
+  border-radius: 30px;
+  width: 6vw;
+  height: 2vmax;
+  min-width: 50px;
+  font-size: 1vw;
+  margin-top:0.8vmax;
+}
+
+.themeInfo > button:hover{
+  color:white;
+  background-color: #F55C03;
+  border: 1px solid white;
+}
+
+#num{
+  margin-left:1.1vmax;
+  margin-top:0.5vmax;
+}
+
+.themeInfo > div{
+  font-size: 1vw;
+  margin-top: 1vh;
+}
+
+.themeDetail{
+  width: 32vmax;
+  min-height: 10vh;
+  height:auto;
+  margin-bottom: 5vh;
+}
+
+
+.theme-describe{
+  font-size: 1vw;
+  margin-top: 2vw;
+  width: 30vw;
+  line-height: 1.5vw;
+}
+
+
+
+
+/* right-sdie theme review */
+.right-side{  
+  width: 43vmax;
+  float:right;
+  background-color: rgb(238, 238, 238);
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  cursor: pointer;
+}
+
+/* 스크롤 안보이게 */
+.right-side::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+h3{
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.review-box{
+  border: solid 1px;
+  border-radius: 30px;
+  background-color: white;
+  margin-top: 3vh;
+  cursor: pointer;
+  height: 11vw;
+  width: 40vw;
+  margin: 3vh auto;
+  padding: 3vh;
+}
+
+.summary-cont{
+  font-size: 1.2vw;
+  font-weight: 300;
+  line-height: 2vw;
+  height: 9vmax;
+  overflow:hidden;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp : 6;
+  -webkit-box-orient: vertical;
+}
+
+
+/* like count in review box  */
+.summary-bottom{
+  display:flex;
+  font-size:1.3vw;
+  margin-left:0.8vw;
+  margin-top:1vw;
+}
+
+.summary-bottom > .like-count{
+  flex-basis: 70%;
+}
+
+.summary-bottom > div > .like{
+  width:5vw;
+  border: none;
+  background-color: white;
+  font-size: 1.2vw;
+}
+
+.summary-bottom > div > .hate{
+  width:8vw;
+  border: none;
+  font-size: 1.2vw;
+  background-color: white;
+}
+
+.summary-bottom > div > .like:hover{
+  color:#F55C03;
+}
+
+.summary-bottom > div > .hate:hover{
+  color:#F55C03;
+}

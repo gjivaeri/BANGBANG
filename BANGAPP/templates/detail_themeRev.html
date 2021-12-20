@@ -1,0 +1,104 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href={% static 'css/detail_themeRev.css' %} rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+<title>detail review</title>
+{% endblock css %}
+
+{% block content %}
+<div class="content">
+  <div class="themeRevList">
+    <h2>리뷰 목록</h2>
+    {% for review in reviews %}
+    <a href="{% url 'detail_themeRev' review.pk%}">
+      <div class="review-box">
+        <div class="summary-cont">
+          {% comment %} <a href="{% url 'detail_themeRev' review.pk %}"> {% endcomment %}
+          {{review.themeRevContent}}
+        </div>
+        <div class="summary-bottom">
+          <div class="like-count" id="count-{{ review.pk }}">
+            ♡{{ review.themeRevRecom }}+
+            {% comment %} 이미지 삽입 오류 수정되면 하트 이미지로 대체 {% endcomment %}
+          </div>
+          <div>
+            <input type="button" class="like" name="{{ review.pk }}" value="추천">
+          </div>
+          <div>
+            <input type="button" class="hate" name="{{ review.pk }}" value="비추천">
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <div class="themeRevDetail">
+      <div class="detailTop">
+        <div class="close">
+          <a href="{% url 'list_themeRevAll' %}">
+            리뷰 닫기
+          </a>
+        </div>
+        <div class="change hidden">
+          <span id="user_name">{{ username }}</span>
+          <span id="writer_name">{{ writer.userID }}</span>
+          <a href="{% url 'edit_themeRev' themeRev.pk %}" class="edit">
+            수정하기
+          </a>
+          <a href="{% url 'delete_themeRev' themeRev.pk %}" class="delete" onclick="return confirm('정말 삭제 하시겠습니까?')">
+            삭제하기
+          </a>
+        </div>
+      </div>
+      
+      <div class="writer box">
+        <div class="profileImg">
+          <img class="profile" src="{{ writer.userImage.url }}" /></div>
+        <div class="writerInfo">
+          <div id="writerName">{{ writer.usersSubname }}님</div>
+          <div class="writeDate">{{ themeRev.themeRevWriteDate|date:'Y년 m월 d일'}} 작성</div>
+        </div>
+      </div>
+
+      <div class="star-review box">
+        <div class="boxTitle text-top">별점 리뷰</div>
+        <div class="rate">{{themeRev.themeRevRating}}.0</div>
+        <div class="rateit" data-rateit-value="{{themeRev.themeRevRating}}" data-rateit-ispreset="true" 
+          data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:3vw">
+        </div>
+      </div>
+
+      <div class="visited-theme box">
+        <div class="boxTitle text-middle">방문한 방탈출 테마</div>
+        <div class="themeImg">
+          <img src="{{ theme.themeImage.url }}" />
+        </div>
+        <div class ="theme-info">
+          <div class="fieldWrapper themeName">
+            {{theme.themeName}}
+          </div>
+          <div class="fieldWrapper shopName">
+            {{theme.ShopID}}
+          </div>
+          <div class="fieldWrapper visDate">
+            {{themeRev.themeRevDate|date:'Y-m-d'}}
+          </div>
+        </div>
+      </div>
+  
+      <div class="text-review box">
+        <div class="boxTitle text-bottom">텍스트 리뷰</div>
+        <div class="textCon">{{themeRev.themeRevContent}}</div>
+      </div>    
+  </div>
+
+</div>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="/static/js/like.js"></script>
+<script type="text/javascript" src="/static/js/hate.js"></script>
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+<script type="text/javascript" src="/static/js/post_edit.js"></script>
+{% endblock js %}

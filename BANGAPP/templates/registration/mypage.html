@@ -1,0 +1,42 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'css/mypage.css' %}" rel="stylesheet" type="text/css">
+<title>mypage</title>
+{% endblock css %}
+
+{% block content %}
+  <div class="profile-form">
+     <div class="profile">
+        <div class="profile-image">
+          <img src="{{user.userImage.url}}">
+          {% comment %} <img src="" onerror="this.src={% static 'images/plus.png' %}"> {% endcomment %}
+        </div>
+        {% comment %} <form action="" method="post">
+          <input type="file" class="image-upload" id="imgfile" name="imgfile">
+        </form> {% endcomment %}
+     </div>
+     <div class="profile-ment">
+      {{user.usersSubname}}님, 안녕하세요.
+     </div>
+     <div class="buttons">
+        <div class="on-buttons">
+            <a href="{% url 'edit_profile' %}">
+              <button type="button" class="modify">회원정보 수정</button>
+            </a>
+            <a href="{% url 'mylike' %}">
+              <button type="button" class="likes" onclick="location.href=''">좋아요</button>
+            </a>
+        </div>
+        <div class="under-buttons">
+            <a href="{% url 'myreview' %}">
+              <button type="button" class="my-review" onclick="location.href=''">리뷰 관리</button>
+            </a>
+            <button type="button" class="logout" onclick="location.href='/logout'">로그아웃</button>
+        </div>
+      </div>
+  </div>
+
+{% endblock content %}
+

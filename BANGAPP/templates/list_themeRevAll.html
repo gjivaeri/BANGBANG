@@ -1,0 +1,36 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href={% static 'css/list_themeRevAll.css' %} rel="stylesheet" type="text/css">
+<title>review all</title>
+{% endblock css %}
+{% block content %}
+  <div class="content">
+    <h2>리뷰 목록</h2>
+
+    <div class="themeRev">
+      {% for review in reviews %}
+      <a href="{% url 'detail_themeRev' review.pk%}">
+      <div class="review-box">
+        <div class="summary-cont">{{review.themeRevContent}}</div>
+        <div class="summary-bottom">
+          <div class="like-count" id="count-{{ review.pk }}">
+            ♡{{ review.themeRevRecom }}+</p>
+            {% comment %} 이미지 삽입 오류 수정되면 하트 이미지로 대체 {% endcomment %}
+          </div>
+          <div>
+          <input type="button" class="like" name="{{ review.pk }}" value="추천">
+          </div>
+          <div>
+          <input type="button" class="hate" name="{{ review.pk }}" value="비추천">
+        </div>        
+      </div>
+    </div>
+      </a>
+      {% endfor %}
+  <div>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="/static/js/like.js"></script>
+<script type="text/javascript" src="/static/js/hate.js"></script>
+{% endblock js %}

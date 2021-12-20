@@ -1,0 +1,58 @@
+{% extends '../base.html' %}
+
+{% block css %}{% load static %}
+<link href="{% static 'css/edit_profile.css' %}" rel="stylesheet" type="text/css">
+<title>edit_profile</title>
+{% endblock css %}
+
+{% block content %}
+<div class="form">
+    <div class="edit">
+        <div class="edit-title">
+        회원정보 수정
+        </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="edit-form">
+                    <input class="name" type="text" name='userName' value="{{user.userName}}" placeholder="이름" style="color:#53444F;"><br>
+                    <input class="id" type="text" name="userID" value="{{user.userID}}" placeholder="아이디" style="color:#53444F;" readonly><br>
+                    <input class="password" type="password" name="userPW" placeholder="현재 비밀번호 확인" style="color:#53444F;" required><br>
+                    <input class="password" type="password" name="userPW1" placeholder="새 비밀번호 (비밀번호 변경 경우만)" style="color:#53444F;"><br>
+                    <input class="password" type="password" name="userPW2" placeholder="새 비밀번호 확인" style="color:#53444F;"><br>
+                    <input class="nickname" type="text" value="{{user.usersSubname}}" name="usersSubname" placeholder="닉네임" style="color:#53444F;" autocomplete="off"><br>
+                    <input class="birthday" type="date" value="{{user.userBirthday | date:'Y-m-d'}}" data-placeholder="생년월일" name='userBirthday' style="color:#53444F;"><br>
+                    <!-- <input class="gander" type="password" name="password" placeholder="성별"> -->
+                    <!-- 성별 -->
+                    <select name='userGender' style="color:#53444F;">
+                        <option value="gender" disabled hidden>성별</option>
+                        <option id='userGender' name='userGender' value='1'
+                            {% if user.userGender == 1 %}selected="selected"{% endif %}
+                        >남</option>
+                        <option id='userGender' name='userGender' value='2'
+                        {% if user.userGender == 2 %}selected="selected"{% endif %}
+                        >여</option>
+                    </select><br>
+                    <label class="ImgUpload" for="userImage" style="color:#53444F;">
+                    프로필 사진
+                    </label><br>    
+                    <input type="file" id='userImage' name='userImage' accept="image/*"/><br>
+                    <div class="edit-button">
+                        <button class="submit-button" type="submit">수정 완료</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> 
+</div>
+<script>
+if ('{{error}}') {
+    alert('{{error}}');
+}
+
+if('{{message}}') {
+    alert('{{message}}')
+}
+</script>
+{% endblock content %}
+
+

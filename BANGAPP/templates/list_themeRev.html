@@ -1,0 +1,99 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href={% static 'css/list_themeRev.css' %} rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+{% comment %} <link rel="black-arrow" type="image/png" href="http://127.0.0.1/static/images/black-arrow.png">  {% endcomment %}
+{% endblock css %}
+{% block header %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous" defer></script>
+    <title>review list</title>
+{% endblock header %}
+{% block content %}
+  <div class="content">
+{% comment %} 1.필터 해당 부분  {% endcomment %}
+    <div class="content-top">
+      <div class="write">
+        <a href="/new/themeRev" >리뷰 작성하기 + </a>
+      </div> 
+      <div class="more"><a href="/list_themeRevAll">더보기 </a></div>
+      {% comment %} <div class="more"><a href="{% url '' %}">더보기</a></div> {% endcomment %}
+      <div class="filter">
+        <select name="sort-select" id="sort-select" onchange="location = this.value;">
+          <option class="sort-date" value="/list_themeRev">최신순 ▼</option>
+          <option class="sort-likes" value="?sort=themeRevRecom">인기순 ▼</option>
+          <option class="sort-rating" value="?sort=themeRevRating">별점순 ▼</option>
+        </select>
+      </div>
+    </div>   
+
+    <div class="posts">
+        {% for review in reviews %}
+          <div class="post">
+{% comment %} 2.작성자 정보 해당 부분 {% endcomment %}
+            <div class="writers">
+              {% comment %} <img src="" onerror="this.src={% static 'plus.png' %}"> {% endcomment %}
+              {% if review.themeRev_WriterID.userImage %}
+              <img class="profileImg" src="{{review.themeRev_WriterID.userImage.url}}" />
+              {% endif %}
+              <div>
+                <div class="writeID">{{review.themeRev_WriterID.usersSubname}} 님</div>
+                <div class="writeDate">{{review.themeRevWriteDate|date:"Y년 m월 d일"}} 작성</div>
+              </div>
+            </div>
+{% comment %} 3.가게 정보 해당 부분 {% endcomment %}
+            {% for theme in themes%}
+            {% if review.theme_ID_id == theme.themeID %}
+            {% for shop in shops %}
+            {% if shop.shopID == theme.ShopID_id %}
+            <div class="info">
+              <a href="{% url 'detail_theme' theme.pk %}">
+                <img src="{{theme.themeImage.url}}"> 
+              </a> 
+              <div>
+                <div class="themeName">{{theme.themeName}}</div>
+                <div class="shopName">{{shop.shopName}}</div>
+                <div class="themeRevRating">
+                  <div class="rateit" data-rateit-value="{{review.themeRevRating}}" data-rateit-ispreset="true" 
+                  data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+                  </div>    
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+{% comment %} 4.리뷰 내용 해당 부분 {% endcomment %}
+            <div class="summary">
+              <div class="summary-cont">
+                <a href="{% url 'detail_themeRev' review.pk %}">
+                {{review.themeRevContent}}
+                </a>
+              </div>
+{% comment %} 5.좋아요 해당 부분 {% endcomment %}
+              <div class="summary-bottom">
+                <div class="like-count" id="count-{{ review.pk }}">
+                  ♡{{ review.themeRevRecom }}+</p>
+                </div>
+                <div>
+                <input type="button" class="like" name="{{ review.pk }}" value="추천">
+                </div>
+                <div>
+                <input type="button" class="hate" name="{{ review.pk }}" value="비추천">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+  <div>
+  
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="/static/js/like.js"></script>
+<script type="text/javascript" src="/static/js/hate.js"></script>
+<script type="text/javascript" src="/static/js/sorted.js"></script>
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+{% endblock js %}

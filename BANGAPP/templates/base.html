@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+  <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css">
+  {% comment %} For Start Rating {% endcomment %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>  {% endcomment %}
+  {% block header %}
+  {% endblock header %}
+  {% block css %}
+  {% endblock css %}
+  <title>search</title>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav-bar">
+      <div class="nav-title">
+        <strong>방탈출 예약 시스템</strong>
+      </div>
+      <div class="nav-menu">
+        <a class="nav-search" href="{% url 'home' %}">검색</a>
+        <a class="nav-recommend" href="{% url 'recommend' %}">추천</a>
+        <a class="nav-review" href="{% url 'list_themeRev' %}">리뷰</a>
+        <a class="nav-mypage" href="{% url 'mypage' %}">마이페이지</a>
+      </div>
+    </div>
+    {% block content %}
+    {% endblock content %}
+  </div>
+  {% block js %}
+  {% endblock js%}
+</body>
+</html>

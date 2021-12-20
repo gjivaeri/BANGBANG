@@ -1,0 +1,100 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/detail_themeRevAddDetail.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{% static 'widgets/rateit/rateit.css' %}">
+<title>theme review detail</title>
+{% endblock css %}
+
+{% block content %}
+  <div class="sides">
+
+    <div class="left-side">
+      <div class="themeInfoBox">
+        <div class="themeInfo-top">
+          <a href="{% url 'detail_theme' theme.pk %}">
+          <div class="imageField">
+            <img src="{{theme.themeImage.url}}"> 
+          </div>       
+          </a>
+
+
+          <div class="themeInfo">
+            <div>{{shop.shopName}}</div>
+            <div><h2>{{theme.themeName}}</h2></div>
+            <div class="info"><div class="text">난이도</div>
+              <div class="rateit" data-rateit-value="{{theme.themeDifficulty}}" data-rateit-ispreset="true" 
+              data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+              </div> 
+            </div>
+            <div class="info"><div class="text">공포도</div>
+              <div class="rateit" data-rateit-value="{{theme.themeHorror}}" data-rateit-ispreset="true" 
+              data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
+              </div>
+            </div>
+            <div class="info"><div class="text">인원</div>
+              <div id="num">{{theme.themeRecomPeople}}</div>
+            </div>
+            <button type="submit" class="themelike" name="{{ theme.pk }}" id="count-{{ theme.pk }}">♡   {{ theme.themeLike }}</button>
+          </div>
+          
+        </div>
+        <div class="theme-describe">
+          {{theme.themeIntro}}
+        </div>
+      </div>
+    </div>
+
+
+    <div class="themeRevDetail">
+      <div class="detailTop">
+        <div class="close">
+          <a href="{% url 'detail_themeRevAdd' theme.pk %}">
+            리뷰 닫기
+          </a>
+        </div>        
+        {% comment %} 자기 게시글만 수정,삭제 가능하도록 {% endcomment %}
+        <div class="change hidden">
+          <span id="user_name">{{ username }}</span>
+          <span id="writer_name">{{ writer.userID }}</span>
+          <a href="{% url 'edit_themeRev' review.pk %}" class="edit">
+            수정하기
+          </a>
+          <a href="{% url 'delete_themeRev' review.pk %}" class="delete" onclick="return confirm('정말 삭제 하시겠습니까?')">
+            삭제하기
+          </a>
+          <span id="user_name">{{ username }}</span>
+          <span id="writer_name">{{ writer.userID }}</span>
+        </div>
+      </div>
+      
+      <div class="writer box">
+        <div class="profileImg">
+          <img class="profile" src="{{ writer.userImage.url }}" /></div>
+        <div class="writerInfo">
+          <div id="writerName">{{ writer.usersSubname }}님</div>
+          <div class="writeDate">{{ review.themeRevWriteDate|date:'Y년 m월 d일'}} 작성</div>
+        </div>
+      </div>
+
+      <div class="star-review box">
+        <div class="boxTitle text-top">별점 리뷰</div>
+        <div class="rate">{{review.themeRevRating}}.0</div>
+        <div class="rateit" data-rateit-value="{{review.themeRevRating}}" data-rateit-ispreset="true" 
+          data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:3vw">
+        </div>
+      </div>
+  
+      <div class="text-review box">
+        <div class="boxTitle text-bottom">텍스트 리뷰</div>
+        <div class="textCon">{{review.themeRevContent}}</div>
+      </div>    
+    </div>
+
+  </div>
+{% endblock content %} 
+{% block js %}
+<script src="{% static 'widgets/rateit/jquery.rateit.min.js' %}" ></script>
+<script type="text/javascript" src="/static/js/themelike.js"></script>
+<script type="text/javascript" src="/static/js/post_edit.js"></script>
+{% endblock js %}

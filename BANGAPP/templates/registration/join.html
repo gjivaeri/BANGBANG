@@ -1,0 +1,48 @@
+{% extends '../base.html' %}
+
+{% block css %}{% load static %}
+<link href="{% static 'css/join.css' %}" rel="stylesheet" type="text/css">
+<title>join</title>
+{% endblock css %}
+
+{% block content %}
+<div class="form">
+    <div class="signup">
+        <div class="signup-title">
+        회원가입
+        </div>
+            {% if user.is_authenticated %}
+            <p>로그인 된 유저입니다</p>
+            {% else %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="signup-form">
+                    <input class="name" type="text" name='userName' placeholder="이름" style="color:#53444F;" autocomplete="off"><br>
+                    <input class="id" type="text" name="userID" placeholder="아이디" style="color:#53444F;" autocomplete="off"><br>
+                    <input class="password" type="password" name="userPW1" placeholder="비밀번호" style="color:#53444F;" autocomplete="off"><br>
+                    <input class="password" type="password" name="userPW2" placeholder="비밀번호 확인" style="color:#53444F;"><br>
+                    <input class="nickname" type="text" name="usersSubname" placeholder="닉네임" style="color:#53444F;" autocomplete="off"><br>
+                    <input class="birthday" type="date" data-placeholder="생년월일" name='userBirthday' style="color:#53444F;"><br>
+                    <!-- <input class="gander" type="password" name="password" placeholder="성별"> -->
+                    <!-- 성별 -->
+                    <select name='userGender' style="color:#53444F;">
+                        <option value="gender" disabled hidden selected>성별</option>
+                        <option id='userGender' name='userGender' value='1'>남</option>
+                        <option id='userGender' name='userGender' value='2'>여</option>
+                    </select>
+                    <div class="signup-button">
+                        <button class="submit-button" type="submit">회원가입</button>
+                    </div>
+                    <div class="cacao-signup">
+                        <img src="{% static 'images/image-removebg-preview.png' %}">
+                        <a class="cacao-go" href="">카카오 계정으로 회원가입</a>
+                    </div>
+                </div>
+            </form>
+            {% endif %}
+        </div>
+    </div> 
+</div>
+{% endblock content %}
+
+
