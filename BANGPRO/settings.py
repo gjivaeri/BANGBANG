@@ -13,7 +13,7 @@ import os, json
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 import dj_database_url
-import django_heroku
+import django_on_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'BANGAPP',
     'django.forms'
+    'django-heroku'
 ]
 
 MIDDLEWARE = [
@@ -155,4 +156,4 @@ MEDIA_URL = '/media/'
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
