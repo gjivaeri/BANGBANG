@@ -18,7 +18,7 @@ pip install pillow
 pip install argon2-cffi
 ```
 
-if error occurs, recommend you to migrate dummy data before runserver
+if error occurs, please migrate dummy data before runserver
 ```bash
 python manage.py makemigrations
 python manage.py migrate
