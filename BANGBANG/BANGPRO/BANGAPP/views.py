@@ -126,6 +126,7 @@ def home(request):
 
     q = request.GET.get('q','')
     t = request.GET.get('t', '')
+    sort = request.GET.get('sort','')
     if t :
       theme_list = theme_list.filter(ShopID__shopName__icontains=t)
       shop_list = shop_list.filter(shopName__icontains=t)
@@ -134,6 +135,8 @@ def home(request):
       theme_list = theme_list.filter(themeName__icontains=q)
       shop_list = shop_list.filter(shopName__icontains=q)
       allcount = theme_list.count() + shop_list.count()
+    if sort :
+      theme_list = theme_list.order_by(sort)
     content = {'shop_list' : shop_list, 'theme_list' : theme_list, 'allcount' : allcount, 'q' : q, 'themerev' : themerev}
     return render(request, 'home.html', content)
 
@@ -279,7 +282,7 @@ def delete_themeRev(request, themeRev_pk):
     print(themeRev.themeRev_WriterID.pk, user.userID)
     if themeRev.themeRev_WriterID.pk == user.userID:
       themeRev.delete()
-    return redirect('detail_themeRevAdd', theme_pk=theme.pk)
+    return redirect('list_themeRevAll')
 
 
 def detail_themeRev(request, themeRev_pk):
