@@ -44,15 +44,16 @@
 {% comment %} 3.가게 정보 해당 부분 {% endcomment %}
             {% for theme in themes%}
             {% if review.theme_ID_id == theme.themeID %}
+            {% comment %} shop name을 유저선택이 아닌 고정으로 두고 싶은 경우
             {% for shop in shops %}
-            {% if shop.shopID == theme.ShopID_id %}
+            {% if shop.shopID == theme.ShopID_id %} {% endcomment %}
             <div class="info">
               <a href="{% url 'detail_theme' theme.pk %}">
                 <img src="{{theme.themeImage.url}}"> 
               </a> 
               <div>
-                <div class="themeName">{{theme.themeName}}</div>
-                <div class="shopName">{{shop.shopName}}</div>
+                <div class="themeName">{{review.theme_ID}}</div>
+                <div class="shopName">{{review.shop_ID}}</div>
                 <div class="themeRevRating">
                   <div class="rateit" data-rateit-value="{{review.themeRevRating}}" data-rateit-ispreset="true" 
                   data-rateit-readonly="true" data-rateit-mode="font"  style="font-size:2vw;">
@@ -60,8 +61,8 @@
                 </div>
               </div>
             </div>
-            {% endif %}
-            {% endfor %}
+            {% comment %} {% endif %}
+            {% endfor %} {% endcomment %}
             {% endif %}
             {% endfor %}
 {% comment %} 4.리뷰 내용 해당 부분 {% endcomment %}

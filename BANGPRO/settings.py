@@ -13,17 +13,19 @@ import os, json
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 import dj_database_url
-# import django_on_heroku
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-jx@ckwbsy9)1vtf06%z5qnx(&(i7ec7)&%d$y+p!qil-vf9*7m'
+
+# secret key 분리를 위한 코드 (heroku error로 주석처리)
 # secret_file = os.path.join(BASE_DIR, 'secrets.json')
 
 # with open(secret_file) as f:
@@ -40,7 +42,7 @@ SECRET_KEY = 'django-insecure-jx@ckwbsy9)1vtf06%z5qnx(&(i7ec7)&%d$y+p!qil-vf9*7m
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '*']
 
@@ -55,8 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BANGAPP',
-    'django.forms'
-    'django-heroku'
+    'django.forms',
 ]
 
 MIDDLEWARE = [
@@ -155,5 +156,3 @@ MEDIA_URL = '/media/'
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-
-# django_on_heroku.settings(locals())

@@ -79,6 +79,7 @@ class Theme(models.Model):
     themeImage = models.ImageField(upload_to='themeImages/', height_field=None, width_field=None,blank=True)    
     themeIntro = models.TextField(null=True)
     themeLike = models.IntegerField(default=0, blank=True)
+    themePrice = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
       return self.themeName
