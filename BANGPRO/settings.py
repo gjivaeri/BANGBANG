@@ -42,7 +42,7 @@ SECRET_KEY = 'django-insecure-jx@ckwbsy9)1vtf06%z5qnx(&(i7ec7)&%d$y+p!qil-vf9*7m
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '*']
 
@@ -150,6 +150,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join('BANGAPP', 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # AUTH_USER_MODEL = 'BANGAPP.User'
