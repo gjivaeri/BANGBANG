@@ -3,7 +3,7 @@ from .models import User
 from .models import Shop
 from .models import Shoprev
 from .models import Theme
-from .models import ThemeRev, Test
+from .models import ThemeRev
 from .forms import TestForm, ThemeRevForm
 
 # Register your models here.
@@ -16,9 +16,9 @@ admin.site.register(Theme)
 class ThemeRevAdmin(admin.ModelAdmin):
     form = ThemeRevForm
 
-@admin.register(Test)
-class ThemeRevAdmin(admin.ModelAdmin):
-    form = TestForm
+# @admin.register(Test)
+# class ThemeRevAdmin(admin.ModelAdmin):
+#     form = TestForm
 
 class BanguserAdmin(admin.ModelAdmin):
     list_display = ('userID', 'userName')

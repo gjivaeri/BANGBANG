@@ -1,5 +1,5 @@
 /* vx, vh단위로 수정할 것 */
-html{height: 100%; }
+html{height: 100%; font-size:10px;}
 body{position: relative;width: 100%;height: 100%;}
 
 a.nav-review{
@@ -58,6 +58,7 @@ h2{
   overflow:hidden;
   word-wrap: break-word;
   display: -webkit-box;
+  font-size: 1.3rem;
   -webkit-line-clamp : 6;
   -webkit-box-orient: vertical;
 }

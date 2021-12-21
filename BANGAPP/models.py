@@ -112,7 +112,6 @@ class Test(models.Model):
     grade = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     con = models.TextField(null=True)
     Date = models.DateField(null=True)
-    WDate = models.DateTimeField(default=datetime.now(), blank=True)
     themeRevRecom = models.IntegerField(default=0, blank=True)
     themeRevNRecom = models.IntegerField(default=0, blank=True)
     theme_ID2 = models.ForeignKey("Theme", related_name="test1", on_delete=models.CASCADE, db_column="test1", default=1)
