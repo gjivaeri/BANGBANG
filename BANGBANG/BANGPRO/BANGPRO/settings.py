@@ -11,38 +11,40 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os, json
 from pathlib import Path
-import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
-
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-jx@ckwbsy9)1vtf06%z5qnx(&(i7ec7)&%d$y+p!qil-vf9*7m'
-secret_file = os.path.join(BASE_DIR, 'secrets.json')
+SECRET_KEY = 'django-insecure-jx@ckwbsy9)1vtf06%z5qnx(&(i7ec7)&%d$y+p!qil-vf9*7m'
 
-with open(secret_file) as f:
-    secrets = json.loads(f.read())
+# secret key 분리를 위한 코드 (heroku error로 주석처리)
+# secret_file = os.path.join(BASE_DIR, 'secrets.json')
 
-def get_secret(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
+# with open(secret_file) as f:
+#     secrets = json.loads(f.read())
 
-SECRET_KEY = get_secret("SECRET_KEY")
+# def get_secret(setting, secrets=secrets):
+#     try:
+#         return secrets[setting]
+#     except KeyError:
+#         error_msg = "Set the {} environment variable".format(setting)
+#         raise ImproperlyConfigured(error_msg)
+
+# SECRET_KEY = get_secret("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '*']
 
 
 # Application definition
@@ -55,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BANGAPP',
-    'django.forms'
+    'django.forms',
 ]
 
 MIDDLEWARE = [
