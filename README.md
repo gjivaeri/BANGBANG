@@ -1,10 +1,10 @@
-# (멋사 프로젝트2차) 방탈출 리뷰 사이트 BANGBANG
+# 🦁멋사 프로젝트2차🦁 방탈출 리뷰 사이트 BANGBANG
 방탈출 관련 리뷰들을 모아볼 수 있는 사이트 <br>
 실행 전에 관련 라이브러리 설치를 필요로 합니다. (하단 Installation 참고)
 
 [디자인시안](https://xd.adobe.com/view/e0e54edb-2c9c-41ce-8a15-2a08127117c6-b5b6/screen/284d5790-8455-4732-8176-7b9fa7c5a715/)
 
-## 서비스 설명
+## 📖서비스 설명
 방탈출 카페 시장규모가 커짐에 따라, 다양하게 즐길 수 있는 동시에 불편함도 존재했습니다. <br>
 온라인은 하나의 공식 홈페이지에서 관리하는 것이 아니라 각 매장별 홈페이지가 있었기 때문입니다.
 
@@ -19,7 +19,7 @@
 
 '빙방이' 서비스는 이러한 문제점을 모두 해결해 주는 방탈출 카페 플랫폼입니다.
 
-## 주요기능
+## 📚주요기능
 1. 방탈출 테마, 가게별 테마, 테마 리뷰 모아보기 기능
 3. 테마 검색 및 필터링 기능
 4. 인기순, 가격순 테마 정렬 기능
@@ -30,11 +30,12 @@
 9. 테마 및 테마 리뷰 좋아요 기능
 10. 내가 작성한 리뷰, 좋아요 한 테마 모아보기 기능
 
-## 기술스택
-Front-end: HTML, CSS, Jquery(+ajax) <br>
-Back-end: Django
+## ⚙️기술스택
 
-## 실행화면
+| FRONT-END          | BACK-END               |
+| ----------------- |:----------------------- |
+| HTML, CSS, Jquery(+ajax)       | Django   |
+## 💻실행화면
 + 테마 검색<br>
 ![1 검색](https://user-images.githubusercontent.com/66814071/146974086-9230b25b-4df4-463e-bd6a-7126168f7cb5.gif)
   + GET 메서드를 받아와 테마 검색 기능 구현
@@ -66,7 +67,7 @@ Back-end: Django
   + 내 좋아요 모아보기
   + 내 작성 리뷰 모아보기
 
-## Installation
+## 🧰Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install required libraries
 
@@ -84,7 +85,6 @@ python manage.py migrate
 ```
 
 ## Usage
-### **(+보충)pillow 사용법 적어주세요**
 
 ```python
 from argon2 import PasswordHasher, exceptions
