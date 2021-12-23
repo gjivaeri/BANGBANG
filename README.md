@@ -88,7 +88,7 @@ python manage.py migrate
 
 ```python
 from argon2 import PasswordHasher, exceptions
-from pillow?
+from PIL import Image
 
 # hash user's password in views.py
 user = User(
@@ -104,6 +104,11 @@ try:
     PasswordHasher().verify(user.userPW, userPW)
 except exceptions.VerifyMismatchError:
     return self.add_error('userPW', '비밀번호가 다릅니다')
+
+#To control image using Python
+im = Image.open('./img/rush_hour.png')
+im2 = im.crop((0, 200, 316, 510))
+im2.save('./img/rush_hour_crop.png')
 
 ```
 
