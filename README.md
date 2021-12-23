@@ -111,6 +111,3 @@ im2 = im.crop((0, 200, 316, 510))
 im2.save('./img/rush_hour_crop.png')
 
 ```
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
